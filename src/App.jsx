@@ -26,22 +26,12 @@ export function App() {
 	const add = id => setCart(v => ({ ...v, [id]: (v[id] || 0) + 1 }))
 	return (
 		<div className='qr-app'>
-			<section className='qhero'>
-				<nav className='qtop'>
-					<div className='brand'>CHAYKHANA</div>
-					<div className='language' aria-label='Language selector'>
-						{[['uz', 'O‘zbekcha'], ['ru', 'Русский'], ['ko', '한국어']].map(([x, label]) => <button key={x} className={lang === x ? 'on' : ''} onClick={() => setLang(x)}>{label}</button>)}
-					</div>
-				</nav>
-			</section>
-			<section className='place'>
-				<div><h2>CHAYKHANA</h2><p>Uzbek cuisine · Seoul</p></div>
-				<div className='service-icons'><button onClick={() => setPanel('waiter')}>♧<small>{t.waiter}</small></button><button onClick={() => setPanel('bill')}>ⓘ<small>{t.bill}</small></button></div>
-			</section>
+			<section className='qhero'><nav className='qtop'><div className='brand'>CHAYKHANA</div><div className='language' aria-label='Language selector'>{[['uz', 'O‘zbekcha'], ['ru', 'Русский'], ['ko', '한국어']].map(([x, label]) => <button key={x} className={lang === x ? 'on' : ''} onClick={() => setLang(x)}>{label}</button>)}</div></nav></section>
+			<section className='place'><div><h2>CHAYKHANA</h2><p>Uzbek cuisine · Seoul</p></div><div className='service-icons'><button onClick={() => setPanel('waiter')}>♧<small>{t.waiter}</small></button><button onClick={() => setPanel('bill')}>ⓘ<small>{t.bill}</small></button></div></section>
 			<main>
 				<div className='heading'><p>{t.menu}</p><div><h2>{t.title}</h2><button onClick={() => setPanel('service')}>{t.service}</button></div></div>
 				<div className='qcategories'>{[['popular', '🔥'], ['all', '✦'], ['hot', '🍢'], ['noodle', '🍜'], ['drinks', '🥤']].map(([id, icon], i) => <button key={id} className={cat === id ? 'selected' : ''} onClick={() => setCat(id)}><i>{icon}</i><span>{t.tabs[i]}</span></button>)}</div>
-				<div className='qcards'>{shown.map(x => <article key={x.id} className='food-card' role='button' tabIndex='0' aria-label={`${t.detail}: ${x.name}`} onClick={() => setFood(x)} onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setFood(x) } }}><button className='qimage' onClick={e => e.stopPropagation()}><img src={x.img} alt={x.name} /></button><div><h3>{x.name}</h3><p>{x.desc}</p><b>₩ {x.price.toLocaleString()}</b></div><button className='plus' aria-label={`${t.add}: ${x.name}`} onClick={e => { e.stopPropagation(); add(x.id) }}>+</button></article>)}</div>
+				<div className='qcards'>{shown.map(x => <article key={x.id} className='food-card' role='button' tabIndex='0' aria-label={`${t.detail}: ${x.name}`} onClick={() => setFood(x)} onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setFood(x) } }}><button className='qimage' onClick={e => { e.stopPropagation(); setFood(x) }}><img src={x.img} alt={x.name} /></button><div><h3>{x.name}</h3><p>{x.desc}</p><b>₩ {x.price.toLocaleString()}</b></div><button className='plus' aria-label={`${t.add}: ${x.name}`} onClick={e => { e.stopPropagation(); add(x.id) }}>+</button></article>)}</div>
 			</main>
 			<button className='bottom-cart' onClick={() => setPanel('cart')}><em>{count}</em><span>{t.cart}</span><b>₩ {total.toLocaleString()}</b></button>
 			{food && <div className='sheet' onClick={() => setFood(null)}><div className='dialog' onClick={e => e.stopPropagation()}><button className='close' onClick={() => setFood(null)}>×</button><img src={food.img} alt='' /><div className='dialog-body'><p>{t.detail}</p><h2>{food.name}</h2><b>₩ {food.price.toLocaleString()}</b><p>{food.desc}</p><a href='https://www.youtube.com/results?search_query=uzbek+food+recipe' target='_blank' rel='noreferrer'>▶ Tayyorlanish videosi</a><button onClick={() => { add(food.id); setFood(null) }}>{t.add}</button></div></div></div>}
