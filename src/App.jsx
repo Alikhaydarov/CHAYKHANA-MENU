@@ -40,6 +40,7 @@ const locales = {
 		title: 'Mashhur taomlar',
 		service: 'Xizmatlar',
 		cart: 'Savatcha',
+		total: 'Jami',
 		add: 'Savatga qo‘shish',
 		detail: 'Taom haqida',
 		waiter: 'Ofitsiant',
@@ -52,6 +53,7 @@ const locales = {
 		title: 'Популярные блюда',
 		service: 'Сервис',
 		cart: 'Корзина',
+		total: 'Итого',
 		add: 'Добавить',
 		detail: 'О блюде',
 		waiter: 'Официант',
@@ -64,6 +66,7 @@ const locales = {
 		title: '인기 메뉴',
 		service: '서비스',
 		cart: '장바구니',
+		total: '합계',
 		add: '담기',
 		detail: '음식 정보',
 		waiter: '직원 호출',
@@ -98,21 +101,12 @@ export function App() {
 					<button className='back'>‹</button>
 					<div className='language'>
 						{['uz', 'ru', 'ko'].map(x => (
-							<button
-								key={x}
-								className={lang === x ? 'on' : ''}
-								onClick={() => setLang(x)}
-							>
+							<button key={x} className={lang === x ? 'on' : ''} onClick={() => setLang(x)}>
 								{x.toUpperCase()}
 							</button>
 						))}
 					</div>
-					<button
-						className='sound'
-						onClick={() =>
-							window.open('https://youtu.be/iWbxlrLnWp0', '_blank', 'noopener')
-						}
-					>
+					<button className='sound' onClick={() => window.open('https://youtu.be/iWbxlrLnWp0', '_blank', 'noopener')}>
 						♬
 					</button>
 				</div>
@@ -129,12 +123,8 @@ export function App() {
 					<p>Uzbek cuisine · Seoul</p>
 				</div>
 				<div className='service-icons'>
-					<button onClick={() => setPanel('waiter')}>
-						♧<small>{t.waiter}</small>
-					</button>
-					<button onClick={() => setPanel('bill')}>
-						ⓘ<small>{t.bill}</small>
-					</button>
+					<button onClick={() => setPanel('waiter')}>♧<small>{t.waiter}</small></button>
+					<button onClick={() => setPanel('bill')}>ⓘ<small>{t.bill}</small></button>
 				</div>
 			</section>
 			<main>
@@ -152,66 +142,37 @@ export function App() {
 						['hot', '🍢'],
 						['noodle', '🍜'],
 					].map(([id, icon], i) => (
-						<button
-							key={id}
-							className={cat === id ? 'selected' : ''}
-							onClick={() => setCat(id)}
-						>
-							<i>{icon}</i>
-							<span>{t.tabs[i]}</span>
+						<button key={id} className={cat === id ? 'selected' : ''} onClick={() => setCat(id)}>
+							<i>{icon}</i><span>{t.tabs[i]}</span>
 						</button>
 					))}
 				</div>
 				<div className='qcards'>
 					{shown.map(x => (
 						<article key={x.id}>
-							<button className='qimage' onClick={() => setFood(x)}>
-								<img src={x.img} alt={x.name} />
-							</button>
+							<button className='qimage' onClick={() => setFood(x)}><img src={x.img} alt={x.name} /></button>
 							<div>
 								<h3>{x.name}</h3>
 								<p>{x.desc}</p>
 								<b>₩ {x.price.toLocaleString()}</b>
 							</div>
-							<button className='plus' onClick={() => add(x.id)}>
-								+
-							</button>
+							<button className='plus' onClick={() => add(x.id)}>+</button>
 						</article>
 					))}
 				</div>
 			</main>
 			<button className='bottom-cart' onClick={() => setPanel('cart')}>
-				<em>{count}</em>
-				<span>{t.cart}</span>
-				<b>₩ {total.toLocaleString()}</b>
+				<em>{count}</em><span>{t.cart}</span><b>₩ {total.toLocaleString()}</b>
 			</button>
 			{food && (
 				<div className='sheet'>
 					<div className='dialog'>
-						<button className='close' onClick={() => setFood(null)}>
-							×
-						</button>
+						<button className='close' onClick={() => setFood(null)}>×</button>
 						<img src={food.img} alt='' />
 						<div className='dialog-body'>
-							<p>{t.detail}</p>
-							<h2>{food.name}</h2>
-							<b>₩ {food.price.toLocaleString()}</b>
-							<p>{food.desc}</p>
-							<a
-								href='https://www.youtube.com/results?search_query=uzbek+food+recipe'
-								target='_blank'
-								rel='noreferrer'
-							>
-								▶ Tayyorlanish videosi
-							</a>
-							<button
-								onClick={() => {
-									add(food.id)
-									setFood(null)
-								}}
-							>
-								{t.add}
-							</button>
+							<p>{t.detail}</p><h2>{food.name}</h2><b>₩ {food.price.toLocaleString()}</b><p>{food.desc}</p>
+							<a href='https://www.youtube.com/results?search_query=uzbek+food+recipe' target='_blank' rel='noreferrer'>▶ Tayyorlanish videosi</a>
+							<button onClick={() => { add(food.id); setFood(null) }}>{t.add}</button>
 						</div>
 					</div>
 				</div>
@@ -219,34 +180,26 @@ export function App() {
 			{panel && (
 				<div className='sheet' onClick={() => setPanel(null)}>
 					<div className='dialog mini' onClick={e => e.stopPropagation()}>
-						<button className='close' onClick={() => setPanel(null)}>
-							×
-						</button>
+						<button className='close' onClick={() => setPanel(null)}>×</button>
 						{panel === 'cart' ? (
 							<>
 								<p>{t.cart}</p>
 								<h2>{count} ta mahsulot</h2>
-								{dishes
-									.filter(x => cart[x.id])
-									.map(x => (
-										<div className='cartline' key={x.id}>
-											<span>
-												{x.name} × {cart[x.id]}
-											</span>
-											<b>₩ {(x.price * cart[x.id]).toLocaleString()}</b>
-										</div>
-									))}
+								{dishes.filter(x => cart[x.id]).map(x => (
+									<div className='cartline' key={x.id}>
+										<span>{x.name} × {cart[x.id]}</span>
+										<b>₩ {(x.price * cart[x.id]).toLocaleString()}</b>
+									</div>
+								))}
+								<div className='cart-total'>
+									<span>{t.total}</span>
+									<strong>₩ {total.toLocaleString()}</strong>
+								</div>
 								<button>{t.add}</button>
 							</>
 						) : (
 							<>
-								<p>
-									{panel === 'waiter'
-										? t.waiter
-										: panel === 'bill'
-											? t.bill
-											: t.service}
-								</p>
+								<p>{panel === 'waiter' ? t.waiter : panel === 'bill' ? t.bill : t.service}</p>
 								<h2>12-STOL</h2>
 								<span>So‘rovingiz ofitsiantga yuboriladi.</span>
 								<button onClick={() => setPanel(null)}>Yuborish</button>
@@ -255,25 +208,12 @@ export function App() {
 					</div>
 				</div>
 			)}
-			{entered && (
-				<iframe
-					className='music-player'
-					title='Uzbek national music'
-					src='https://www.youtube.com/embed/iWbxlrLnWp0?autoplay=1&loop=1&playlist=iWbxlrLnWp0'
-					allow='autoplay'
-				/>
-			)}
+			{entered && <iframe className='music-player' title='Uzbek national music' src='https://www.youtube.com/embed/iWbxlrLnWp0?autoplay=1&loop=1&playlist=iWbxlrLnWp0' allow='autoplay' />}
 			{!entered && (
 				<section className='welcome'>
-					<div className='arch'>
-						<span />
-					</div>
-					<p>SEOUL · UZBEK CUISINE</p>
-					<h1>CHAYKHANA</h1>
-					<strong>차이하나 우즈베크 레스토랑</strong>
-					<span>Uy ta’mi, Seul markazida</span>
-					<button onClick={() => setEntered(true)}>Kirish / 입장하기</button>
-					<small>♫ Musiqa bilan davom etish uchun bosing</small>
+					<div className='arch'><span /></div>
+					<p>SEOUL · UZBEK CUISINE</p><h1>CHAYKHANA</h1><strong>차이하나 우즈베크 레스토랑</strong><span>Uy ta’mi, Seul markazida</span>
+					<button onClick={() => setEntered(true)}>Kirish / 입장하기</button><small>♫ Musiqa bilan davom etish uchun bosing</small>
 				</section>
 			)}
 		</div>
