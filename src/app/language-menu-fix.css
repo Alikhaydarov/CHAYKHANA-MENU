@@ -1,0 +1,35 @@
+/* Fix mobile header rule `.header-actions button span{display:none}` leaking into the custom language menu. */
+.header-actions .language-popover button span {
+  display: block !important;
+  color: inherit !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  white-space: nowrap;
+}
+
+.header-actions .language-popover button {
+  height: auto !important;
+  min-height: 49px !important;
+  padding: 0 12px !important;
+  border: 0 !important;
+  border-radius: 12px !important;
+  background: transparent !important;
+  color: #e7eef9 !important;
+}
+
+.header-actions .language-popover button:hover,
+.header-actions .language-popover button:focus-visible {
+  background: rgba(255,255,255,.08) !important;
+  color: #fff !important;
+}
+
+.header-actions .language-popover button.active {
+  background: rgba(55,130,235,.14) !important;
+  color: #fff !important;
+}
+
+@media (max-width: 640px) {
+  .header-actions .language-popover button span {
+    display: block !important;
+  }
+}
