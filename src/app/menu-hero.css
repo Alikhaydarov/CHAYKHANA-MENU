@@ -23,14 +23,14 @@
 .menu-hero {
   position: relative;
   isolation: isolate;
-  min-height: 310px;
+  min-height: 284px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 30px 20px 34px;
+  padding: 24px 20px 28px;
   color: #fff;
   background:
     radial-gradient(circle at 14% 18%, rgba(61,145,255,.24), transparent 28%),
@@ -79,13 +79,13 @@
 .menu-hero-logo {
   width: 108px;
   height: 93px;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
   background: url('/assets/chayhana-logo.svg') center / contain no-repeat;
   filter: drop-shadow(0 10px 24px rgba(0,0,0,.2));
 }
 
 .menu-hero p {
-  margin: 0 0 8px;
+  margin: 0 0 7px;
   color: #b9d5ff;
   font-size: 11px;
   font-weight: 750;
@@ -103,7 +103,7 @@
 }
 
 .menu-hero > span {
-  margin-top: 13px;
+  margin-top: 11px;
   color: #d9e8ff;
   font-size: 10px;
   font-weight: 650;
@@ -133,15 +133,15 @@
   }
 
   .menu-hero {
-    min-height: 350px;
-    padding-top: 42px;
-    padding-bottom: 46px;
+    min-height: 320px;
+    padding-top: 34px;
+    padding-bottom: 38px;
   }
 
   .menu-hero-logo {
     width: 132px;
     height: 112px;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
   }
 
   .menu-hero p {
@@ -165,14 +165,14 @@
   }
 
   .menu-hero {
-    min-height: 292px;
-    padding: 24px 16px 30px;
+    min-height: 260px;
+    padding: 18px 16px 22px;
   }
 
   .menu-hero-logo {
-    width: 94px;
-    height: 82px;
-    margin-bottom: 12px;
+    width: 90px;
+    height: 78px;
+    margin-bottom: 10px;
   }
 
   .menu-hero h1 {
@@ -199,12 +199,12 @@
   }
 
   .menu-hero {
-    min-height: 272px;
+    min-height: 244px;
   }
 
   .menu-hero-logo {
-    width: 84px;
-    height: 73px;
+    width: 82px;
+    height: 71px;
   }
 
   .menu-hero h1 {
