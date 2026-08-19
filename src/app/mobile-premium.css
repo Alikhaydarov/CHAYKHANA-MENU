@@ -1,0 +1,382 @@
+/* Mobile-only premium polish for the public menu.
+   Loaded last so desktop/admin behavior stays untouched. */
+
+@media (max-width: 640px) {
+  .menu-page {
+    background:
+      linear-gradient(180deg, #eaf2fd 0, #f4f8fd 330px, #f7f9fc 520px, #f8fafc 100%);
+    padding-bottom: 108px;
+  }
+
+  /* Cleaner compact navbar with subtle glass depth. */
+  .menu-header {
+    padding-left: 13px !important;
+    padding-right: 13px !important;
+    background:
+      radial-gradient(circle at 8% -50%, rgba(45, 133, 255, .38), transparent 48%),
+      linear-gradient(145deg, rgba(3, 25, 58, .985), rgba(4, 47, 101, .985)) !important;
+    border-bottom-color: rgba(167, 202, 255, .12) !important;
+    box-shadow: 0 9px 28px rgba(1, 22, 52, .20) !important;
+    backdrop-filter: blur(18px) saturate(1.08);
+    -webkit-backdrop-filter: blur(18px) saturate(1.08);
+  }
+
+  .menu-brand::before {
+    width: 58px;
+    height: 50px;
+    filter: drop-shadow(0 7px 15px rgba(0,0,0,.22));
+  }
+
+  .header-actions {
+    gap: 6px !important;
+  }
+
+  .language-trigger {
+    min-width: 80px !important;
+    height: 40px !important;
+    padding: 0 10px !important;
+    border-radius: 14px !important;
+    border-color: rgba(255,255,255,.18) !important;
+    background: rgba(255,255,255,.075) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 5px 15px rgba(0,0,0,.08);
+  }
+
+  .language-trigger:active {
+    transform: scale(.97);
+  }
+
+  .language-popover {
+    right: 0 !important;
+    width: min(214px, calc(100vw - 26px)) !important;
+    border: 1px solid rgba(144, 188, 247, .18) !important;
+    box-shadow: 0 18px 42px rgba(0, 18, 45, .28) !important;
+  }
+
+  /* Keep the same hero concept, but give it a richer focal point. */
+  .menu-hero {
+    min-height: 252px !important;
+    padding: 15px 16px 20px !important;
+    background:
+      radial-gradient(circle at 50% 35%, rgba(39, 123, 244, .25), transparent 35%),
+      radial-gradient(circle at 8% 12%, rgba(79, 157, 255, .20), transparent 30%),
+      linear-gradient(155deg, #021731 0%, #042d63 54%, #031d43 100%) !important;
+    box-shadow: inset 0 -20px 34px rgba(0, 15, 38, .10);
+  }
+
+  .menu-hero-pattern {
+    opacity: .17;
+    background-size: 52px 52px;
+  }
+
+  .menu-hero-logo {
+    width: 92px !important;
+    height: 79px !important;
+    margin-bottom: 9px !important;
+    filter: drop-shadow(0 12px 25px rgba(0,0,0,.24)) drop-shadow(0 0 14px rgba(81,153,255,.10));
+  }
+
+  .menu-hero p {
+    margin-bottom: 6px;
+    font-size: 10px;
+    letter-spacing: .38em;
+  }
+
+  .menu-hero h1 {
+    font-size: clamp(31px, 9.5vw, 39px) !important;
+    letter-spacing: .095em !important;
+    text-shadow: 0 9px 24px rgba(0,0,0,.22);
+  }
+
+  .menu-hero > span {
+    margin-top: 9px;
+    font-size: 9px;
+    letter-spacing: .24em;
+    color: #dceaff;
+  }
+
+  /* Slim category rail with slightly softer active state. */
+  .category-strip {
+    height: 52px !important;
+    gap: 6px !important;
+    padding: 8px 12px !important;
+    background: rgba(255,255,255,.965) !important;
+    border-top: 0 !important;
+    border-bottom-color: #e8eef6 !important;
+    box-shadow: 0 7px 20px rgba(5, 37, 82, .07) !important;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .category-strip button {
+    height: 34px !important;
+    min-height: 34px !important;
+    padding: 0 13px !important;
+    border-color: #e5ebf3 !important;
+    background: #fdfefe !important;
+    color: #314764 !important;
+    font-size: 12px !important;
+    font-weight: 650 !important;
+  }
+
+  .category-strip button.active {
+    background: linear-gradient(135deg, #1479ff, #0757da) !important;
+    border-color: transparent !important;
+    box-shadow: 0 5px 13px rgba(12, 99, 244, .20) !important;
+  }
+
+  /* More deliberate card proportions and food-photo treatment. */
+  .dish-grid {
+    width: calc(100% - 22px) !important;
+    margin: 15px auto 28px !important;
+    gap: 18px !important;
+  }
+
+  .dish-card {
+    border-radius: 22px !important;
+    border: 1px solid rgba(220, 229, 241, .82) !important;
+    background: #fff !important;
+    box-shadow:
+      0 15px 36px rgba(15, 48, 94, .105),
+      0 2px 7px rgba(15, 48, 94, .045) !important;
+    transform: translateZ(0);
+  }
+
+  .dish-card:active {
+    transform: scale(.993);
+  }
+
+  .dish-image {
+    height: clamp(225px, 62vw, 278px) !important;
+    min-height: 0 !important;
+    box-shadow: inset 0 -1px 0 rgba(0,0,0,.03), 0 7px 19px rgba(5,38,84,.09) !important;
+  }
+
+  .dish-image::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(120deg, rgba(255,255,255,.07), transparent 28%, transparent 72%, rgba(0,22,54,.025));
+  }
+
+  .dish-image::after {
+    background:
+      linear-gradient(180deg, rgba(1, 19, 45, 0) 50%, rgba(1, 19, 45, .16) 100%),
+      radial-gradient(circle at 50% 18%, rgba(255,255,255,.09), transparent 50%) !important;
+    box-shadow: inset 0 -20px 28px rgba(2, 24, 56, .06) !important;
+  }
+
+  .dish-image > span {
+    top: 12px !important;
+    left: 12px !important;
+    padding: 6px 10px !important;
+    border: 1px solid rgba(255,255,255,.14);
+    background: rgba(2, 24, 56, .76) !important;
+    font-size: 10px !important;
+    letter-spacing: .01em;
+    box-shadow: 0 5px 14px rgba(0,0,0,.12);
+  }
+
+  .dish-meta {
+    min-height: 112px !important;
+    padding: 14px 14px 15px !important;
+    gap: 12px;
+    align-items: center !important;
+    background: linear-gradient(180deg, #fff, #fcfdff) !important;
+  }
+
+  .dish-meta > div:first-child {
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+
+  .dish-meta h2 {
+    margin: 0 0 5px !important;
+    color: #0a2041;
+    font-size: 18px !important;
+    line-height: 1.18;
+    letter-spacing: -.015em;
+  }
+
+  .dish-meta small {
+    display: -webkit-box !important;
+    margin: 0 0 9px !important;
+    overflow: hidden !important;
+    color: #7c899d !important;
+    font-size: 11px !important;
+    line-height: 1.35 !important;
+    white-space: normal !important;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  .dish-meta p {
+    margin: 0 !important;
+    color: #0758da !important;
+    font-size: 17px !important;
+    font-weight: 850 !important;
+    letter-spacing: -.01em;
+  }
+
+  .dish-card .add {
+    height: 42px !important;
+    padding: 0 13px !important;
+    gap: 5px !important;
+    border-radius: 13px !important;
+    font-size: 12px;
+    box-shadow: 0 8px 18px rgba(12, 99, 244, .20) !important;
+  }
+
+  .dish-card .add svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .dish-card .add:active {
+    transform: scale(.96);
+  }
+
+  .dish-card .stepper {
+    height: 42px !important;
+    border-radius: 13px !important;
+    overflow: hidden;
+    box-shadow: inset 0 0 0 1px rgba(12,99,244,.04);
+  }
+
+  .dish-card .stepper button {
+    width: 38px !important;
+    height: 40px !important;
+  }
+
+  .dish-card .stepper span {
+    width: 36px !important;
+    height: 40px !important;
+    font-size: 13px;
+  }
+
+  /* Floating cart feels more like a native bottom action. */
+  .calc-bar {
+    bottom: calc(10px + env(safe-area-inset-bottom)) !important;
+    width: calc(100% - 20px) !important;
+    min-height: 66px !important;
+    padding: 8px 9px 8px 10px !important;
+    gap: 8px !important;
+    border-radius: 20px !important;
+    border-color: rgba(132, 180, 244, .24) !important;
+    background:
+      radial-gradient(circle at 3% 0%, rgba(33, 116, 235, .22), transparent 38%),
+      rgba(2, 27, 63, .965) !important;
+    box-shadow: 0 20px 42px rgba(1, 19, 46, .30), 0 4px 12px rgba(1, 19, 46, .13) !important;
+  }
+
+  .calc-bar > div:first-child > svg {
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 13px !important;
+    box-shadow: 0 7px 16px rgba(12, 99, 244, .28) !important;
+  }
+
+  .calc-bar > div:first-child b {
+    font-size: 16px !important;
+  }
+
+  .calc-bar > div:nth-child(2) small {
+    font-size: 9px !important;
+  }
+
+  .calc-bar > div:nth-child(2) b {
+    font-size: 15px !important;
+    letter-spacing: -.015em;
+  }
+
+  .calc-bar > button {
+    width: 44px !important;
+    min-width: 44px !important;
+    height: 44px !important;
+    border-radius: 14px !important;
+    box-shadow: 0 6px 16px rgba(0,0,0,.12) !important;
+  }
+
+  .calc-bar > button::after {
+    font-size: 19px !important;
+  }
+
+  /* Sheets: softer mobile-native presentation. */
+  .sheet-backdrop {
+    background: rgba(0, 13, 34, .54) !important;
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+  }
+
+  .dish-detail-sheet,
+  .calc-sheet {
+    border-radius: 28px 28px 0 0 !important;
+    box-shadow: 0 -20px 55px rgba(0, 20, 50, .22) !important;
+  }
+
+  .dish-detail-image {
+    height: 238px !important;
+  }
+
+  .dish-detail-content h2 {
+    font-size: 22px !important;
+    line-height: 1.15;
+  }
+
+  .dish-detail-content p {
+    margin-top: 8px;
+    color: #77869a;
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  .dish-detail-price {
+    font-size: 21px !important;
+  }
+
+  .dish-detail-close,
+  .sheet-close {
+    box-shadow: 0 7px 18px rgba(2, 24, 56, .13) !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .dish-grid {
+    width: calc(100% - 18px) !important;
+  }
+
+  .dish-image {
+    height: 222px !important;
+  }
+
+  .dish-meta {
+    padding: 13px !important;
+    gap: 9px;
+  }
+
+  .dish-meta h2 {
+    font-size: 17px !important;
+  }
+
+  .dish-card .add {
+    padding: 0 11px !important;
+  }
+
+  .calc-bar > div:first-child span {
+    display: none !important;
+  }
+
+  .calc-bar > div:nth-child(2) {
+    justify-content: start !important;
+    text-align: left !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dish-card,
+  .language-trigger,
+  .dish-card .add {
+    transition: none !important;
+  }
+}
