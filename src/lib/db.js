@@ -27,12 +27,21 @@ export function mapCategory(row) {
   };
 }
 
+function isDishPlaceholder(dish) {
+  return dish.names?.uz === "Yangi taom" && Number(dish.price) === 0;
+}
+
+function isCategoryPlaceholder(category) {
+  return category.names?.uz === "Yangi kategoriya";
+}
+
 export async function listDishes(admin = false) {
   let query = getDb().from("dishes").select("*").order("position").order("id");
   if (!admin) query = query.eq("visible", true);
   const { data, error } = await query;
   if (error) throw error;
-  return data.map(mapDish);
+  const dishes = data.map(mapDish);
+  return admin ? dishes : dishes.filter((dish) => !isDishPlaceholder(dish));
 }
 
 export async function listCategories(admin = false) {
@@ -40,7 +49,8 @@ export async function listCategories(admin = false) {
   if (!admin) query = query.eq("visible", true);
   const { data, error } = await query;
   if (error) throw error;
-  return data.map(mapCategory);
+  const categories = data.map(mapCategory);
+  return admin ? categories : categories.filter((category) => !isCategoryPlaceholder(category));
 }
 
 export async function categoryExists(id) {
