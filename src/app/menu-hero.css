@@ -1,7 +1,7 @@
 /* Branded entrance section + reference-inspired sticky menu behavior. */
 
 .menu-page {
-  --menu-sticky-offset: 124px;
+  --menu-sticky-offset: 78px;
 }
 
 .menu-header {
@@ -9,15 +9,15 @@
   top: 0;
   z-index: 40 !important;
   min-height: var(--menu-sticky-offset);
-  padding-top: 12px !important;
-  padding-bottom: 12px !important;
-  gap: 10px 14px !important;
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+  gap: 8px 12px !important;
   border-bottom: 1px solid rgba(255,255,255,.09);
   box-shadow: 0 8px 26px rgba(1,24,55,.18);
 }
 
 .menu-search {
-  height: 44px !important;
+  display: none !important;
 }
 
 .menu-hero {
@@ -129,7 +129,7 @@
 
 @media (min-width: 760px) {
   .menu-page {
-    --menu-sticky-offset: 124px;
+    --menu-sticky-offset: 78px;
   }
 
   .menu-hero {
@@ -155,18 +155,13 @@
 
 @media (max-width: 640px) {
   .menu-page {
-    --menu-sticky-offset: 120px;
+    --menu-sticky-offset: 72px;
   }
 
   .menu-header {
     min-height: var(--menu-sticky-offset);
-    padding: 10px 12px !important;
-    gap: 8px 10px !important;
-  }
-
-  .menu-search {
-    height: 42px !important;
-    border-radius: 13px !important;
+    padding: 8px 12px !important;
+    gap: 6px 10px !important;
   }
 
   .menu-hero {
@@ -194,7 +189,7 @@
 
 @media (max-width: 390px) {
   .menu-page {
-    --menu-sticky-offset: 116px;
+    --menu-sticky-offset: 68px;
   }
 
   .menu-header {
