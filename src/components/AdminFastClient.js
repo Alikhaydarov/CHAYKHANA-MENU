@@ -15,7 +15,7 @@ function responseFrom(data, status = 200) {
   });
 }
 
-function sortRows(key, rows) {
+function sortRows(rows) {
   return [...rows].sort((a, b) => {
     const positionDiff = Number(a?.position || 0) - Number(b?.position || 0);
     if (positionDiff) return positionDiff;
@@ -71,7 +71,7 @@ export default function AdminFastClient() {
             data = { error: "Server xatosi" };
           }
           if (response.ok && Array.isArray(data) && version[key] === requestVersion) {
-            cache[key] = sortRows(key, data);
+            cache[key] = sortRows(data);
           }
           return { status: response.status, data };
         })
@@ -94,12 +94,12 @@ export default function AdminFastClient() {
       if (!Array.isArray(cache[key])) return;
 
       if (method === "POST" && data?.id != null) {
-        cache[key] = sortRows(key, [...cache[key].filter((item) => String(item.id) !== String(data.id)), data]);
+        cache[key] = sortRows([...cache[key].filter((item) => String(item.id) !== String(data.id)), data]);
         return;
       }
 
       if ((method === "PUT" || method === "PATCH") && data?.id != null) {
-        cache[key] = sortRows(key, cache[key].map((item) => (String(item.id) === String(data.id) ? data : item)));
+        cache[key] = sortRows(cache[key].map((item) => (String(item.id) === String(data.id) ? data : item)));
         return;
       }
 
