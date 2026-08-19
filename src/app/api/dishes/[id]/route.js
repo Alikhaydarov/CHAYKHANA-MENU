@@ -12,7 +12,7 @@ export async function PUT(request, { params }) {
 
   let dish;
   try {
-    dish = validateDish(await request.json(), { partial: true });
+    dish = validateDish(await request.json());
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 400 });
   }
@@ -37,7 +37,7 @@ export async function PUT(request, { params }) {
     console.error(error);
     return NextResponse.json({ error: "Saqlashda xato" }, { status: 500 });
   }
-  return data ? NextResponse.json(mapDish(data)) : NextResponse.json({ error: "Not found" }, { status: 404 });
+  return data ? NextResponse.json(mapDish(data)) : NextResponse.json({ error: "Topilmadi" }, { status: 404 });
 }
 
 export async function DELETE(_request, { params }) {
@@ -45,6 +45,9 @@ export async function DELETE(_request, { params }) {
   const { id } = await params;
   if (!/^\d+$/.test(id)) return NextResponse.json({ error: "Noto‘g‘ri ID" }, { status: 400 });
   const { data, error } = await getDb().from("dishes").delete().eq("id", id).select("id").maybeSingle();
-  if (error) return NextResponse.json({ error: "O‘chirishda xato" }, { status: 500 });
+  if (error) {
+    console.error(error);
+    return NextResponse.json({ error: "O‘chirishda xato" }, { status: 500 });
+  }
   return data ? NextResponse.json({ ok: true }) : NextResponse.json({ error: "Topilmadi" }, { status: 404 });
 }
