@@ -5,10 +5,10 @@ import { useEffect, useMemo, useState } from "react";
 import { Calculator, Globe, MagnifyingGlass, Minus, Plus, X } from "@phosphor-icons/react";
 
 const copy = {
-  uz: { welcome: "Xush kelibsiz", search: "Taom yoki kategoriya qidiring", all: "Barchasi", add: "Qo‘shish", selected: "Tanlangan", total: "Jami", view: "Hisobni ko‘rish", empty: "Hali taom tanlanmagan", noResult: "Taom topilmadi", retry: "Qayta urinish" },
-  ko: { welcome: "환영합니다", search: "음식 또는 카테고리 검색", all: "전체", add: "추가", selected: "선택", total: "합계", view: "계산 보기", empty: "선택한 음식이 없습니다", noResult: "음식을 찾을 수 없습니다", retry: "다시 시도" },
-  ru: { welcome: "Добро пожаловать", search: "Найти блюдо или категорию", all: "Все", add: "Добавить", selected: "Выбрано", total: "Итого", view: "Посмотреть счёт", empty: "Блюда не выбраны", noResult: "Блюда не найдены", retry: "Повторить" },
-  en: { welcome: "Welcome", search: "Search dishes or categories", all: "All", add: "Add", selected: "Selected", total: "Total", view: "View total", empty: "No dishes selected", noResult: "No dishes found", retry: "Try again" },
+  uz: { welcome: "Xush kelibsiz", search: "Taom yoki kategoriya qidiring", all: "Barchasi", add: "Qo‘shish", selected: "Tanlangan", total: "Jami", view: "Hisobni ko‘rish", empty: "Hali taom tanlanmagan", noResult: "Taom topilmadi", categoryEmpty: "Bu kategoriyada hozircha taom yo‘q", retry: "Qayta urinish" },
+  ko: { welcome: "환영합니다", search: "음식 또는 카테고리 검색", all: "전체", add: "추가", selected: "선택", total: "합계", view: "계산 보기", empty: "선택한 음식이 없습니다", noResult: "음식을 찾을 수 없습니다", categoryEmpty: "이 카테고리에는 아직 음식이 없습니다", retry: "다시 시도" },
+  ru: { welcome: "Добро пожаловать", search: "Найти блюдо или категорию", all: "Все", add: "Добавить", selected: "Выбрано", total: "Итого", view: "Посмотреть счёт", empty: "Блюда не выбраны", noResult: "Блюда не найдены", categoryEmpty: "В этой категории пока нет блюд", retry: "Повторить" },
+  en: { welcome: "Welcome", search: "Search dishes or categories", all: "All", add: "Add", selected: "Selected", total: "Total", view: "View total", empty: "No dishes selected", noResult: "No dishes found", categoryEmpty: "No dishes in this category yet", retry: "Try again" },
 };
 
 const labels = { uz: "UZ", ko: "한국어", ru: "RU", en: "EN" };
@@ -24,6 +24,7 @@ export default function MenuClient() {
   const [category, setCategory] = useState("all");
   const [qty, setQty] = useState({});
   const [open, setOpen] = useState(false);
+  const [detailDish, setDetailDish] = useState(null);
 
   const fetchMenu = async () => {
     const dishResponse = await fetch("/api/dishes", { cache: "no-store" });
@@ -61,6 +62,21 @@ export default function MenuClient() {
     fetchMenu().catch(() => setError("Menu yuklanmadi")).finally(() => setTimeout(() => setLoading(false), 550));
   }, []);
 
+  useEffect(() => {
+    const onKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+        setDetailDish(null);
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, []);
+
+  useEffect(() => {
+    if (category !== "all" && !categories.some((item) => item.id === category)) setCategory("all");
+  }, [categories, category]);
+
   const selectLanguage = (value) => {
     setLang(value);
     localStorage.setItem("chaykahana-language", value);
@@ -79,20 +95,38 @@ export default function MenuClient() {
   };
 
   const availableCategories = categories;
-
   const t = copy[lang];
-  const list = useMemo(
-    () => menuDishes.filter((dish) => {
+
+  const list = useMemo(() => {
+    const needle = query.trim().toLowerCase();
+    return menuDishes.filter((dish) => {
       const categoryText = categoryMap[dish.category]?.names?.[lang] || categoryMap[dish.category]?.names?.uz || dish.category;
       const text = `${dish.names[lang] || dish.names.uz} ${dish.descriptions[lang] || dish.descriptions.uz} ${categoryText}`.toLowerCase();
-      return (category === "all" || dish.category === category) && text.includes(query.toLowerCase());
-    }),
-    [menuDishes, category, query, lang, categoryMap],
-  );
+      return (category === "all" || dish.category === category) && text.includes(needle);
+    });
+  }, [menuDishes, category, query, lang, categoryMap]);
 
   const count = Object.values(qty).reduce((sum, value) => sum + value, 0);
   const total = menuDishes.reduce((sum, dish) => sum + (qty[dish.id] || 0) * dish.price, 0);
   const change = (id, amount) => setQty((current) => ({ ...current, [id]: Math.max(0, (current[id] || 0) + amount) }));
+  const emptyMessage = category !== "all" && !query.trim() ? t.categoryEmpty : t.noResult;
+
+  const quantityControl = (dish, stopPropagation = false) => {
+    const handle = (event, amount) => {
+      if (stopPropagation) event.stopPropagation();
+      change(dish.id, amount);
+    };
+
+    if (qty[dish.id]) {
+      return <div className="stepper" onClick={stopPropagation ? (event) => event.stopPropagation() : undefined}>
+        <button aria-label="Kamaytirish" onClick={(event) => handle(event, -1)}><Minus/></button>
+        <span>{qty[dish.id]}</span>
+        <button aria-label="Ko‘paytirish" onClick={(event) => handle(event, 1)}><Plus/></button>
+      </div>;
+    }
+
+    return <button className="add" onClick={(event) => handle(event, 1)}><Plus/>{t.add}</button>;
+  };
 
   if (loading) return <div className="loader"><div className="loader-orbit"><div className="loader-mark">✦</div></div><b>CHAYKAHANA</b><span>{t.welcome}</span></div>;
 
@@ -106,19 +140,39 @@ export default function MenuClient() {
       <div className="menu-search"><MagnifyingGlass/><input aria-label={t.search} placeholder={t.search} value={query} onChange={(event) => setQuery(event.target.value)}/>{query && <button aria-label="Tozalash" onClick={() => setQuery("")}><X/></button>}</div>
     </header>
 
-    <nav className="category-strip">
+    <nav className="category-strip" aria-label="Kategoriyalar">
       <button className={category === "all" ? "active" : ""} onClick={() => setCategory("all")}>{t.all}</button>
       {availableCategories.map((item) => <button key={item.id} className={category === item.id ? "active" : ""} onClick={() => setCategory(item.id)}>{item.names[lang] || item.names.uz || item.id}</button>)}
     </nav>
 
-    {error ? <section className="menu-empty"><b>!</b><h2>{error}</h2><button onClick={load}>{t.retry}</button></section> : list.length === 0 ? <section className="menu-empty"><MagnifyingGlass/><h2>{t.noResult}</h2></section> : <section className="dish-grid">
+    {error ? <section className="menu-empty"><b>!</b><h2>{error}</h2><button onClick={load}>{t.retry}</button></section> : list.length === 0 ? <section className="menu-empty"><MagnifyingGlass/><h2>{emptyMessage}</h2></section> : <section className="dish-grid">
       {list.map((dish, index) => <article className="dish-card" key={dish.id}>
-        <div className="dish-image"><Image src={dish.image} alt={dish.names[lang] || dish.names.uz} fill sizes="(max-width: 900px) 100vw, 880px" priority={index === 0}/><span>{categoryLabel(dish.category)}</span></div>
-        <div className="dish-meta"><div><h2>{dish.names[lang] || dish.names.uz}</h2><small>{dish.descriptions[lang] || dish.descriptions.uz}</small><p>₩{dish.price.toLocaleString()}</p></div>{qty[dish.id] ? <div className="stepper"><button aria-label="Kamaytirish" onClick={() => change(dish.id, -1)}><Minus/></button><span>{qty[dish.id]}</span><button aria-label="Ko‘paytirish" onClick={() => change(dish.id, 1)}><Plus/></button></div> : <button className="add" onClick={() => change(dish.id, 1)}><Plus/>{t.add}</button>}</div>
+        <button className="dish-card-open" aria-label={`${dish.names[lang] || dish.names.uz} — ₩${dish.price.toLocaleString()}`} onClick={() => setDetailDish(dish)} />
+        <div className="dish-image"><Image src={dish.image} alt={dish.names[lang] || dish.names.uz} fill sizes="(max-width: 759px) 100vw, 540px" priority={index === 0}/><span>{categoryLabel(dish.category)}</span></div>
+        <div className="dish-meta"><div><h2>{dish.names[lang] || dish.names.uz}</h2><small>{dish.descriptions[lang] || dish.descriptions.uz}</small><p>₩{dish.price.toLocaleString()}</p></div>{quantityControl(dish, true)}</div>
       </article>)}
     </section>}
 
     {count > 0 && <footer className="calc-bar"><div><Calculator/><span><small>{t.selected}</small><b>{count}</b></span></div><div><small>{t.total}</small><b>₩{total.toLocaleString()}</b></div><button onClick={() => setOpen(true)}>{t.view}</button></footer>}
-    {open && <div className="sheet-backdrop" onClick={() => setOpen(false)}><div className="calc-sheet" onClick={(event) => event.stopPropagation()}><div className="sheet-handle"/><button className="sheet-close" onClick={() => setOpen(false)}><X/></button><h2>{t.view}</h2>{count === 0 ? <p>{t.empty}</p> : menuDishes.filter((dish) => qty[dish.id]).map((dish) => <div className="calc-row" key={dish.id}><span>{dish.names[lang] || dish.names.uz} × {qty[dish.id]}</span><b>₩{(dish.price * qty[dish.id]).toLocaleString()}</b></div>)}<div className="calc-total"><span>{t.total}</span><b>₩{total.toLocaleString()}</b></div></div></div>}
+
+    {detailDish && <div className="sheet-backdrop" onClick={() => setDetailDish(null)}>
+      <section className="dish-detail-sheet" role="dialog" aria-modal="true" aria-label={detailDish.names[lang] || detailDish.names.uz} onClick={(event) => event.stopPropagation()}>
+        <button className="dish-detail-close" aria-label="Yopish" onClick={() => setDetailDish(null)}><X/></button>
+        <div className="dish-detail-image">
+          <Image src={detailDish.image} alt={detailDish.names[lang] || detailDish.names.uz} fill sizes="(max-width: 620px) 100vw, 620px"/>
+          <span>{categoryLabel(detailDish.category)}</span>
+        </div>
+        <div className="dish-detail-content">
+          <h2>{detailDish.names[lang] || detailDish.names.uz}</h2>
+          <p>{detailDish.descriptions[lang] || detailDish.descriptions.uz || categoryLabel(detailDish.category)}</p>
+          <div className="dish-detail-footer">
+            <strong className="dish-detail-price">₩{detailDish.price.toLocaleString()}</strong>
+            {quantityControl(detailDish)}
+          </div>
+        </div>
+      </section>
+    </div>}
+
+    {open && <div className="sheet-backdrop" onClick={() => setOpen(false)}><div className="calc-sheet" role="dialog" aria-modal="true" aria-label={t.view} onClick={(event) => event.stopPropagation()}><div className="sheet-handle"/><button className="sheet-close" aria-label="Yopish" onClick={() => setOpen(false)}><X/></button><h2>{t.view}</h2>{count === 0 ? <p>{t.empty}</p> : menuDishes.filter((dish) => qty[dish.id]).map((dish) => <div className="calc-row" key={dish.id}><span>{dish.names[lang] || dish.names.uz} × {qty[dish.id]}</span><b>₩{(dish.price * qty[dish.id]).toLocaleString()}</b></div>)}<div className="calc-total"><span>{t.total}</span><b>₩{total.toLocaleString()}</b></div></div></div>}
   </main>;
 }

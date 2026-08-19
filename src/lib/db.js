@@ -27,12 +27,65 @@ export function mapCategory(row) {
   };
 }
 
+function isDishPlaceholder(dish) {
+  return dish.names?.uz === "Yangi taom" && Number(dish.price) === 0;
+}
+
+function isCategoryPlaceholder(category) {
+  return category.names?.uz === "Yangi kategoriya";
+}
+
+export function getDishImageStoragePath(image) {
+  if (!image || image.startsWith("/assets/")) return null;
+  try {
+    const url = new URL(image);
+    if (!url.hostname.endsWith(".supabase.co")) return null;
+    const marker = "/storage/v1/object/public/dish-images/";
+    const index = url.pathname.indexOf(marker);
+    if (index === -1) return null;
+    const path = decodeURIComponent(url.pathname.slice(index + marker.length));
+    return path && !path.includes("..") ? path : null;
+  } catch {
+    return null;
+  }
+}
+
+export async function removeDishImage(image) {
+  const path = getDishImageStoragePath(image);
+  if (!path) return;
+  const { error } = await getDb().storage.from("dish-images").remove([path]);
+  if (error) console.error("Failed to remove old dish image", error);
+}
+
 export async function listDishes(admin = false) {
   let query = getDb().from("dishes").select("*").order("position").order("id");
   if (!admin) query = query.eq("visible", true);
   const { data, error } = await query;
   if (error) throw error;
-  return data.map(mapDish);
+
+  const dishes = data.map(mapDish);
+  if (admin) return dishes;
+
+  const publicDishes = dishes.filter((dish) => !isDishPlaceholder(dish));
+  const { data: categoryRows, error: categoryError } = await getDb()
+    .from("categories")
+    .select("id,names")
+    .eq("visible", true);
+
+  // Keep the old pre-migration fallback working if categories are temporarily unavailable.
+  if (categoryError) {
+    console.error(categoryError);
+    return publicDishes;
+  }
+
+  const visibleCategoryIds = new Set(
+    categoryRows
+      .map(mapCategory)
+      .filter((category) => !isCategoryPlaceholder(category))
+      .map((category) => category.id),
+  );
+
+  return publicDishes.filter((dish) => visibleCategoryIds.has(dish.category));
 }
 
 export async function listCategories(admin = false) {
@@ -40,7 +93,8 @@ export async function listCategories(admin = false) {
   if (!admin) query = query.eq("visible", true);
   const { data, error } = await query;
   if (error) throw error;
-  return data.map(mapCategory);
+  const categories = data.map(mapCategory);
+  return admin ? categories : categories.filter((category) => !isCategoryPlaceholder(category));
 }
 
 export async function categoryExists(id) {

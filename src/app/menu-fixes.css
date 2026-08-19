@@ -1,0 +1,192 @@
+/* Public menu fixes layered after globals.css. */
+
+.dish-card {
+  position: relative;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.dish-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 48px rgba(14,49,98,.16);
+}
+
+.dish-card-open {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border: 0;
+  border-radius: inherit;
+  background: transparent;
+  cursor: pointer;
+}
+
+.dish-card-open:focus-visible {
+  outline: 3px solid rgba(12,99,244,.32);
+  outline-offset: 3px;
+}
+
+.dish-card .add,
+.dish-card .stepper,
+.dish-card .stepper button {
+  position: relative;
+  z-index: 2;
+}
+
+.dish-detail-sheet {
+  width: min(620px, 100%);
+  max-height: min(86dvh, 760px);
+  overflow: auto;
+  background: #fff;
+  border-radius: 28px 28px 0 0;
+  position: relative;
+  padding: 0 22px max(26px, env(safe-area-inset-bottom));
+  box-shadow: 0 -18px 60px rgba(2,24,56,.24);
+}
+
+.dish-detail-image {
+  height: 300px;
+  margin: 0 -22px 20px;
+  position: relative;
+  overflow: hidden;
+  background: #e9eff7;
+}
+
+.dish-detail-image img {
+  object-fit: cover;
+}
+
+.dish-detail-image span {
+  position: absolute;
+  left: 18px;
+  bottom: 16px;
+  z-index: 1;
+  border-radius: 999px;
+  background: rgba(2,24,56,.82);
+  color: #fff;
+  padding: 7px 12px;
+  font-size: 12px;
+  font-weight: 750;
+  backdrop-filter: blur(8px);
+}
+
+.dish-detail-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 3;
+  width: 42px;
+  height: 42px;
+  border: 0;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(255,255,255,.92);
+  color: #173159;
+  box-shadow: 0 5px 18px rgba(2,24,56,.16);
+}
+
+.dish-detail-content h2 {
+  margin: 0;
+  color: #071b3d;
+  font-size: 26px;
+  letter-spacing: -.02em;
+}
+
+.dish-detail-content p {
+  color: #6f7f96;
+  line-height: 1.65;
+  margin: 10px 0 18px;
+}
+
+.dish-detail-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 17px;
+  border-top: 1px solid #e6edf6;
+}
+
+.dish-detail-price {
+  color: #0758da;
+  font-size: 24px;
+  font-weight: 850;
+}
+
+.dish-detail-footer .add {
+  height: 46px;
+}
+
+@media (min-width: 760px) {
+  .menu-header {
+    padding-left: max(20px, calc((100% - 1100px) / 2));
+    padding-right: max(20px, calc((100% - 1100px) / 2));
+  }
+
+  .category-strip {
+    padding-left: max(20px, calc((100% - 1100px) / 2));
+    padding-right: max(20px, calc((100% - 1100px) / 2));
+  }
+
+  .dish-grid {
+    width: min(1100px, calc(100% - 40px));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  .dish-image {
+    height: 300px;
+    min-height: 0;
+  }
+
+  .dish-meta {
+    min-height: 128px;
+    padding: 18px;
+  }
+
+  .dish-meta h2 {
+    font-size: 20px;
+  }
+
+  .dish-meta small {
+    max-width: 320px;
+  }
+
+  .menu-empty {
+    width: min(1100px, calc(100% - 40px));
+  }
+
+  .calc-bar {
+    width: min(1100px, calc(100% - 28px));
+  }
+
+  .dish-detail-sheet {
+    border-radius: 26px;
+    margin-bottom: 28px;
+  }
+
+  .sheet-backdrop:has(.dish-detail-sheet) {
+    align-items: center;
+  }
+}
+
+@media (max-width: 520px) {
+  .dish-detail-image {
+    height: 245px;
+  }
+
+  .dish-detail-content h2 {
+    font-size: 22px;
+  }
+
+  .dish-detail-footer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .dish-detail-footer .add,
+  .dish-detail-footer .stepper {
+    width: 100%;
+    justify-content: center;
+  }
+}

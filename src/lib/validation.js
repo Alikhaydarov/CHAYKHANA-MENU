@@ -1,5 +1,5 @@
 const LANGS = ["uz", "ko", "ru", "en"];
-const MAX_IMAGE_LENGTH = 5 * 1024 * 1024;
+const MAX_IMAGE_URL_LENGTH = 2048;
 
 function localized(value, field, maxLength, requiredUz = false) {
   if (!value || typeof value !== "object" || Array.isArray(value)) throw new Error(`${field} noto‘g‘ri`);
@@ -11,6 +11,20 @@ function localized(value, field, maxLength, requiredUz = false) {
   }
   if (requiredUz && !result.uz) throw new Error(`${field} (UZ) kiritilishi shart`);
   return result;
+}
+
+function validImageSource(image) {
+  if (image.startsWith("/assets/") && !image.includes("..")) return true;
+  try {
+    const url = new URL(image);
+    return (
+      url.protocol === "https:" &&
+      url.hostname.endsWith(".supabase.co") &&
+      url.pathname.startsWith("/storage/v1/object/public/")
+    );
+  } catch {
+    return false;
+  }
 }
 
 export function categoryIdFromName(name) {
@@ -38,7 +52,7 @@ export function validateCategory(input) {
   };
 }
 
-export function validateDish(input, { partial = false } = {}) {
+export function validateDish(input) {
   if (!input || typeof input !== "object" || Array.isArray(input)) throw new Error("Noto‘g‘ri ma’lumot");
   const category = String(input.category ?? "").trim();
   const price = Number(input.price);
@@ -48,8 +62,8 @@ export function validateDish(input, { partial = false } = {}) {
   if (!category || category.length > 80) throw new Error("Kategoriya noto‘g‘ri");
   if (!Number.isSafeInteger(price) || price < 0 || price > 10_000_000) throw new Error("Narx noto‘g‘ri");
   if (!Number.isSafeInteger(position) || position < 0 || position > 100_000) throw new Error("Tartib raqami noto‘g‘ri");
-  if (!image || image.length > MAX_IMAGE_LENGTH || (!image.startsWith("/assets/") && !/^https:\/\//i.test(image))) {
-    throw new Error("Rasm PNG, JPG yoki WebP formatida va 5 MB dan kichik bo‘lishi kerak");
+  if (!image || image.length > MAX_IMAGE_URL_LENGTH || !validImageSource(image)) {
+    throw new Error("Rasm manzili noto‘g‘ri");
   }
 
   return {
@@ -58,7 +72,7 @@ export function validateDish(input, { partial = false } = {}) {
     image,
     visible: input.visible !== false,
     position,
-    names: localized(input.names, "Nom", 100, !partial),
+    names: localized(input.names, "Nom", 100, true),
     descriptions: localized(input.descriptions, "Tavsif", 500),
   };
 }

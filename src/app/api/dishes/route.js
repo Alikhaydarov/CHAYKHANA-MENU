@@ -36,8 +36,22 @@ export async function POST(request) {
   }
 
   const database = getDb();
-  const { data: maxRows } = await database.from("dishes").select("position").order("position", { ascending: false }).limit(1);
+  const { data: maxRows, error: maxError } = await database
+    .from("dishes")
+    .select("position")
+    .order("position", { ascending: false })
+    .limit(1);
+
+  if (maxError) {
+    console.error(maxError);
+    return NextResponse.json({ error: "Taomlar tartibi aniqlanmadi" }, { status: 500 });
+  }
+
   dish.position = (maxRows?.[0]?.position || 0) + 1;
+
+  // Admin panel first creates a placeholder and opens it in the editor.
+  // Keep that placeholder private until the admin explicitly publishes it.
+  if (dish.names.uz === "Yangi taom" && dish.price === 0) dish.visible = false;
 
   const { data, error } = await database.from("dishes").insert(dish).select().single();
   if (error) {
