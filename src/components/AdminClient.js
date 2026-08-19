@@ -180,6 +180,7 @@ export default function AdminClient() {
 
   const switchView = (nextView) => {
     setView(nextView);
+    if (nextView === "categories") setLang("uz");
     setMobileEdit(false);
     setNotice("");
   };
@@ -193,6 +194,7 @@ export default function AdminClient() {
   const selectCategory = (category) => {
     setSelectedCategoryId(category.id);
     setCategoryDraft(structuredClone(category));
+    setLang("uz");
     setMobileEdit(true);
   };
 
@@ -234,15 +236,25 @@ export default function AdminClient() {
 
   const saveCategory = () =>
     act(async () => {
+      const uzName = categoryDraft?.names?.uz?.trim();
+      if (!uzName) throw new Error("Kategoriya nomini kiriting");
+
+      const payload = {
+        names: { ...emptyNames, ...categoryDraft.names, uz: uzName },
+        visible: categoryDraft.visible,
+        position: Number(categoryDraft.position || 0),
+      };
+
       const updated = await api(`/api/categories/${encodeURIComponent(categoryDraft.id)}`, {
         method: "PUT",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify(categoryDraft),
+        body: JSON.stringify(payload),
       });
-      await load();
+
+      setCategories((current) => current.map((item) => (item.id === updated.id ? updated : item)));
       setSelectedCategoryId(updated.id);
-      setCategoryDraft(updated);
-    }, "Kategoriya saqlandi");
+      setCategoryDraft(structuredClone(updated));
+    }, "Kategoriya nomi saqlandi");
 
   const addCategory = () =>
     act(async () => {
@@ -254,6 +266,7 @@ export default function AdminClient() {
       await load();
       setSelectedCategoryId(created.id);
       setCategoryDraft(created);
+      setLang("uz");
       setMobileEdit(true);
       setView("categories");
     }, "Yangi kategoriya qo‘shildi");
@@ -691,7 +704,7 @@ export default function AdminClient() {
             <button className={styles.dangerButton} disabled={busy} onClick={removeCategory}>
               <Trash size={18} />O‘chirish
             </button>
-            <button className={styles.primaryButton} disabled={busy} onClick={saveCategory}>
+            <button type="button" className={styles.primaryButton} disabled={busy} onClick={saveCategory}>
               {busy ? <SpinnerGap className={styles.spin} size={18}/> : <FloppyDisk size={18}/>}
               Saqlash
             </button>
@@ -703,11 +716,26 @@ export default function AdminClient() {
             <div className={styles.formSectionHeading}>
               <div>
                 <h3>Asosiy sozlamalar</h3>
-                <p>Kategoriyaning ichki identifikatori, tartibi va holati.</p>
+                <p>Avval mijozga ko‘rinadigan UZ nomini tahrirlang. Ichki ID o‘zgarmaydi.</p>
               </div>
             </div>
 
             <div className={styles.categoryFormGrid}>
+              <label className={styles.field}>
+                <span>Kategoriya nomi (UZ)</span>
+                <input
+                  value={categoryDraft.names?.uz || ""}
+                  onChange={(event) => setCategoryDraft((current) => ({ ...current, names: { ...current.names, uz: event.target.value } }))}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter") {
+                      event.preventDefault();
+                      saveCategory();
+                    }
+                  }}
+                />
+                <small className={styles.fieldHint}>Admin ro‘yxati va saytda asosiy nom sifatida shu qiymat ko‘rinadi.</small>
+              </label>
+
               <label className={styles.field}>
                 <span>Ichki ID</span>
                 <input value={categoryDraft.id} disabled />
@@ -739,14 +767,14 @@ export default function AdminClient() {
           <section className={styles.formSection}>
             <div className={styles.formSectionHeading}>
               <div>
-                <h3>Kategoriya nomi</h3>
-                <p>Har bir til uchun mijozga ko‘rinadigan nomni kiriting.</p>
+                <h3>Kategoriya tarjimalari</h3>
+                <p>Kerak bo‘lsa kategoriya nomini boshqa tillarda ham tahrirlang.</p>
               </div>
             </div>
 
             <div className={styles.languageTabs}>
               {Object.entries(langs).map(([key, label]) => (
-                <button key={key} className={lang === key ? styles.languageActive : ""} onClick={() => setLang(key)}>
+                <button type="button" key={key} className={lang === key ? styles.languageActive : ""} onClick={() => setLang(key)}>
                   {label}
                 </button>
               ))}
