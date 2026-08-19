@@ -6,6 +6,9 @@ create table if not exists public.dishes (
  created_at timestamptz not null default now(), updated_at timestamptz not null default now()
 );
 alter table public.dishes enable row level security;
+grant usage on schema public to service_role;
+grant select, insert, update, delete on table public.dishes to service_role;
+grant usage, select on sequence public.dishes_id_seq to service_role;
 insert into storage.buckets (id,name,public,file_size_limit,allowed_mime_types)
 values ('dish-images','dish-images',true,5242880,array['image/png','image/jpeg','image/webp'])
 on conflict (id) do update set public=true,file_size_limit=5242880;
