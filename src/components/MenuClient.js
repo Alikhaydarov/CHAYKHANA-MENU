@@ -78,10 +78,7 @@ export default function MenuClient() {
     return item?.names?.[lang] || item?.names?.uz || id;
   };
 
-  const availableCategories = useMemo(
-    () => categories.filter((item) => menuDishes.some((dish) => dish.category === item.id)),
-    [categories, menuDishes],
-  );
+  const availableCategories = categories;
 
   const t = copy[lang];
   const list = useMemo(
