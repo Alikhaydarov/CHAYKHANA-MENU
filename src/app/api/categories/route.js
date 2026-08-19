@@ -40,16 +40,27 @@ export async function POST(request) {
 
   category.position = (maxRows?.[0]?.position || 0) + 1;
 
+  // New-category buttons create an editor draft first. Do not expose the
+  // generic placeholder publicly until the admin explicitly enables it.
+  if (category.names.uz === "Yangi kategoriya") category.visible = false;
+
   const baseId = categoryIdFromName(category.names.uz);
   let id = baseId;
-  for (let suffix = 2; suffix < 100; suffix += 1) {
+  let suffix = 1;
+
+  while (suffix <= 1000) {
     const { data, error } = await database.from("categories").select("id").eq("id", id).maybeSingle();
     if (error) {
       console.error(error);
       return NextResponse.json({ error: "Kategoriya tekshirilmadi" }, { status: 500 });
     }
     if (!data) break;
+    suffix += 1;
     id = `${baseId}-${suffix}`;
+  }
+
+  if (suffix > 1000) {
+    return NextResponse.json({ error: "Kategoriya uchun noyob ID yaratilmadi" }, { status: 409 });
   }
 
   const { data, error } = await database.from("categories").insert({ id, ...category }).select().single();
