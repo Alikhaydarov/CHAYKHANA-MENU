@@ -1,4 +1,13 @@
 /* Keep navbar action controls visually centered and balanced. */
+.menu-header {
+  align-items: center !important;
+}
+
+.menu-brand,
+.header-actions {
+  align-self: center !important;
+}
+
 .header-actions {
   align-items: center !important;
 }
@@ -13,6 +22,8 @@
   align-items: center !important;
   justify-content: center !important;
   line-height: 1 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
 }
 
 .header-actions > button > svg,
@@ -36,6 +47,10 @@
 }
 
 @media (max-width: 640px) {
+  .menu-header {
+    align-items: center !important;
+  }
+
   .header-actions {
     height: 42px;
     align-items: center !important;
