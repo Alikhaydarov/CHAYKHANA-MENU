@@ -1,7 +1,7 @@
 /* Public menu fixes layered after globals.css. */
 
 .dish-card {
-  cursor: pointer;
+  position: relative;
   transition: transform .18s ease, box-shadow .18s ease;
 }
 
@@ -10,7 +10,17 @@
   box-shadow: 0 20px 48px rgba(14,49,98,.16);
 }
 
-.dish-card:focus-visible {
+.dish-card-open {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border: 0;
+  border-radius: inherit;
+  background: transparent;
+  cursor: pointer;
+}
+
+.dish-card-open:focus-visible {
   outline: 3px solid rgba(12,99,244,.32);
   outline-offset: 3px;
 }
