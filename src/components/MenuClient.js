@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Calculator, CaretDown, Globe, MagnifyingGlass, Minus, Plus, X } from "@phosphor-icons/react";
+import { Calculator, MagnifyingGlass, Minus, Plus, X } from "@phosphor-icons/react";
+import LanguageMenu from "./LanguageMenu";
 
 const copy = {
   uz: { welcome: "Xush kelibsiz", loading: "Menu yangilanmoqda", language: "Til", search: "Taom yoki kategoriya qidiring", all: "Barchasi", add: "Qo‘shish", selected: "Tanlangan", total: "Jami", view: "Hisobni ko‘rish", empty: "Hali taom tanlanmagan", noResult: "Taom topilmadi", categoryEmpty: "Bu kategoriyada hozircha taom yo‘q", retry: "Qayta urinish", heroMenu: "MENYU", heroSubtitle: "O‘ZBEK TAOMLARI" },
@@ -157,13 +158,7 @@ export default function MenuClient() {
     <header className="menu-header">
       <div className="menu-brand"><span className="logo-mark">✦</span><div><b>CHAYKAHANA</b><small>O‘ZBEK TAOMLARI</small></div></div>
       <div className="header-actions">
-        <label className="language-select" aria-label={t.language}>
-          <Globe/>
-          <select value={lang} onChange={(event) => selectLanguage(event.target.value)} aria-label={t.language}>
-            {Object.entries(labels).map(([key, label]) => <option key={key} value={key}>{label}</option>)}
-          </select>
-          <CaretDown/>
-        </label>
+        <LanguageMenu lang={lang} ariaLabel={t.language} onSelect={selectLanguage} />
         <button aria-label={t.total} onClick={() => setOpen(true)}><Calculator/><span>{t.total}</span>{count > 0 && <em>{count}</em>}</button>
       </div>
       <div className="menu-search"><MagnifyingGlass/><input aria-label={t.search} placeholder={t.search} value={query} onChange={(event) => setQuery(event.target.value)}/>{query && <button aria-label="Tozalash" onClick={() => setQuery("")}><X/></button>}</div>
