@@ -35,6 +35,28 @@ function isCategoryPlaceholder(category) {
   return category.names?.uz === "Yangi kategoriya";
 }
 
+export function getDishImageStoragePath(image) {
+  if (!image || image.startsWith("/assets/")) return null;
+  try {
+    const url = new URL(image);
+    if (!url.hostname.endsWith(".supabase.co")) return null;
+    const marker = "/storage/v1/object/public/dish-images/";
+    const index = url.pathname.indexOf(marker);
+    if (index === -1) return null;
+    const path = decodeURIComponent(url.pathname.slice(index + marker.length));
+    return path && !path.includes("..") ? path : null;
+  } catch {
+    return null;
+  }
+}
+
+export async function removeDishImage(image) {
+  const path = getDishImageStoragePath(image);
+  if (!path) return;
+  const { error } = await getDb().storage.from("dish-images").remove([path]);
+  if (error) console.error("Failed to remove old dish image", error);
+}
+
 export async function listDishes(admin = false) {
   let query = getDb().from("dishes").select("*").order("position").order("id");
   if (!admin) query = query.eq("visible", true);
