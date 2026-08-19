@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { categoryExists, getDb, mapDish } from "@/lib/db";
+import { categoryExists, getDb, mapDish, removeDishImage } from "@/lib/db";
 import { isAdmin } from "@/lib/auth";
 import { validateDish } from "@/lib/validation";
 
@@ -26,7 +26,20 @@ export async function PUT(request, { params }) {
     return NextResponse.json({ error: "Kategoriyalar bazasi tayyor emas" }, { status: 503 });
   }
 
-  const { data, error } = await getDb()
+  const database = getDb();
+  const { data: current, error: currentError } = await database
+    .from("dishes")
+    .select("image")
+    .eq("id", id)
+    .maybeSingle();
+
+  if (currentError) {
+    console.error(currentError);
+    return NextResponse.json({ error: "Taom tekshirilmadi" }, { status: 500 });
+  }
+  if (!current) return NextResponse.json({ error: "Topilmadi" }, { status: 404 });
+
+  const { data, error } = await database
     .from("dishes")
     .update({ ...dish, updated_at: new Date().toISOString() })
     .eq("id", id)
@@ -37,17 +50,37 @@ export async function PUT(request, { params }) {
     console.error(error);
     return NextResponse.json({ error: "Saqlashda xato" }, { status: 500 });
   }
-  return data ? NextResponse.json(mapDish(data)) : NextResponse.json({ error: "Topilmadi" }, { status: 404 });
+  if (!data) return NextResponse.json({ error: "Topilmadi" }, { status: 404 });
+
+  if (current.image && current.image !== data.image) await removeDishImage(current.image);
+  return NextResponse.json(mapDish(data));
 }
 
 export async function DELETE(_request, { params }) {
   if (!(await isAdmin())) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   const { id } = await params;
   if (!/^\d+$/.test(id)) return NextResponse.json({ error: "Noto‘g‘ri ID" }, { status: 400 });
-  const { data, error } = await getDb().from("dishes").delete().eq("id", id).select("id").maybeSingle();
+
+  const database = getDb();
+  const { data: current, error: currentError } = await database
+    .from("dishes")
+    .select("image")
+    .eq("id", id)
+    .maybeSingle();
+
+  if (currentError) {
+    console.error(currentError);
+    return NextResponse.json({ error: "Taom tekshirilmadi" }, { status: 500 });
+  }
+  if (!current) return NextResponse.json({ error: "Topilmadi" }, { status: 404 });
+
+  const { data, error } = await database.from("dishes").delete().eq("id", id).select("id").maybeSingle();
   if (error) {
     console.error(error);
     return NextResponse.json({ error: "O‘chirishda xato" }, { status: 500 });
   }
-  return data ? NextResponse.json({ ok: true }) : NextResponse.json({ error: "Topilmadi" }, { status: 404 });
+  if (!data) return NextResponse.json({ error: "Topilmadi" }, { status: 404 });
+
+  await removeDishImage(current.image);
+  return NextResponse.json({ ok: true });
 }
