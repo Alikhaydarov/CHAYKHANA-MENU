@@ -1,23 +1,31 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
-import { Calculator, Globe, MagnifyingGlass, Minus, Plus, X } from "@phosphor-icons/react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { Calculator, CaretDown, Check, Globe, MagnifyingGlass, Minus, Plus, X } from "@phosphor-icons/react";
 
 const copy = {
-  uz: { welcome: "Xush kelibsiz", search: "Taom yoki kategoriya qidiring", all: "Barchasi", add: "Qo‘shish", selected: "Tanlangan", total: "Jami", view: "Hisobni ko‘rish", empty: "Hali taom tanlanmagan", noResult: "Taom topilmadi", categoryEmpty: "Bu kategoriyada hozircha taom yo‘q", retry: "Qayta urinish" },
-  ko: { welcome: "환영합니다", search: "음식 또는 카테고리 검색", all: "전체", add: "추가", selected: "선택", total: "합계", view: "계산 보기", empty: "선택한 음식이 없습니다", noResult: "음식을 찾을 수 없습니다", categoryEmpty: "이 카테고리에는 아직 음식이 없습니다", retry: "다시 시도" },
-  ru: { welcome: "Добро пожаловать", search: "Найти блюдо или категорию", all: "Все", add: "Добавить", selected: "Выбрано", total: "Итого", view: "Посмотреть счёт", empty: "Блюда не выбраны", noResult: "Блюда не найдены", categoryEmpty: "В этой категории пока нет блюд", retry: "Повторить" },
-  en: { welcome: "Welcome", search: "Search dishes or categories", all: "All", add: "Add", selected: "Selected", total: "Total", view: "View total", empty: "No dishes selected", noResult: "No dishes found", categoryEmpty: "No dishes in this category yet", retry: "Try again" },
+  uz: { welcome: "Xush kelibsiz", loading: "Menu yangilanmoqda", language: "Til", chooseLanguage: "Tilni tanlang", languageHint: "Menyuni o‘zingizga qulay tilda ko‘ring", search: "Taom yoki kategoriya qidiring", all: "Barchasi", add: "Qo‘shish", selected: "Tanlangan", total: "Jami", view: "Hisobni ko‘rish", empty: "Hali taom tanlanmagan", noResult: "Taom topilmadi", categoryEmpty: "Bu kategoriyada hozircha taom yo‘q", retry: "Qayta urinish" },
+  ko: { welcome: "환영합니다", loading: "메뉴를 불러오는 중", language: "언어", chooseLanguage: "언어 선택", languageHint: "편한 언어로 메뉴를 확인하세요", search: "음식 또는 카테고리 검색", all: "전체", add: "추가", selected: "선택", total: "합계", view: "계산 보기", empty: "선택한 음식이 없습니다", noResult: "음식을 찾을 수 없습니다", categoryEmpty: "이 카테고리에는 아직 음식이 없습니다", retry: "다시 시도" },
+  ru: { welcome: "Добро пожаловать", loading: "Обновляем меню", language: "Язык", chooseLanguage: "Выберите язык", languageHint: "Просматривайте меню на удобном языке", search: "Найти блюдо или категорию", all: "Все", add: "Добавить", selected: "Выбрано", total: "Итого", view: "Посмотреть счёт", empty: "Блюда не выбраны", noResult: "Блюда не найдены", categoryEmpty: "В этой категории пока нет блюд", retry: "Повторить" },
+  en: { welcome: "Welcome", loading: "Updating menu", language: "Language", chooseLanguage: "Choose language", languageHint: "View the menu in the language you prefer", search: "Search dishes or categories", all: "All", add: "Add", selected: "Selected", total: "Total", view: "View total", empty: "No dishes selected", noResult: "No dishes found", categoryEmpty: "No dishes in this category yet", retry: "Try again" },
 };
 
 const labels = { uz: "UZ", ko: "한국어", ru: "RU", en: "EN" };
+const languageOptions = [
+  { key: "uz", short: "UZ", native: "O‘zbekcha" },
+  { key: "ko", short: "KO", native: "한국어" },
+  { key: "ru", short: "RU", native: "Русский" },
+  { key: "en", short: "EN", native: "English" },
+];
 
 export default function MenuClient() {
   const [dishes, setDishes] = useState([]);
   const [categories, setCategories] = useState([]);
   const [categoriesReady, setCategoriesReady] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [languageLoading, setLanguageLoading] = useState(false);
+  const [languageOpen, setLanguageOpen] = useState(false);
   const [error, setError] = useState("");
   const [lang, setLang] = useState("uz");
   const [query, setQuery] = useState("");
@@ -25,6 +33,7 @@ export default function MenuClient() {
   const [qty, setQty] = useState({});
   const [open, setOpen] = useState(false);
   const [detailDish, setDetailDish] = useState(null);
+  const languageTimerRef = useRef(null);
 
   const fetchMenu = async () => {
     const dishResponse = await fetch("/api/dishes", { cache: "no-store" });
@@ -58,8 +67,15 @@ export default function MenuClient() {
 
   useEffect(() => {
     const saved = localStorage.getItem("chaykahana-language");
-    if (saved && labels[saved]) queueMicrotask(() => setLang(saved));
+    if (saved && labels[saved]) {
+      queueMicrotask(() => setLang(saved));
+      document.documentElement.lang = saved;
+    }
     fetchMenu().catch(() => setError("Menu yuklanmadi")).finally(() => setTimeout(() => setLoading(false), 550));
+
+    return () => {
+      if (languageTimerRef.current) window.clearTimeout(languageTimerRef.current);
+    };
   }, []);
 
   useEffect(() => {
@@ -67,6 +83,7 @@ export default function MenuClient() {
       if (event.key === "Escape") {
         setOpen(false);
         setDetailDish(null);
+        setLanguageOpen(false);
       }
     };
     window.addEventListener("keydown", onKeyDown);
@@ -78,8 +95,22 @@ export default function MenuClient() {
   }, [categories, category]);
 
   const selectLanguage = (value) => {
+    if (!labels[value]) return;
+    if (value === lang) {
+      setLanguageOpen(false);
+      return;
+    }
+
+    if (languageTimerRef.current) window.clearTimeout(languageTimerRef.current);
     setLang(value);
+    document.documentElement.lang = value;
     localStorage.setItem("chaykahana-language", value);
+    setLanguageOpen(false);
+    setLanguageLoading(true);
+    languageTimerRef.current = window.setTimeout(() => {
+      setLanguageLoading(false);
+      languageTimerRef.current = null;
+    }, 650);
   };
 
   const categoryMap = useMemo(() => Object.fromEntries(categories.map((item) => [item.id, item])), [categories]);
@@ -128,13 +159,22 @@ export default function MenuClient() {
     return <button className="add" onClick={(event) => handle(event, 1)}><Plus/>{t.add}</button>;
   };
 
-  if (loading) return <div className="loader"><div className="loader-orbit"><div className="loader-mark">✦</div></div><b>CHAYKAHANA</b><span>{t.welcome}</span></div>;
+  if (loading || languageLoading) return <div className={`loader${languageLoading ? " language-transition-loader" : ""}`}>
+    <div className="loader-orbit"><div className="loader-mark">✦</div></div>
+    <b>CHAYKAHANA</b>
+    <span>{languageLoading ? t.loading : t.welcome}</span>
+    {languageLoading && <small>{t.welcome}</small>}
+  </div>;
 
   return <main className="menu-page">
     <header className="menu-header">
       <div className="menu-brand"><span className="logo-mark">✦</span><div><b>CHAYKAHANA</b><small>O‘ZBEK TAOMLARI</small></div></div>
       <div className="header-actions">
-        <label aria-label="Til"><Globe/><select value={lang} onChange={(event) => selectLanguage(event.target.value)}>{Object.entries(labels).map(([key, label]) => <option key={key} value={key}>{label}</option>)}</select></label>
+        <button className="language-trigger" aria-haspopup="dialog" aria-expanded={languageOpen} onClick={() => setLanguageOpen(true)}>
+          <Globe/>
+          <span className="language-trigger-copy"><small>{t.language}</small><b>{labels[lang]}</b></span>
+          <CaretDown className="language-trigger-caret"/>
+        </button>
         <button aria-label={t.total} onClick={() => setOpen(true)}><Calculator/><span>{t.total}</span>{count > 0 && <em>{count}</em>}</button>
       </div>
       <div className="menu-search"><MagnifyingGlass/><input aria-label={t.search} placeholder={t.search} value={query} onChange={(event) => setQuery(event.target.value)}/>{query && <button aria-label="Tozalash" onClick={() => setQuery("")}><X/></button>}</div>
@@ -154,6 +194,23 @@ export default function MenuClient() {
     </section>}
 
     {count > 0 && <footer className="calc-bar"><div><Calculator/><span><small>{t.selected}</small><b>{count}</b></span></div><div><small>{t.total}</small><b>₩{total.toLocaleString()}</b></div><button onClick={() => setOpen(true)}>{t.view}</button></footer>}
+
+    {languageOpen && <div className="language-backdrop" onClick={() => setLanguageOpen(false)}>
+      <section className="language-sheet" role="dialog" aria-modal="true" aria-labelledby="language-title" onClick={(event) => event.stopPropagation()}>
+        <div className="language-sheet-handle"/>
+        <header>
+          <div><span className="language-sheet-icon"><Globe/></span><div><h2 id="language-title">{t.chooseLanguage}</h2><p>{t.languageHint}</p></div></div>
+          <button className="language-sheet-close" aria-label="Close" onClick={() => setLanguageOpen(false)}><X/></button>
+        </header>
+        <div className="language-options">
+          {languageOptions.map((item) => <button key={item.key} className={lang === item.key ? "active" : ""} aria-pressed={lang === item.key} onClick={() => selectLanguage(item.key)}>
+            <span className="language-code">{item.short}</span>
+            <span className="language-name"><b>{item.native}</b><small>{copy[item.key].chooseLanguage}</small></span>
+            <span className="language-check">{lang === item.key && <Check weight="bold"/>}</span>
+          </button>)}
+        </div>
+      </section>
+    </div>}
 
     {detailDish && <div className="sheet-backdrop" onClick={() => setDetailDish(null)}>
       <section className="dish-detail-sheet" role="dialog" aria-modal="true" aria-label={detailDish.names[lang] || detailDish.names.uz} onClick={(event) => event.stopPropagation()}>
