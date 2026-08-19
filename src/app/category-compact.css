@@ -1,0 +1,47 @@
+/* Slimmer, quieter public category navigation. */
+.category-strip {
+  height: 56px !important;
+  gap: 8px !important;
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+  border-top-color: #edf1f6 !important;
+  border-bottom: 1px solid #edf1f6 !important;
+  box-shadow: 0 4px 14px rgba(3,29,67,.045) !important;
+}
+
+.category-strip button {
+  height: 36px !important;
+  min-height: 36px !important;
+  padding: 0 16px !important;
+  border-color: #e1e7ef !important;
+  background: #fff !important;
+  color: #29405f !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  box-shadow: none !important;
+}
+
+.category-strip button.active {
+  background: #0c63f4 !important;
+  color: #fff !important;
+  border-color: #0c63f4 !important;
+  font-weight: 700 !important;
+  box-shadow: 0 3px 10px rgba(12,99,244,.16) !important;
+}
+
+@media (max-width: 640px) {
+  .category-strip {
+    height: 54px !important;
+    gap: 7px !important;
+    padding-top: 9px !important;
+    padding-bottom: 9px !important;
+  }
+
+  .category-strip button {
+    height: 34px !important;
+    min-height: 34px !important;
+    padding: 0 14px !important;
+    font-size: 13px !important;
+    border-radius: 999px !important;
+  }
+}
