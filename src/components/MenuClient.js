@@ -55,7 +55,7 @@ export default function MenuClient() {
   const load = () => {
     setLoading(true);
     setError("");
-    fetchMenu().catch(() => setError("Menu yuklanmadi")).finally(() => window.setTimeout(() => setLoading(false), 180));
+    fetchMenu().catch(() => setError("Menu yuklanmadi")).finally(() => window.setTimeout(() => setLoading(false), 2000));
   };
 
   useEffect(() => {
@@ -65,7 +65,7 @@ export default function MenuClient() {
       document.documentElement.lang = saved;
     }
 
-    fetchMenu().catch(() => setError("Menu yuklanmadi")).finally(() => window.setTimeout(() => setLoading(false), 180));
+    fetchMenu().catch(() => setError("Menu yuklanmadi")).finally(() => window.setTimeout(() => setLoading(false), 2000));
 
     return () => {
       if (languageTimerRef.current) window.clearTimeout(languageTimerRef.current);
