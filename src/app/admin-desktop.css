@@ -1,132 +1,287 @@
-/* Desktop-only admin layout corrections.
-   Kept separate from the mobile-first component styles so tablet/mobile behavior stays untouched. */
+/* PC-only admin polish. Mobile/tablet styles stay in AdminClient.module.css. */
 
 @media (min-width: 1240px) {
   main:has(> aside) {
-    grid-template-columns: 220px minmax(0, 1fr) !important;
-    background: #f5f7fb !important;
+    grid-template-columns: 238px minmax(0, 1fr) !important;
+    background: #f3f6fa !important;
   }
 
+  /* Sidebar */
   main:has(> aside) > aside {
-    padding: 22px 14px 18px !important;
-    box-shadow: 8px 0 28px rgba(16, 35, 63, 0.06) !important;
+    padding: 24px 16px 18px !important;
+    background:
+      radial-gradient(circle at 15% 0%, rgba(38, 116, 235, .24), transparent 30%),
+      linear-gradient(180deg, #071a36 0%, #06162f 100%) !important;
+    border-right: 1px solid rgba(255, 255, 255, .04);
+    box-shadow: 10px 0 30px rgba(12, 30, 55, .06) !important;
+  }
+
+  main:has(> aside) > aside > div:first-child {
+    min-height: 66px;
+    padding: 0 8px 20px !important;
+    margin-bottom: 6px;
+  }
+
+  main:has(> aside) > aside nav {
+    gap: 7px !important;
+    margin-top: 20px !important;
+  }
+
+  main:has(> aside) > aside nav button {
+    min-height: 48px !important;
+    border-radius: 12px !important;
+    padding-inline: 13px !important;
+  }
+
+  main:has(> aside) > aside nav button:hover {
+    transform: translateX(2px);
+  }
+
+  main:has(> aside) > aside > div:last-child {
+    padding-top: 16px !important;
+  }
+
+  /* Workspace + topbar */
+  main:has(> aside) > section {
+    min-width: 0;
+    background: #f3f6fa;
   }
 
   main:has(> aside) > section > header {
-    min-height: 84px !important;
-    padding: 16px 28px !important;
+    min-height: 88px !important;
+    padding: 16px 30px !important;
+    background: rgba(255, 255, 255, .96) !important;
+    border-bottom: 1px solid #e4eaf2 !important;
+    box-shadow: 0 1px 0 rgba(15, 33, 57, .02);
   }
 
   main:has(> aside) > section > header h1 {
-    font-size: 28px !important;
-    line-height: 1.08 !important;
+    margin-top: 5px !important;
+    font-size: 27px !important;
+    line-height: 1.04 !important;
+    letter-spacing: -.035em !important;
   }
 
   main:has(> aside) > section > header p {
-    font-size: 14px !important;
-  }
-
-  main:has(> aside) > section > div {
-    padding: 20px 24px 24px !important;
-  }
-
-  /* Dashboard stays centered instead of stretching across ultra-wide screens. */
-  main:has(> aside) > section > div > div:not(:has(> section + section)) {
-    width: 100%;
-    max-width: 1280px;
-    margin-inline: auto;
-  }
-
-  /* Dishes/categories: compact list + readable editor, centered as one workspace. */
-  main:has(> aside) > section > div > div:has(> section + section) {
-    width: 100%;
-    max-width: 1280px;
-    margin-inline: auto;
-    grid-template-columns: 360px minmax(0, 900px) !important;
-    gap: 18px !important;
-    justify-content: center;
-  }
-
-  main:has(> aside) > section > div > div:has(> section + section) > section:first-child {
-    width: 100%;
-    max-width: 360px;
-  }
-
-  main:has(> aside) > section > div > div:has(> section + section) > section:last-child {
-    width: 100%;
-    min-width: 0;
-  }
-
-  main:has(> aside) section section {
-    border-radius: 16px !important;
-  }
-
-  /* Desktop typography was too small. */
-  main:has(> aside) section section h2 {
-    font-size: 19px !important;
-  }
-
-  main:has(> aside) section section h3 {
-    font-size: 18px !important;
-  }
-
-  main:has(> aside) section section b {
-    font-size: 13px;
-  }
-
-  main:has(> aside) section section small {
-    font-size: 11px;
-    line-height: 1.45;
-  }
-
-  main:has(> aside) section section label,
-  main:has(> aside) section section input,
-  main:has(> aside) section section select,
-  main:has(> aside) section section textarea,
-  main:has(> aside) section section button {
+    margin-top: 4px !important;
     font-size: 13px !important;
   }
 
-  main:has(> aside) section section input,
-  main:has(> aside) section section select {
-    min-height: 44px;
+  main:has(> aside) > section > header a,
+  main:has(> aside) > section > header button {
+    min-height: 42px !important;
+    border-radius: 11px !important;
   }
 
-  main:has(> aside) section section textarea {
-    min-height: 132px;
-    line-height: 1.55;
+  /* Main canvas */
+  main:has(> aside) > section > div {
+    padding: 24px 28px 28px !important;
   }
 
-  /* Give editor content breathing room without creating a huge empty canvas. */
-  main:has(> aside) > section > div > div:has(> section + section) > section:last-child > div:last-child {
+  main:has(> aside) > section > div > div {
+    width: 100%;
+    max-width: 1420px;
+    margin-inline: auto;
+  }
+
+  /* Dashboard */
+  main:has(> aside) > section > div > div:not(:has(> section + section)) > section:first-of-type {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+    margin-bottom: 20px !important;
+  }
+
+  main:has(> aside) > section > div > div:not(:has(> section + section)) > section:first-of-type > article {
+    min-height: 154px;
+    padding: 20px !important;
+    border-radius: 18px !important;
+    border-color: #e1e8f1 !important;
+    box-shadow: 0 10px 30px rgba(17, 41, 78, .045) !important;
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+
+  main:has(> aside) > section > div > div:not(:has(> section + section)) > section:first-of-type > article:hover {
+    transform: translateY(-2px);
+    border-color: #d4e0ef !important;
+    box-shadow: 0 14px 34px rgba(17, 41, 78, .07) !important;
+  }
+
+  main:has(> aside) > section > div > div:not(:has(> section + section)) > section:first-of-type > article > div:first-child {
+    width: 42px !important;
+    height: 42px !important;
+    border-radius: 12px !important;
+    margin-bottom: 18px !important;
+  }
+
+  main:has(> aside) > section > div > div:not(:has(> section + section)) > section:first-of-type > article > div:nth-child(2) {
+    font-size: 32px !important;
+  }
+
+  main:has(> aside) > section > div > div:not(:has(> section + section)) > section:nth-of-type(2) {
+    grid-template-columns: minmax(0, 1.55fr) minmax(330px, .75fr) !important;
+    gap: 20px !important;
+  }
+
+  main:has(> aside) > section > div > div:not(:has(> section + section)) > section:nth-of-type(2) > article {
+    border-radius: 18px !important;
     padding: 22px !important;
+    border-color: #e1e8f1 !important;
+    box-shadow: 0 10px 30px rgba(17, 41, 78, .04) !important;
   }
 
-  main:has(> aside) article {
+  /* Dishes/categories split workspace */
+  main:has(> aside) > section > div > div:has(> section + section) {
+    max-width: 1420px;
+    grid-template-columns: 390px minmax(0, 1fr) !important;
+    gap: 20px !important;
+    align-items: stretch;
+  }
+
+  main:has(> aside) > section > div > div:has(> section + section) > section {
+    border-radius: 18px !important;
+    border-color: #dde6f0 !important;
+    box-shadow: 0 10px 30px rgba(17, 41, 78, .045) !important;
+    background: #fff !important;
+  }
+
+  /* Left list */
+  main:has(> aside) > section > div > div:has(> section + section) > section:first-child > div:first-child {
+    min-height: 80px !important;
+    padding: 17px 18px !important;
+  }
+
+  main:has(> aside) > section > div > div:has(> section + section) > section:first-child > div:nth-child(2) {
+    padding: 12px !important;
+    gap: 10px !important;
+    background: #fafbfd !important;
+  }
+
+  main:has(> aside) > section > div > div:has(> section + section) > section:first-child > div:nth-child(2) input,
+  main:has(> aside) > section > div > div:has(> section + section) > section:first-child > div:nth-child(2) select {
+    min-height: 42px !important;
+    font-size: 12px !important;
+  }
+
+  main:has(> aside) > section > div > div:has(> section + section) > section:first-child > div:last-child {
+    padding: 8px !important;
+  }
+
+  main:has(> aside) > section > div > div:has(> section + section) > section:first-child > div:last-child > button {
+    min-height: 74px !important;
+    border-radius: 12px !important;
+    padding: 9px !important;
+    margin-bottom: 4px !important;
+  }
+
+  main:has(> aside) > section > div > div:has(> section + section) > section:first-child > div:last-child > button:hover {
+    background: #f5f9ff !important;
+  }
+
+  main:has(> aside) > section > div > div:has(> section + section) > section:first-child > div:last-child > button b {
+    font-size: 13px !important;
+  }
+
+  main:has(> aside) > section > div > div:has(> section + section) > section:first-child > div:last-child > button small {
+    font-size: 11px !important;
+  }
+
+  /* Editor */
+  main:has(> aside) > section > div > div:has(> section + section) > section:last-child > div:first-child {
+    min-height: 80px !important;
+    padding: 14px 20px !important;
+    background: #fff !important;
+  }
+
+  main:has(> aside) > section > div > div:has(> section + section) > section:last-child > div:first-child h2 {
+    font-size: 20px !important;
+  }
+
+  main:has(> aside) > section > div > div:has(> section + section) > section:last-child > div:last-child {
+    padding: 20px !important;
+    background: #f8fafc !important;
+  }
+
+  main:has(> aside) > section > div > div:has(> section + section) > section:last-child > div:last-child > section {
+    padding: 20px !important;
     border-radius: 16px !important;
+    border: 1px solid #e1e8f1 !important;
+    box-shadow: 0 4px 16px rgba(17, 41, 78, .025) !important;
+  }
+
+  main:has(> aside) > section > div > div:has(> section + section) > section:last-child > div:last-child > section + section {
+    margin-top: 16px !important;
+  }
+
+  main:has(> aside) > section > div > div:has(> section + section) h3 {
+    font-size: 17px !important;
+  }
+
+  main:has(> aside) > section > div > div:has(> section + section) label,
+  main:has(> aside) > section > div > div:has(> section + section) input,
+  main:has(> aside) > section > div > div:has(> section + section) select,
+  main:has(> aside) > section > div > div:has(> section + section) textarea,
+  main:has(> aside) > section > div > div:has(> section + section) button {
+    font-size: 13px !important;
+  }
+
+  main:has(> aside) > section > div > div:has(> section + section) input,
+  main:has(> aside) > section > div > div:has(> section + section) select {
+    min-height: 44px !important;
+  }
+
+  main:has(> aside) > section > div > div:has(> section + section) textarea {
+    min-height: 126px !important;
+    line-height: 1.55 !important;
+  }
+
+  /* Image editor gets a calmer, less stretched desktop ratio. */
+  main:has(> aside) > section > div > div:has(> section + section) section:last-child section:first-child > div:last-child > div:first-child > div {
+    max-height: 310px;
+  }
+
+  /* Scrollbars */
+  main:has(> aside) * {
+    scrollbar-width: thin;
+    scrollbar-color: #c8d3e2 transparent;
   }
 }
 
 @media (min-width: 1600px) {
+  main:has(> aside) {
+    grid-template-columns: 248px minmax(0, 1fr) !important;
+  }
+
   main:has(> aside) > section > header {
-    padding-inline: 34px !important;
+    padding-inline: 36px !important;
   }
 
   main:has(> aside) > section > div {
-    padding: 26px 32px 30px !important;
+    padding: 28px 34px 32px !important;
   }
 
-  main:has(> aside) > section > div > div:not(:has(> section + section)) {
-    max-width: 1340px;
+  main:has(> aside) > section > div > div {
+    max-width: 1500px;
   }
 
   main:has(> aside) > section > div > div:has(> section + section) {
-    max-width: 1340px;
-    grid-template-columns: 380px minmax(0, 940px) !important;
-    gap: 20px !important;
+    max-width: 1500px;
+    grid-template-columns: 410px minmax(0, 1fr) !important;
+    gap: 22px !important;
   }
 
-  main:has(> aside) > section > div > div:has(> section + section) > section:first-child {
-    max-width: 380px;
+  main:has(> aside) > section > div > div:not(:has(> section + section)) > section:first-of-type > article {
+    min-height: 162px;
+    padding: 22px !important;
+  }
+}
+
+@media (min-width: 1900px) {
+  main:has(> aside) > section > div > div {
+    max-width: 1560px;
+  }
+
+  main:has(> aside) > section > div > div:has(> section + section) {
+    max-width: 1560px;
+    grid-template-columns: 420px minmax(0, 1fr) !important;
   }
 }
