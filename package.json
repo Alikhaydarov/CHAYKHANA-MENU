@@ -1,19 +1,22 @@
 {
-  "name": "chaykhana-website",
-  "version": "0.0.0",
+  "name": "chaykahana-next",
+  "version": "0.1.0",
   "private": true,
-  "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "test:sites": "node --test tests/sites-worker.test.mjs"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
   },
   "dependencies": {
-    "@vitejs/plugin-react": "5.0.4",
-    "vite": "6.4.2",
-    "react": "19.2.0",
-    "react-dom": "19.2.0"
+    "@phosphor-icons/react": "^2.1.10",
+    "better-sqlite3": "^13.0.3",
+    "next": "16.3.1",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "eslint": "^9",
+    "eslint-config-next": "16.3.1"
+  }
 }

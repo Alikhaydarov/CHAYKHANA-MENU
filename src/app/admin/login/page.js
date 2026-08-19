@@ -1,0 +1,1 @@
+import {redirect} from "next/navigation";import {isAdmin} from "@/lib/auth";import LoginClient from "@/components/LoginClient";export default async function Login(){if(await isAdmin())redirect("/admin");return <LoginClient/>}
