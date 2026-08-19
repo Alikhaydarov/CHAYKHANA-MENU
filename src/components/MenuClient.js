@@ -146,21 +146,8 @@ export default function MenuClient() {
     </nav>
 
     {error ? <section className="menu-empty"><b>!</b><h2>{error}</h2><button onClick={load}>{t.retry}</button></section> : list.length === 0 ? <section className="menu-empty"><MagnifyingGlass/><h2>{emptyMessage}</h2></section> : <section className="dish-grid">
-      {list.map((dish, index) => <article
-        className="dish-card"
-        key={dish.id}
-        role="button"
-        tabIndex={0}
-        aria-label={`${dish.names[lang] || dish.names.uz} — ₩${dish.price.toLocaleString()}`}
-        onClick={() => setDetailDish(dish)}
-        onKeyDown={(event) => {
-          if (event.target !== event.currentTarget) return;
-          if (event.key === "Enter" || event.key === " ") {
-            event.preventDefault();
-            setDetailDish(dish);
-          }
-        }}
-      >
+      {list.map((dish, index) => <article className="dish-card" key={dish.id}>
+        <button className="dish-card-open" aria-label={`${dish.names[lang] || dish.names.uz} — ₩${dish.price.toLocaleString()}`} onClick={() => setDetailDish(dish)} />
         <div className="dish-image"><Image src={dish.image} alt={dish.names[lang] || dish.names.uz} fill sizes="(max-width: 759px) 100vw, 540px" priority={index === 0}/><span>{categoryLabel(dish.category)}</span></div>
         <div className="dish-meta"><div><h2>{dish.names[lang] || dish.names.uz}</h2><small>{dish.descriptions[lang] || dish.descriptions.uz}</small><p>₩{dish.price.toLocaleString()}</p></div>{quantityControl(dish, true)}</div>
       </article>)}
