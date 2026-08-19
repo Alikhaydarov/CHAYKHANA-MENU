@@ -151,7 +151,7 @@ export default function MenuClient() {
   if (loading || languageLoading) return <div className={`loader${languageLoading ? " language-transition-loader" : ""}`}>
     <div className="loader-orbit"><div className="loader-mark">✦</div></div>
     <b>CHAYKAHANA</b>
-    <span>{languageLoading ? t.loading : t.welcome}</span>
+    <span>{t.welcome}</span>
   </div>;
 
   return <main className="menu-page">
