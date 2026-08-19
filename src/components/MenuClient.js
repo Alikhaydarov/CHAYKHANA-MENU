@@ -5,10 +5,10 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Calculator, CaretDown, Globe, MagnifyingGlass, Minus, Plus, X } from "@phosphor-icons/react";
 
 const copy = {
-  uz: { welcome: "Xush kelibsiz", loading: "Menu yangilanmoqda", language: "Til", search: "Taom yoki kategoriya qidiring", all: "Barchasi", add: "Qo‘shish", selected: "Tanlangan", total: "Jami", view: "Hisobni ko‘rish", empty: "Hali taom tanlanmagan", noResult: "Taom topilmadi", categoryEmpty: "Bu kategoriyada hozircha taom yo‘q", retry: "Qayta urinish" },
-  ko: { welcome: "환영합니다", loading: "메뉴를 불러오는 중", language: "언어", search: "음식 또는 카테고리 검색", all: "전체", add: "추가", selected: "선택", total: "합계", view: "계산 보기", empty: "선택한 음식이 없습니다", noResult: "음식을 찾을 수 없습니다", categoryEmpty: "이 카테고리에는 아직 음식이 없습니다", retry: "다시 시도" },
-  ru: { welcome: "Добро пожаловать", loading: "Обновляем меню", language: "Язык", search: "Найти блюдо или категорию", all: "Все", add: "Добавить", selected: "Выбрано", total: "Итого", view: "Посмотреть счёт", empty: "Блюда не выбраны", noResult: "Блюда не найдены", categoryEmpty: "В этой категории пока нет блюд", retry: "Повторить" },
-  en: { welcome: "Welcome", loading: "Updating menu", language: "Language", search: "Search dishes or categories", all: "All", add: "Add", selected: "Selected", total: "Total", view: "View total", empty: "No dishes selected", noResult: "No dishes found", categoryEmpty: "No dishes in this category yet", retry: "Try again" },
+  uz: { welcome: "Xush kelibsiz", loading: "Menu yangilanmoqda", language: "Til", search: "Taom yoki kategoriya qidiring", all: "Barchasi", add: "Qo‘shish", selected: "Tanlangan", total: "Jami", view: "Hisobni ko‘rish", empty: "Hali taom tanlanmagan", noResult: "Taom topilmadi", categoryEmpty: "Bu kategoriyada hozircha taom yo‘q", retry: "Qayta urinish", heroMenu: "MENYU", heroSubtitle: "O‘ZBEK TAOMLARI" },
+  ko: { welcome: "환영합니다", loading: "메뉴를 불러오는 중", language: "언어", search: "음식 또는 카테고리 검색", all: "전체", add: "추가", selected: "선택", total: "합계", view: "계산 보기", empty: "선택한 음식이 없습니다", noResult: "음식을 찾을 수 없습니다", categoryEmpty: "이 카테고리에는 아직 음식이 없습니다", retry: "다시 시도", heroMenu: "메뉴", heroSubtitle: "우즈베키스탄 요리" },
+  ru: { welcome: "Добро пожаловать", loading: "Обновляем меню", language: "Язык", search: "Найти блюдо или категорию", all: "Все", add: "Добавить", selected: "Выбрано", total: "Итого", view: "Посмотреть счёт", empty: "Блюда не выбраны", noResult: "Блюда не найдены", categoryEmpty: "В этой категории пока нет блюд", retry: "Повторить", heroMenu: "МЕНЮ", heroSubtitle: "УЗБЕКСКАЯ КУХНЯ" },
+  en: { welcome: "Welcome", loading: "Updating menu", language: "Language", search: "Search dishes or categories", all: "All", add: "Add", selected: "Selected", total: "Total", view: "View total", empty: "No dishes selected", noResult: "No dishes found", categoryEmpty: "No dishes in this category yet", retry: "Try again", heroMenu: "MENU", heroSubtitle: "UZBEK CUISINE" },
 };
 
 const labels = { uz: "O‘zbekcha", ko: "한국어", ru: "Русский", en: "English" };
@@ -168,6 +168,14 @@ export default function MenuClient() {
       </div>
       <div className="menu-search"><MagnifyingGlass/><input aria-label={t.search} placeholder={t.search} value={query} onChange={(event) => setQuery(event.target.value)}/>{query && <button aria-label="Tozalash" onClick={() => setQuery("")}><X/></button>}</div>
     </header>
+
+    <section className="menu-hero" aria-label={`${t.heroMenu} CHAYHANA`}>
+      <div className="menu-hero-pattern" aria-hidden="true" />
+      <div className="menu-hero-logo" aria-hidden="true" />
+      <p>{t.heroMenu}</p>
+      <h1>CHAYHANA</h1>
+      <span>{t.heroSubtitle}</span>
+    </section>
 
     <nav className="category-strip" aria-label="Kategoriyalar">
       <button className={category === "all" ? "active" : ""} onClick={() => setCategory("all")}>{t.all}</button>
