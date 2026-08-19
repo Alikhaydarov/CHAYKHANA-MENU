@@ -55,7 +55,7 @@ export default function MenuClient() {
   const load = () => {
     setLoading(true);
     setError("");
-    fetchMenu().catch(() => setError("Menu yuklanmadi")).finally(() => window.setTimeout(() => setLoading(false), 2000));
+    fetchMenu().catch(() => setError("Menu yuklanmadi")).finally(() => window.setTimeout(() => setLoading(false), 1200));
   };
 
   useEffect(() => {
@@ -65,7 +65,7 @@ export default function MenuClient() {
       document.documentElement.lang = saved;
     }
 
-    fetchMenu().catch(() => setError("Menu yuklanmadi")).finally(() => window.setTimeout(() => setLoading(false), 2000));
+    fetchMenu().catch(() => setError("Menu yuklanmadi")).finally(() => window.setTimeout(() => setLoading(false), 1200));
 
     return () => {
       if (languageTimerRef.current) window.clearTimeout(languageTimerRef.current);
@@ -98,7 +98,7 @@ export default function MenuClient() {
     languageTimerRef.current = window.setTimeout(() => {
       setLanguageLoading(false);
       languageTimerRef.current = null;
-    }, 380);
+    }, 1200);
   };
 
   const categoryMap = useMemo(() => Object.fromEntries(categories.map((item) => [item.id, item])), [categories]);
