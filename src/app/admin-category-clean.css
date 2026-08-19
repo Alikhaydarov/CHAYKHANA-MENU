@@ -1,0 +1,14 @@
+/* Keep technical category identifiers out of the admin editing UI. */
+[class*="formSection"]:has([class*="categoryFormGrid"]) [class*="categoryFormGrid"] > label:nth-of-type(2) {
+  display: none !important;
+}
+
+[class*="formSection"]:has([class*="categoryFormGrid"]) [class*="formSectionHeading"] p {
+  font-size: 0;
+}
+
+[class*="formSection"]:has([class*="categoryFormGrid"]) [class*="formSectionHeading"] p::after {
+  content: "Kategoriya nomi, tartibi va ko‘rinishini boshqaring.";
+  font-size: 12px;
+  line-height: 1.5;
+}
