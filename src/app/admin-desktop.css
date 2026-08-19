@@ -1,0 +1,132 @@
+/* Desktop-only admin layout corrections.
+   Kept separate from the mobile-first component styles so tablet/mobile behavior stays untouched. */
+
+@media (min-width: 1240px) {
+  main:has(> aside) {
+    grid-template-columns: 220px minmax(0, 1fr) !important;
+    background: #f5f7fb !important;
+  }
+
+  main:has(> aside) > aside {
+    padding: 22px 14px 18px !important;
+    box-shadow: 8px 0 28px rgba(16, 35, 63, 0.06) !important;
+  }
+
+  main:has(> aside) > section > header {
+    min-height: 84px !important;
+    padding: 16px 28px !important;
+  }
+
+  main:has(> aside) > section > header h1 {
+    font-size: 28px !important;
+    line-height: 1.08 !important;
+  }
+
+  main:has(> aside) > section > header p {
+    font-size: 14px !important;
+  }
+
+  main:has(> aside) > section > div {
+    padding: 20px 24px 24px !important;
+  }
+
+  /* Dashboard stays centered instead of stretching across ultra-wide screens. */
+  main:has(> aside) > section > div > div:not(:has(> section + section)) {
+    width: 100%;
+    max-width: 1280px;
+    margin-inline: auto;
+  }
+
+  /* Dishes/categories: compact list + readable editor, centered as one workspace. */
+  main:has(> aside) > section > div > div:has(> section + section) {
+    width: 100%;
+    max-width: 1280px;
+    margin-inline: auto;
+    grid-template-columns: 360px minmax(0, 900px) !important;
+    gap: 18px !important;
+    justify-content: center;
+  }
+
+  main:has(> aside) > section > div > div:has(> section + section) > section:first-child {
+    width: 100%;
+    max-width: 360px;
+  }
+
+  main:has(> aside) > section > div > div:has(> section + section) > section:last-child {
+    width: 100%;
+    min-width: 0;
+  }
+
+  main:has(> aside) section section {
+    border-radius: 16px !important;
+  }
+
+  /* Desktop typography was too small. */
+  main:has(> aside) section section h2 {
+    font-size: 19px !important;
+  }
+
+  main:has(> aside) section section h3 {
+    font-size: 18px !important;
+  }
+
+  main:has(> aside) section section b {
+    font-size: 13px;
+  }
+
+  main:has(> aside) section section small {
+    font-size: 11px;
+    line-height: 1.45;
+  }
+
+  main:has(> aside) section section label,
+  main:has(> aside) section section input,
+  main:has(> aside) section section select,
+  main:has(> aside) section section textarea,
+  main:has(> aside) section section button {
+    font-size: 13px !important;
+  }
+
+  main:has(> aside) section section input,
+  main:has(> aside) section section select {
+    min-height: 44px;
+  }
+
+  main:has(> aside) section section textarea {
+    min-height: 132px;
+    line-height: 1.55;
+  }
+
+  /* Give editor content breathing room without creating a huge empty canvas. */
+  main:has(> aside) > section > div > div:has(> section + section) > section:last-child > div:last-child {
+    padding: 22px !important;
+  }
+
+  main:has(> aside) article {
+    border-radius: 16px !important;
+  }
+}
+
+@media (min-width: 1600px) {
+  main:has(> aside) > section > header {
+    padding-inline: 34px !important;
+  }
+
+  main:has(> aside) > section > div {
+    padding: 26px 32px 30px !important;
+  }
+
+  main:has(> aside) > section > div > div:not(:has(> section + section)) {
+    max-width: 1340px;
+  }
+
+  main:has(> aside) > section > div > div:has(> section + section) {
+    max-width: 1340px;
+    grid-template-columns: 380px minmax(0, 940px) !important;
+    gap: 20px !important;
+  }
+
+  main:has(> aside) > section > div > div:has(> section + section) > section:first-child {
+    max-width: 380px;
+  }
+}
