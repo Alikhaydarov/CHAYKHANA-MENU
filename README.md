@@ -8,9 +8,9 @@ Next.js 16 full-stack multilingual restaurant menu and protected admin panel.
 - Localized welcome loader, category search, quantity controls, and meal-total calculator
 - Protected admin login
 - Dish create, update, show/hide, image upload, translation, and delete
-- Shared REST API backed by SQLite
+- Shared REST API backed by Supabase PostgreSQL
 - HTTP-only signed admin session cookie
-- Production build compatible with a persistent Node/VPS deployment
+- Vercel-compatible database and image storage
 
 ## Routes
 
@@ -58,4 +58,4 @@ The menu uses Supabase PostgreSQL and uploads admin images to the public `dish-i
 
 - Admin writes require a valid signed HTTP-only cookie.
 - The cookie uses `SameSite=Strict` and `Secure` in production.
-- Never commit `.env.local` or production database files.
+- Never commit `.env.local` or service-role credentials.

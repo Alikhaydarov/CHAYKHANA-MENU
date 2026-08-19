@@ -1,7 +1,7 @@
 import crypto from "crypto";
 import { cookies } from "next/headers";
 const COOKIE="chaykahana_admin";
-const secret=()=>process.env.AUTH_SECRET||"dev-only-change-this-secret";
+const secret=()=>{const value=process.env.AUTH_SECRET||(process.env.NODE_ENV==="development"?"dev-only-change-this-secret":"");if(!value)throw new Error("AUTH_SECRET is not configured");return value};
 export function signSession(){
  const exp=Date.now()+1000*60*60*12;
  const body=String(exp);const sig=crypto.createHmac("sha256",secret()).update(body).digest("hex");
