@@ -33,7 +33,8 @@ Set strong values in `.env.local`:
 ```env
 ADMIN_PASSWORD=your-strong-password
 AUTH_SECRET=at-least-32-random-characters
-DATABASE_PATH=./data/chaykahana.db
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
 ```
 
 Development-only fallback password when `ADMIN_PASSWORD` is missing: `chaykahana-admin`.
@@ -45,11 +46,16 @@ npm run build
 npm start
 ```
 
-Deploy on a Node/VPS platform with a persistent disk because SQLite and uploaded image data must survive restarts. For Vercel/serverless deployment, migrate the storage layer to Postgres/Supabase and object storage first.
+## Supabase and Vercel
+
+1. Create a Supabase project and run `supabase/migration.sql` in its SQL Editor.
+2. Add all variables from `.env.example` to Vercel Project Settings → Environment Variables.
+3. Redeploy the latest `main` commit. The service-role key is server-only and must never use the `NEXT_PUBLIC_` prefix.
+
+The menu uses Supabase PostgreSQL and uploads admin images to the public `dish-images` Storage bucket, so it is compatible with Vercel's serverless filesystem.
 
 ## Security
 
 - Admin writes require a valid signed HTTP-only cookie.
 - The cookie uses `SameSite=Strict` and `Secure` in production.
 - Never commit `.env.local` or production database files.
-

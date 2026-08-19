@@ -23,7 +23,7 @@ export function validateDish(input, { partial = false } = {}) {
   if (!CATEGORIES.includes(category)) throw new Error("Kategoriya noto‘g‘ri");
   if (!Number.isSafeInteger(price) || price < 0 || price > 10_000_000) throw new Error("Narx noto‘g‘ri");
   if (!Number.isSafeInteger(position) || position < 0 || position > 100_000) throw new Error("Tartib raqami noto‘g‘ri");
-  if (!image || image.length > MAX_IMAGE_LENGTH || (!image.startsWith("/assets/") && !/^data:image\/(png|jpe?g|webp);base64,/i.test(image))) {
+  if (!image || image.length > MAX_IMAGE_LENGTH || (!image.startsWith("/assets/") && !/^https:\/\//i.test(image))) {
     throw new Error("Rasm PNG, JPG yoki WebP formatida va 5 MB dan kichik bo‘lishi kerak");
   }
   return {

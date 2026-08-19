@@ -18,7 +18,7 @@ export default function AdminClient(){
  const add=()=>act(async()=>{const d=await api("/api/dishes",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(empty)});await load();setSelectedId(d.id);setDraft(d)},"Yangi taom qo‘shildi");
  const remove=async()=>{if(!confirm("Taom o‘chirilsinmi?"))return;act(async()=>{await api("/api/dishes/"+draft.id,{method:"DELETE"});const next=await load();setSelectedId(next[0]?.id??null);setDraft(next[0]?structuredClone(next[0]):null)},"O‘chirildi")};
  const logout=async()=>{await fetch("/api/auth/logout",{method:"POST"});router.push("/admin/login")};
- const image=e=>{const f=e.target.files?.[0];if(!f)return;const r=new FileReader();r.onload=()=>setDraft(x=>({...x,image:r.result}));r.readAsDataURL(f)};
+ const image=async e=>{const f=e.target.files?.[0];if(!f)return;const form=new FormData();form.set("file",f);await act(async()=>{const d=await api("/api/uploads",{method:"POST",body:form});setDraft(x=>({...x,image:d.url}))},"Rasm yuklandi")};
  if(!draft)return <div className="admin-loading">Admin panel yuklanmoqda…</div>;
  return <main className="admin-shell">
   <aside className="admin-side"><div className="admin-brand"><span>✦</span><b>CHAYKAHANA</b></div><nav><button className="active"><BowlFood/>Taomlar</button><button><GridFour/>Kategoriyalar</button><button><Globe/>Tillar</button><button><Gear/>Sozlamalar</button></nav><Link href="/">← Menyuni ko‘rish</Link><button className="logout" onClick={logout}>Chiqish</button></aside>
