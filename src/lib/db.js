@@ -40,8 +40,30 @@ export async function listDishes(admin = false) {
   if (!admin) query = query.eq("visible", true);
   const { data, error } = await query;
   if (error) throw error;
+
   const dishes = data.map(mapDish);
-  return admin ? dishes : dishes.filter((dish) => !isDishPlaceholder(dish));
+  if (admin) return dishes;
+
+  const publicDishes = dishes.filter((dish) => !isDishPlaceholder(dish));
+  const { data: categoryRows, error: categoryError } = await getDb()
+    .from("categories")
+    .select("id,names")
+    .eq("visible", true);
+
+  // Keep the old pre-migration fallback working if categories are temporarily unavailable.
+  if (categoryError) {
+    console.error(categoryError);
+    return publicDishes;
+  }
+
+  const visibleCategoryIds = new Set(
+    categoryRows
+      .map(mapCategory)
+      .filter((category) => !isCategoryPlaceholder(category))
+      .map((category) => category.id),
+  );
+
+  return publicDishes.filter((dish) => visibleCategoryIds.has(dish.category));
 }
 
 export async function listCategories(admin = false) {
