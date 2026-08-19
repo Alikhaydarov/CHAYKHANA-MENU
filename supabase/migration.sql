@@ -9,9 +9,38 @@ alter table public.dishes enable row level security;
 grant usage on schema public to service_role;
 grant select, insert, update, delete on table public.dishes to service_role;
 grant usage, select on sequence public.dishes_id_seq to service_role;
+
+create table if not exists public.categories (
+ id text primary key,
+ names jsonb not null default '{}'::jsonb,
+ visible boolean not null default true,
+ position integer not null default 0,
+ created_at timestamptz not null default now(),
+ updated_at timestamptz not null default now()
+);
+alter table public.categories enable row level security;
+grant select, insert, update, delete on table public.categories to service_role;
+
+insert into public.categories(id,names,visible,position) values
+ ('Osh','{"uz":"Osh","ko":"플로브","ru":"Плов","en":"Plov"}'::jsonb,true,1),
+ ('Manti','{"uz":"Manti","ko":"만티","ru":"Манты","en":"Manti"}'::jsonb,true,2),
+ ('Lag‘mon','{"uz":"Lag‘mon","ko":"라그만","ru":"Лагман","en":"Lagman"}'::jsonb,true,3),
+ ('Shashlik','{"uz":"Shashlik","ko":"샤슬릭","ru":"Шашлык","en":"Shashlik"}'::jsonb,true,4),
+ ('Somsa','{"uz":"Somsa","ko":"삼사","ru":"Самса","en":"Samsa"}'::jsonb,true,5)
+on conflict (id) do nothing;
+
+insert into public.categories(id,names,visible,position)
+select d.category,
+       jsonb_build_object('uz',d.category,'ko','','ru','','en',''),
+       true,
+       100 + row_number() over(order by d.category)
+from (select distinct category from public.dishes) d
+where not exists(select 1 from public.categories c where c.id=d.category);
+
 insert into storage.buckets (id,name,public,file_size_limit,allowed_mime_types)
 values ('dish-images','dish-images',true,5242880,array['image/png','image/jpeg','image/webp'])
 on conflict (id) do update set public=true,file_size_limit=5242880;
+
 insert into public.dishes(category,price,image,visible,position,names,descriptions)
 select 'Osh',13000,'/assets/osh.png',true,1,'{"uz":"Osh","ko":"오시","ru":"Плов","en":"Plov"}'::jsonb,'{"uz":"An’anaviy o‘zbek palovi","ko":"전통 우즈베크 플로브","ru":"Традиционный узбекский плов","en":"Traditional Uzbek plov"}'::jsonb
 where not exists(select 1 from public.dishes);
