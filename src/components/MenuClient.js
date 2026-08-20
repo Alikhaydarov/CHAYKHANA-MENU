@@ -13,6 +13,7 @@ const copy = {
 };
 
 const labels = { uz: "O‘zbekcha", ko: "한국어", ru: "Русский", en: "English" };
+const LOADER_MIN_MS = 1200;
 
 export default function MenuClient() {
   const [dishes, setDishes] = useState([]);
@@ -30,13 +31,18 @@ export default function MenuClient() {
   const languageTimerRef = useRef(null);
 
   const fetchMenu = async () => {
-    const dishResponse = await fetch("/api/dishes", { cache: "no-store" });
+    // Start both public requests together. Categories are optional, dishes are required.
+    const dishRequest = fetch("/api/dishes", { cache: "no-store" });
+    const categoryRequest = fetch("/api/categories", { cache: "no-store" }).catch(() => null);
+
+    const dishResponse = await dishRequest;
     const dishData = await dishResponse.json();
     if (!dishResponse.ok) throw new Error(dishData.error || "Server error");
     setDishes(dishData);
 
     try {
-      const categoryResponse = await fetch("/api/categories", { cache: "no-store" });
+      const categoryResponse = await categoryRequest;
+      if (!categoryResponse) throw new Error("Category error");
       const categoryData = await categoryResponse.json();
       if (!categoryResponse.ok) throw new Error(categoryData.error || "Category error");
       setCategories(categoryData);
@@ -53,10 +59,19 @@ export default function MenuClient() {
     }
   };
 
+  const finishLoadingAfterMinimum = (startedAt) => {
+    const elapsed = Date.now() - startedAt;
+    const remaining = Math.max(0, LOADER_MIN_MS - elapsed);
+    window.setTimeout(() => setLoading(false), remaining);
+  };
+
   const load = () => {
+    const startedAt = Date.now();
     setLoading(true);
     setError("");
-    fetchMenu().catch(() => setError("Menu yuklanmadi")).finally(() => window.setTimeout(() => setLoading(false), 1200));
+    fetchMenu()
+      .catch(() => setError("Menu yuklanmadi"))
+      .finally(() => finishLoadingAfterMinimum(startedAt));
   };
 
   useEffect(() => {
@@ -66,7 +81,10 @@ export default function MenuClient() {
       document.documentElement.lang = saved;
     }
 
-    fetchMenu().catch(() => setError("Menu yuklanmadi")).finally(() => window.setTimeout(() => setLoading(false), 1200));
+    const startedAt = Date.now();
+    fetchMenu()
+      .catch(() => setError("Menu yuklanmadi"))
+      .finally(() => finishLoadingAfterMinimum(startedAt));
 
     return () => {
       if (languageTimerRef.current) window.clearTimeout(languageTimerRef.current);
