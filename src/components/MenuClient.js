@@ -24,14 +24,13 @@ export default function MenuClient() {
   const [error, setError] = useState("");
   const [lang, setLang] = useState("uz");
   const [query, setQuery] = useState("");
-  const [category, setCategory] = useState("all");
+  const [category, setCategory] = useState("");
   const [qty, setQty] = useState({});
   const [open, setOpen] = useState(false);
   const [detailDish, setDetailDish] = useState(null);
   const languageTimerRef = useRef(null);
 
   const fetchMenu = async () => {
-    // Start both public requests together. Categories are optional, dishes are required.
     const dishRequest = fetch("/api/dishes", { cache: "no-store" });
     const categoryRequest = fetch("/api/categories", { cache: "no-store" }).catch(() => null);
 
@@ -47,6 +46,7 @@ export default function MenuClient() {
       if (!categoryResponse.ok) throw new Error(categoryData.error || "Category error");
       setCategories(categoryData);
       setCategoriesReady(true);
+      setCategory((current) => current && categoryData.some((item) => item.id === current) ? current : (categoryData[0]?.id || ""));
     } catch {
       const fallback = [...new Set(dishData.map((dish) => dish.category))].map((id, index) => ({
         id,
@@ -56,6 +56,7 @@ export default function MenuClient() {
       }));
       setCategories(fallback);
       setCategoriesReady(false);
+      setCategory((current) => current && fallback.some((item) => item.id === current) ? current : (fallback[0]?.id || ""));
     }
   };
 
@@ -103,7 +104,11 @@ export default function MenuClient() {
   }, []);
 
   useEffect(() => {
-    if (category !== "all" && !categories.some((item) => item.id === category)) setCategory("all");
+    if (!categories.length) {
+      if (category) setCategory("");
+      return;
+    }
+    if (!category || !categories.some((item) => item.id === category)) setCategory(categories[0].id);
   }, [categories, category]);
 
   const selectLanguage = (value) => {
@@ -140,14 +145,14 @@ export default function MenuClient() {
     return menuDishes.filter((dish) => {
       const categoryText = categoryMap[dish.category]?.names?.[lang] || categoryMap[dish.category]?.names?.uz || dish.category;
       const text = `${dish.names[lang] || dish.names.uz} ${dish.descriptions[lang] || dish.descriptions.uz} ${categoryText}`.toLowerCase();
-      return (category === "all" || dish.category === category) && text.includes(needle);
+      return (!category || dish.category === category) && text.includes(needle);
     });
   }, [menuDishes, category, query, lang, categoryMap]);
 
   const count = Object.values(qty).reduce((sum, value) => sum + value, 0);
   const total = menuDishes.reduce((sum, dish) => sum + (qty[dish.id] || 0) * dish.price, 0);
   const change = (id, amount) => setQty((current) => ({ ...current, [id]: Math.max(0, (current[id] || 0) + amount) }));
-  const emptyMessage = category !== "all" && !query.trim() ? t.categoryEmpty : t.noResult;
+  const emptyMessage = category && !query.trim() ? t.categoryEmpty : t.noResult;
 
   const quantityControl = (dish, stopPropagation = false) => {
     const handle = (event, amount) => {
@@ -191,7 +196,6 @@ export default function MenuClient() {
     </section>
 
     <nav className="category-strip" aria-label="Kategoriyalar">
-      <button className={category === "all" ? "active" : ""} onClick={() => setCategory("all")}>{t.all}</button>
       {availableCategories.map((item) => <button key={item.id} className={category === item.id ? "active" : ""} onClick={() => setCategory(item.id)}>{item.names[lang] || item.names.uz || item.id}</button>)}
     </nav>
 
