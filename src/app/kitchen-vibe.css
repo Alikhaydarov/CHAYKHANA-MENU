@@ -1,0 +1,267 @@
+/* Warm restaurant/kitchen layer for the public menu.
+   Keeps Chayhana blue as the brand anchor and adds ivory/brass warmth. */
+
+.menu-page {
+  --kitchen-ivory: #fbf6ed;
+  --kitchen-cream: #f4ead9;
+  --kitchen-brass: #c89248;
+  --kitchen-brass-soft: #ead0a7;
+  --kitchen-ink: #13243c;
+  background:
+    radial-gradient(circle at 8% 420px, rgba(200, 146, 72, .08), transparent 270px),
+    radial-gradient(circle at 92% 720px, rgba(23, 105, 214, .055), transparent 300px),
+    linear-gradient(180deg, #f9f4eb 0%, #fcfaf6 42%, #f8f5ef 100%) !important;
+}
+
+.menu-header {
+  border-bottom: 1px solid rgba(225, 190, 137, .16) !important;
+  box-shadow: 0 10px 28px rgba(1, 20, 48, .19), inset 0 -1px 0 rgba(232, 198, 147, .05) !important;
+}
+
+.language-trigger {
+  border-color: rgba(235, 205, 161, .20) !important;
+}
+
+.menu-hero {
+  background:
+    radial-gradient(circle at 50% 31%, rgba(52, 132, 248, .23), transparent 34%),
+    radial-gradient(circle at 50% 74%, rgba(213, 158, 82, .10), transparent 31%),
+    radial-gradient(circle at 8% 4%, rgba(73, 153, 255, .15), transparent 30%),
+    linear-gradient(157deg, #02162f 0%, #052d61 55%, #031c40 100%) !important;
+  border-bottom-color: rgba(218, 177, 116, .16) !important;
+}
+
+.menu-hero-logo {
+  filter:
+    drop-shadow(0 13px 28px rgba(0,0,0,.25))
+    drop-shadow(0 0 18px rgba(78,153,255,.10))
+    drop-shadow(0 7px 13px rgba(199,145,70,.10)) !important;
+}
+
+.menu-hero h1 {
+  position: relative;
+}
+
+.menu-hero h1::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -13px;
+  width: 48px;
+  height: 2px;
+  border-radius: 999px;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, transparent, #d6a35b 25%, #f0d4a7 50%, #d6a35b 75%, transparent);
+  box-shadow: 0 2px 10px rgba(210, 158, 85, .24);
+}
+
+.menu-hero > span {
+  margin-top: 18px !important;
+  color: #e7dccb !important;
+}
+
+.category-strip {
+  background: rgba(255, 252, 246, .96) !important;
+  border-bottom-color: #eadfce !important;
+  box-shadow: 0 8px 22px rgba(61, 43, 20, .065) !important;
+}
+
+.category-strip button {
+  border-color: #e9dfd0 !important;
+  background: linear-gradient(180deg, #fffdf9, #faf5ed) !important;
+  color: #4c443a !important;
+  box-shadow: inset 0 1px 0 #fff, 0 2px 7px rgba(91, 64, 28, .035) !important;
+}
+
+.category-strip button.active {
+  color: #fff !important;
+  border-color: rgba(225, 185, 126, .30) !important;
+  background:
+    linear-gradient(135deg, #176fdf 0%, #0755cf 68%, #0a4db7 100%) !important;
+  box-shadow:
+    0 7px 17px rgba(9, 82, 193, .22),
+    inset 0 1px 0 rgba(255,255,255,.14),
+    inset 0 -2px 0 rgba(207, 150, 70, .20) !important;
+}
+
+.dish-card {
+  border-color: #eadfce !important;
+  background: linear-gradient(180deg, #fffdfa 0%, #fff 64%, #fcf8f1 100%) !important;
+  box-shadow:
+    0 18px 42px rgba(58, 43, 25, .095),
+    0 3px 10px rgba(20, 49, 86, .04) !important;
+}
+
+.dish-image {
+  border: 1px solid rgba(239, 220, 193, .56);
+  box-shadow:
+    0 12px 26px rgba(52, 36, 18, .13),
+    inset 0 0 0 1px rgba(255,255,255,.06) !important;
+}
+
+.dish-image::after {
+  background:
+    linear-gradient(180deg, rgba(2,24,56,.00) 44%, rgba(20,24,30,.20) 100%),
+    radial-gradient(circle at 50% 14%, rgba(255,245,225,.12), transparent 48%) !important;
+}
+
+.dish-image > span {
+  border-color: rgba(240, 210, 163, .26) !important;
+  background: rgba(21, 31, 42, .72) !important;
+  color: #fff8eb !important;
+  box-shadow: 0 6px 16px rgba(0,0,0,.13), inset 0 0 0 1px rgba(213,163,91,.05) !important;
+}
+
+.dish-meta::before {
+  background: linear-gradient(90deg, transparent, rgba(222, 202, 173, .82), transparent) !important;
+}
+
+.dish-meta h2 {
+  color: #182338 !important;
+}
+
+.dish-meta small {
+  color: #82786d !important;
+}
+
+.dish-meta p {
+  color: #7b5424 !important;
+  background: linear-gradient(180deg, #fbf0df, #f7e7cf) !important;
+  border: 1px solid #ecd5b3;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.78);
+}
+
+.dish-card .add {
+  background: linear-gradient(135deg, #1778ef, #0755cc) !important;
+  box-shadow:
+    0 9px 20px rgba(12,99,244,.19),
+    inset 0 1px 0 rgba(255,255,255,.13),
+    inset 0 -2px 0 rgba(204,147,65,.13) !important;
+}
+
+.dish-card .stepper {
+  border-color: #d9c7ab !important;
+  background: #fbf4e8 !important;
+}
+
+.dish-card .stepper span {
+  background: linear-gradient(135deg, #1778ef, #0755cc) !important;
+}
+
+.calc-bar {
+  border-color: rgba(217, 175, 114, .28) !important;
+  background:
+    radial-gradient(circle at 8% 0%, rgba(201, 145, 68, .15), transparent 36%),
+    radial-gradient(circle at 92% 100%, rgba(35, 113, 223, .18), transparent 42%),
+    rgba(2, 27, 63, .975) !important;
+  box-shadow:
+    0 22px 48px rgba(1, 18, 43, .32),
+    0 5px 14px rgba(92, 63, 27, .10),
+    inset 0 1px 0 rgba(239, 205, 155, .06) !important;
+}
+
+.calc-bar > div:first-child > svg {
+  background: linear-gradient(135deg, #1a78ec, #0754c8) !important;
+  box-shadow: 0 7px 17px rgba(12,99,244,.25), inset 0 -2px 0 rgba(203,148,69,.13) !important;
+}
+
+.dish-detail-sheet,
+.calc-sheet {
+  background:
+    linear-gradient(180deg, #fffdfa 0%, #fff 54%, #fbf6ee 100%) !important;
+  border-top: 1px solid #ead9bf;
+}
+
+.dish-detail-price,
+.calc-total b {
+  color: #865c28 !important;
+}
+
+.calc-total {
+  border-top-color: #eadbc5 !important;
+}
+
+@media (max-width: 640px) {
+  .menu-page {
+    background:
+      radial-gradient(circle at 88% 330px, rgba(198, 143, 68, .075), transparent 200px),
+      linear-gradient(180deg, #f5ede0 0, #fbf7f0 350px, #faf8f4 760px, #faf8f4 100%) !important;
+  }
+
+  .menu-header {
+    background:
+      radial-gradient(circle at 0 -40%, rgba(55, 139, 255, .28), transparent 45%),
+      radial-gradient(circle at 88% 130%, rgba(197, 143, 67, .08), transparent 46%),
+      linear-gradient(145deg, rgba(2, 23, 53, .995), rgba(4, 45, 96, .995)) !important;
+  }
+
+  .menu-hero {
+    min-height: 248px !important;
+  }
+
+  .menu-hero > span {
+    margin-top: 17px !important;
+  }
+
+  .category-strip {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    scrollbar-width: none;
+  }
+
+  .category-strip::-webkit-scrollbar {
+    display: none;
+  }
+
+  .category-strip button {
+    border-radius: 12px !important;
+  }
+
+  .dish-grid {
+    margin-top: 13px !important;
+  }
+
+  .dish-card {
+    border-radius: 25px !important;
+  }
+
+  .dish-image {
+    margin: 7px 7px 0 !important;
+    border-radius: 19px !important;
+  }
+
+  .dish-meta {
+    padding-top: 14px !important;
+  }
+
+  .dish-meta p {
+    min-height: 28px;
+    padding-left: 9px;
+    padding-right: 9px;
+  }
+
+  .calc-bar {
+    bottom: calc(11px + env(safe-area-inset-bottom)) !important;
+  }
+}
+
+@media (min-width: 641px) {
+  .dish-grid {
+    row-gap: 24px !important;
+  }
+
+  .dish-card {
+    border-radius: 23px !important;
+  }
+
+  .dish-image {
+    margin: 7px 7px 0;
+    border-radius: 18px;
+    overflow: hidden;
+  }
+
+  .dish-meta {
+    padding-left: 17px !important;
+    padding-right: 17px !important;
+  }
+}
