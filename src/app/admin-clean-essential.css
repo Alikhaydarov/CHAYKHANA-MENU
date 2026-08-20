@@ -1,0 +1,327 @@
+/* Clean-essential admin pass: less chrome, more working space. */
+@media (min-width: 1180px) {
+  main:has(> aside) {
+    grid-template-columns: 224px minmax(0, 1fr) !important;
+    background: #f4f6f9 !important;
+  }
+
+  /* Keep navigation useful, remove decorative noise. */
+  main:has(> aside) > aside {
+    padding: 18px 12px 16px !important;
+    box-shadow: 8px 0 24px rgba(8, 25, 48, .055) !important;
+  }
+
+  main:has(> aside) > aside::after,
+  main:has(> aside) [class*="navLabel"] {
+    display: none !important;
+  }
+
+  main:has(> aside) [class*="brand"] {
+    min-height: 60px !important;
+    padding: 0 8px 16px !important;
+  }
+
+  main:has(> aside) [class*="brandMark"] {
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 12px !important;
+    box-shadow: 0 8px 18px rgba(17, 104, 232, .22) !important;
+  }
+
+  main:has(> aside) [class*="sidebarNav"] {
+    margin-top: 14px !important;
+    gap: 5px !important;
+  }
+
+  main:has(> aside) [class*="sidebarNav"] button {
+    min-height: 44px !important;
+    border-radius: 10px !important;
+  }
+
+  main:has(> aside) [class*="sidebarNav"] button:hover {
+    transform: none !important;
+  }
+
+  /* The sidebar already has “Menyuni ko‘rish”; topbar Preview is duplicate. */
+  main:has(> aside) [class*="previewButton"] {
+    display: none !important;
+  }
+
+  /* Compact page header: title + primary action only. */
+  main:has(> aside) > section > header {
+    min-height: 72px !important;
+    padding: 12px 26px !important;
+    box-shadow: none !important;
+    background: rgba(255, 255, 255, .96) !important;
+  }
+
+  main:has(> aside) > section > header [class*="eyebrow"],
+  main:has(> aside) > section > header p {
+    display: none !important;
+  }
+
+  main:has(> aside) > section > header h1 {
+    margin: 0 !important;
+    font-size: 24px !important;
+    line-height: 1.1 !important;
+    letter-spacing: -.035em !important;
+  }
+
+  main:has(> aside) [class*="topbarActions"] {
+    gap: 8px !important;
+  }
+
+  main:has(> aside) [class*="primaryButton"],
+  main:has(> aside) [class*="dangerButton"] {
+    min-height: 40px !important;
+    border-radius: 10px !important;
+  }
+
+  /* More space for actual work. */
+  main:has(> aside) > section > div {
+    padding: 18px 22px 22px !important;
+  }
+
+  main:has(> aside) > section > div > div {
+    max-width: 1500px !important;
+  }
+
+  /* Dashboard: information first, less decorative treatment. */
+  main:has(> aside) [class*="metricsGrid"] {
+    gap: 12px !important;
+    margin-bottom: 14px !important;
+  }
+
+  main:has(> aside) [class*="metricCard"] {
+    min-height: 126px !important;
+    padding: 16px !important;
+    border-radius: 14px !important;
+    background: #fff !important;
+    box-shadow: 0 5px 16px rgba(17, 41, 78, .035) !important;
+  }
+
+  main:has(> aside) [class*="metricCard"]::after {
+    display: none !important;
+  }
+
+  main:has(> aside) [class*="metricCard"]:hover {
+    transform: none !important;
+    box-shadow: 0 7px 18px rgba(17, 41, 78, .05) !important;
+  }
+
+  main:has(> aside) [class*="metricIcon"] {
+    width: 36px !important;
+    height: 36px !important;
+    margin-bottom: 12px !important;
+    border-radius: 10px !important;
+  }
+
+  main:has(> aside) [class*="metricValue"] {
+    font-size: 28px !important;
+  }
+
+  main:has(> aside) [class*="metricCard"] > b {
+    margin-top: 6px !important;
+  }
+
+  main:has(> aside) [class*="dashboardGrid"] {
+    grid-template-columns: minmax(0, 1fr) 300px !important;
+    gap: 14px !important;
+  }
+
+  main:has(> aside) [class*="surfaceCard"] {
+    padding: 18px !important;
+    border-radius: 14px !important;
+    box-shadow: 0 5px 16px rgba(17, 41, 78, .032) !important;
+  }
+
+  /* Repeated uppercase labels do not add information. */
+  main:has(> aside) [class*="sectionKicker"] {
+    display: none !important;
+  }
+
+  main:has(> aside) [class*="cardHeading"] h2,
+  main:has(> aside) [class*="panelHeader"] h2 {
+    margin-top: 0 !important;
+  }
+
+  /* “Taomlarni tahrirlash” duplicates sidebar navigation. */
+  main:has(> aside) [class*="quickActions"] > button:nth-child(3) {
+    display: none !important;
+  }
+
+  main:has(> aside) [class*="quickActions"] {
+    gap: 8px !important;
+    margin-top: 14px !important;
+  }
+
+  main:has(> aside) [class*="quickActions"] > button {
+    min-height: 52px !important;
+    padding: 10px !important;
+    border-radius: 11px !important;
+    box-shadow: none !important;
+  }
+
+  main:has(> aside) [class*="quickActions"] small {
+    display: none !important;
+  }
+
+  main:has(> aside) [class*="quickIcon"] {
+    width: 34px !important;
+    height: 34px !important;
+    border-radius: 9px !important;
+  }
+
+  /* List/editor workspace: prioritize density and clarity. */
+  main:has(> aside) [class*="splitLayout"] {
+    grid-template-columns: 370px minmax(0, 1fr) !important;
+    gap: 14px !important;
+  }
+
+  main:has(> aside) [class*="panel"] {
+    border-radius: 14px !important;
+    box-shadow: 0 5px 18px rgba(17, 41, 78, .04) !important;
+  }
+
+  main:has(> aside) [class*="panelHeader"],
+  main:has(> aside) [class*="editorHeader"] {
+    min-height: 68px !important;
+    padding: 12px 16px !important;
+  }
+
+  main:has(> aside) [class*="panelHeader"] h2,
+  main:has(> aside) [class*="editorTitle"] h2 {
+    font-size: 18px !important;
+  }
+
+  main:has(> aside) [class*="filters"] {
+    padding: 9px !important;
+    gap: 8px !important;
+    background: #f8fafc !important;
+  }
+
+  main:has(> aside) [class*="searchBox"],
+  main:has(> aside) [class*="filterSelect"] {
+    min-height: 38px !important;
+    border-radius: 9px !important;
+  }
+
+  main:has(> aside) [class*="listScroll"] {
+    padding: 7px !important;
+  }
+
+  main:has(> aside) [class*="listRow"] {
+    min-height: 68px !important;
+    padding: 7px !important;
+    margin-bottom: 3px !important;
+    border-radius: 10px !important;
+  }
+
+  main:has(> aside) [class*="listRow"]:hover {
+    transform: none !important;
+  }
+
+  main:has(> aside) [class*="dishThumb"] {
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 10px !important;
+  }
+
+  main:has(> aside) [class*="categoryGlyph"] {
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 10px !important;
+  }
+
+  /* Editor: labels and controls are enough; explanatory copy is removed. */
+  main:has(> aside) [class*="editorScroll"] {
+    padding: 14px !important;
+    background: #f7f9fc !important;
+  }
+
+  main:has(> aside) [class*="formSection"] {
+    padding: 16px !important;
+    border-radius: 13px !important;
+    box-shadow: none !important;
+  }
+
+  main:has(> aside) [class*="formSection"] + [class*="formSection"] {
+    margin-top: 12px !important;
+  }
+
+  main:has(> aside) [class*="formSectionHeading"] p,
+  main:has(> aside) [class*="fieldHint"] {
+    display: none !important;
+  }
+
+  main:has(> aside) [class*="formSectionHeading"] h3 {
+    margin: 0 !important;
+    font-size: 16px !important;
+  }
+
+  main:has(> aside) [class*="formSectionHeading"] {
+    margin-bottom: 12px !important;
+  }
+
+  main:has(> aside) [class*="field"] > span,
+  main:has(> aside) [class*="fieldLabel"] {
+    font-size: 11px !important;
+    font-weight: 700 !important;
+  }
+
+  main:has(> aside) [class*="field"] input,
+  main:has(> aside) [class*="field"] select {
+    min-height: 40px !important;
+    border-radius: 9px !important;
+  }
+
+  main:has(> aside) [class*="field"] textarea {
+    min-height: 104px !important;
+    border-radius: 9px !important;
+  }
+
+  main:has(> aside) [class*="languageTabs"] {
+    padding: 3px !important;
+    border-radius: 10px !important;
+    margin-bottom: 12px !important;
+  }
+
+  main:has(> aside) [class*="languageTabs"] button {
+    min-height: 34px !important;
+    border-radius: 8px !important;
+  }
+
+  main:has(> aside) [class*="visibilityToggle"] {
+    min-height: 54px !important;
+    border-radius: 10px !important;
+  }
+
+  main:has(> aside) [class*="imagePreview"] {
+    max-height: 260px !important;
+    border-radius: 11px !important;
+  }
+
+  main:has(> aside) button:focus-visible,
+  main:has(> aside) a:focus-visible,
+  main:has(> aside) input:focus-visible,
+  main:has(> aside) select:focus-visible,
+  main:has(> aside) textarea:focus-visible {
+    outline: 3px solid rgba(17, 104, 232, .16) !important;
+    outline-offset: 2px !important;
+  }
+}
+
+@media (min-width: 1540px) {
+  main:has(> aside) {
+    grid-template-columns: 232px minmax(0, 1fr) !important;
+  }
+
+  main:has(> aside) [class*="splitLayout"] {
+    grid-template-columns: 390px minmax(0, 1fr) !important;
+    gap: 16px !important;
+  }
+
+  main:has(> aside) > section > div > div {
+    max-width: 1560px !important;
+  }
+}
