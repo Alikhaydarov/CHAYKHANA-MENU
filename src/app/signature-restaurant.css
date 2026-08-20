@@ -1,0 +1,470 @@
+/* Signature restaurant UI pass.
+   Final visual layer for the public menu only. */
+
+.menu-page {
+  --sig-ivory: #fffaf2;
+  --sig-cream: #f4e8d6;
+  --sig-brass: #c58a3d;
+  --sig-brass-light: #eed3a7;
+  --sig-blue: #0b5ed7;
+  --sig-ink: #17263a;
+  background:
+    radial-gradient(circle at 14% 390px, rgba(194, 137, 61, .095), transparent 230px),
+    radial-gradient(circle at 88% 760px, rgba(20, 94, 194, .06), transparent 300px),
+    linear-gradient(180deg, #f6eee2 0%, #fbf8f2 40%, #f8f4ed 100%) !important;
+}
+
+/* Header: cleaner, richer restaurant-brand surface. */
+.menu-header {
+  border-bottom-color: rgba(219, 182, 127, .16) !important;
+  box-shadow:
+    0 10px 30px rgba(1, 17, 41, .2),
+    inset 0 -1px 0 rgba(238, 207, 162, .055) !important;
+}
+
+.menu-brand {
+  position: relative;
+}
+
+.menu-brand::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -7px;
+  width: 34px;
+  height: 1px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #d8a45b, transparent);
+  opacity: .65;
+}
+
+.language-trigger {
+  border-color: rgba(234, 199, 147, .24) !important;
+  background: rgba(255,255,255,.055) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.055) !important;
+}
+
+/* Hero: stronger focal point without changing structure. */
+.menu-hero {
+  overflow: hidden;
+  box-shadow: inset 0 -18px 34px rgba(0, 12, 31, .14);
+}
+
+.menu-hero::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 19px;
+  width: min(76%, 420px);
+  height: 46px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(205, 151, 78, .11), transparent 68%);
+  pointer-events: none;
+}
+
+.menu-hero-logo {
+  transform: translateZ(0);
+  filter:
+    drop-shadow(0 14px 28px rgba(0,0,0,.27))
+    drop-shadow(0 0 22px rgba(66,145,255,.10))
+    drop-shadow(0 8px 16px rgba(197,140,62,.12)) !important;
+}
+
+.menu-hero h1 {
+  letter-spacing: .035em !important;
+  text-shadow: 0 7px 24px rgba(0,0,0,.23) !important;
+}
+
+.menu-hero > span {
+  letter-spacing: .16em !important;
+  font-weight: 650 !important;
+}
+
+/* Category rail: floating restaurant menu selector. */
+.category-strip {
+  width: min(1120px, calc(100% - 24px));
+  margin: -10px auto 0 !important;
+  z-index: 30 !important;
+  height: 62px !important;
+  gap: 9px !important;
+  padding: 10px 12px !important;
+  border: 1px solid rgba(222, 201, 170, .9) !important;
+  border-radius: 20px !important;
+  background:
+    radial-gradient(circle at 10% 0%, rgba(255,255,255,.94), transparent 42%),
+    linear-gradient(180deg, rgba(255,253,249,.985), rgba(247,239,228,.975)) !important;
+  box-shadow:
+    0 16px 34px rgba(72, 48, 19, .105),
+    0 4px 10px rgba(18, 47, 82, .04),
+    inset 0 1px 0 rgba(255,255,255,.95) !important;
+  scrollbar-width: none;
+}
+
+.category-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.category-strip button {
+  position: relative;
+  flex: 0 0 auto;
+  height: 40px !important;
+  min-height: 40px !important;
+  min-width: max-content;
+  padding: 0 17px 0 29px !important;
+  border-radius: 14px !important;
+  border: 1px solid #e3d4c0 !important;
+  background: linear-gradient(180deg, #fffdfa, #f8f0e5) !important;
+  color: #51463b !important;
+  font-weight: 720 !important;
+  letter-spacing: -.012em;
+  box-shadow:
+    0 3px 9px rgba(94,67,32,.05),
+    inset 0 1px 0 rgba(255,255,255,.95) !important;
+  transition: transform .17s ease, box-shadow .17s ease, border-color .17s ease !important;
+}
+
+.category-strip button::before {
+  content: "" !important;
+  position: absolute !important;
+  left: 12px !important;
+  top: 50% !important;
+  width: 7px !important;
+  height: 7px !important;
+  inset: auto !important;
+  transform: translateY(-50%) !important;
+  border-radius: 50% !important;
+  background: linear-gradient(135deg, #d5aa6b, #b9792f) !important;
+  box-shadow: 0 0 0 3px rgba(201,145,67,.10) !important;
+  opacity: .88 !important;
+}
+
+.category-strip button.active {
+  padding-left: 30px !important;
+  color: #fffdf7 !important;
+  border-color: rgba(226, 180, 111, .56) !important;
+  background:
+    radial-gradient(circle at 16% 0%, rgba(255,255,255,.18), transparent 34%),
+    linear-gradient(135deg, #1b79ea 0%, #0a5bcc 58%, #06459f 100%) !important;
+  box-shadow:
+    0 10px 22px rgba(7,78,181,.25),
+    0 2px 5px rgba(86,56,19,.08),
+    inset 0 1px 0 rgba(255,255,255,.18),
+    inset 0 -2px 0 rgba(207,146,62,.24) !important;
+}
+
+.category-strip button.active::before {
+  background: linear-gradient(135deg, #fff6df, #efc98f) !important;
+  box-shadow: 0 0 0 3px rgba(255,239,212,.14) !important;
+  opacity: 1 !important;
+}
+
+.category-strip button.active::after {
+  bottom: 4px !important;
+  width: 22px !important;
+  height: 2px !important;
+}
+
+.category-strip button:active {
+  transform: scale(.965) !important;
+}
+
+/* Food cards: restaurant-menu hierarchy and warmer material. */
+.dish-grid {
+  position: relative;
+}
+
+.dish-card {
+  overflow: hidden;
+  border: 1px solid #e4d5c1 !important;
+  background:
+    radial-gradient(circle at 10% 0%, rgba(255,255,255,.92), transparent 34%),
+    linear-gradient(180deg, #fffdf9 0%, #fff 55%, #fbf5eb 100%) !important;
+  box-shadow:
+    0 20px 44px rgba(60, 42, 20, .105),
+    0 4px 12px rgba(18, 46, 80, .04),
+    inset 0 1px 0 rgba(255,255,255,.95) !important;
+}
+
+.dish-card::after {
+  content: "";
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(204,156,88,.22), transparent);
+  pointer-events: none;
+}
+
+.dish-image {
+  border-color: rgba(230, 207, 176, .68) !important;
+  box-shadow:
+    0 15px 30px rgba(54,37,18,.155),
+    0 3px 8px rgba(16,31,49,.045),
+    inset 0 0 0 1px rgba(255,255,255,.08) !important;
+}
+
+.dish-image::after {
+  background:
+    linear-gradient(180deg, rgba(3,17,36,0) 44%, rgba(10,15,20,.24) 100%),
+    radial-gradient(circle at 50% 10%, rgba(255,245,226,.14), transparent 48%) !important;
+}
+
+.dish-image > span {
+  border: 1px solid rgba(242, 211, 164, .24) !important;
+  background: rgba(19,27,36,.74) !important;
+  color: #fff8ec !important;
+  box-shadow: 0 7px 18px rgba(0,0,0,.14) !important;
+}
+
+.dish-meta h2 {
+  color: var(--sig-ink) !important;
+  font-weight: 780 !important;
+  letter-spacing: -.028em !important;
+}
+
+.dish-meta small {
+  color: #7c7369 !important;
+  line-height: 1.5 !important;
+}
+
+.dish-meta p {
+  color: #79501f !important;
+  border-color: #e8cea8 !important;
+  background: linear-gradient(180deg, #fbefdc, #f6e3c6) !important;
+  font-weight: 800 !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.92),
+    0 4px 10px rgba(119,78,28,.06) !important;
+}
+
+.dish-card .add {
+  border-color: rgba(243,212,168,.16) !important;
+  background:
+    radial-gradient(circle at 15% 0%, rgba(255,255,255,.16), transparent 32%),
+    linear-gradient(135deg, #1979ec, #0755c8) !important;
+  font-weight: 760 !important;
+  box-shadow:
+    0 10px 22px rgba(7,82,193,.22),
+    inset 0 1px 0 rgba(255,255,255,.17),
+    inset 0 -2px 0 rgba(204,143,59,.16) !important;
+}
+
+.dish-card .stepper {
+  border-color: #d8c3a5 !important;
+  background: linear-gradient(180deg, #fffaf2, #f8ecda) !important;
+}
+
+.dish-card .stepper span {
+  background: linear-gradient(135deg, #1979ec, #0755c8) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.14);
+}
+
+/* Floating cart / total: stronger hierarchy. */
+.calc-bar {
+  border-radius: 24px !important;
+  border-color: rgba(229, 185, 120, .34) !important;
+  background:
+    radial-gradient(circle at 6% 0%, rgba(204,147,66,.16), transparent 38%),
+    radial-gradient(circle at 92% 100%, rgba(38,117,227,.20), transparent 44%),
+    linear-gradient(145deg, rgba(2,24,56,.985), rgba(4,47,99,.985)) !important;
+  box-shadow:
+    0 26px 56px rgba(1,16,38,.34),
+    0 7px 17px rgba(84,56,23,.11),
+    inset 0 1px 0 rgba(255,255,255,.07) !important;
+}
+
+.calc-bar > div:nth-child(2) small {
+  color: rgba(241,224,197,.72) !important;
+}
+
+.calc-bar > div:nth-child(2) b {
+  color: #fff4df !important;
+  font-weight: 820 !important;
+}
+
+.calc-bar > button {
+  border-radius: 15px !important;
+  border-color: rgba(243,214,173,.18) !important;
+  background: linear-gradient(135deg, #1c7bf0, #0755c8) !important;
+}
+
+/* Sheets and popovers match the same material system. */
+.language-popover {
+  border-color: rgba(229,194,143,.20) !important;
+  background: linear-gradient(180deg, rgba(10,35,70,.985), rgba(5,27,59,.99)) !important;
+  box-shadow:
+    0 26px 58px rgba(0,14,34,.38),
+    inset 0 1px 0 rgba(255,255,255,.055) !important;
+}
+
+.dish-detail-sheet,
+.calc-sheet {
+  border-color: #e3d1b8 !important;
+  background:
+    radial-gradient(circle at 15% 0%, rgba(255,255,255,.88), transparent 30%),
+    linear-gradient(180deg, #fffdf9 0%, #fff 52%, #faf3e8 100%) !important;
+  box-shadow:
+    0 -28px 64px rgba(17,23,31,.21),
+    inset 0 1px 0 rgba(255,255,255,.95) !important;
+}
+
+.sheet-handle {
+  width: 44px !important;
+  height: 5px !important;
+  border-radius: 999px !important;
+  background: linear-gradient(90deg, #dfc7a4, #b98b4e, #dfc7a4) !important;
+}
+
+.sheet-close,
+.dish-detail-close {
+  border-color: #e2d2bd !important;
+  background: rgba(255,252,247,.96) !important;
+  box-shadow: 0 7px 18px rgba(63,42,18,.09) !important;
+}
+
+.dish-detail-content h2,
+.calc-sheet h2 {
+  color: var(--sig-ink) !important;
+  font-weight: 800 !important;
+}
+
+.dish-detail-price,
+.calc-total b {
+  color: #7f5624 !important;
+  font-weight: 820 !important;
+}
+
+/* Entry motion adds polish without slowing interaction. */
+@keyframes signatureCardIn {
+  from { opacity: 0; transform: translateY(12px) scale(.992); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.dish-grid > .dish-card {
+  animation: signatureCardIn .42s cubic-bezier(.2,.7,.2,1) both;
+}
+
+.dish-grid > .dish-card:nth-child(2) { animation-delay: .035s; }
+.dish-grid > .dish-card:nth-child(3) { animation-delay: .07s; }
+.dish-grid > .dish-card:nth-child(4) { animation-delay: .105s; }
+.dish-grid > .dish-card:nth-child(5) { animation-delay: .14s; }
+.dish-grid > .dish-card:nth-child(6) { animation-delay: .175s; }
+
+@media (max-width: 640px) {
+  .menu-hero {
+    min-height: 244px !important;
+  }
+
+  .category-strip {
+    width: calc(100% - 14px) !important;
+    height: 60px !important;
+    margin-top: -9px !important;
+    padding: 10px !important;
+    gap: 8px !important;
+    border-radius: 18px !important;
+    scroll-padding-left: 10px;
+  }
+
+  .category-strip button {
+    height: 40px !important;
+    min-height: 40px !important;
+    padding: 0 15px 0 28px !important;
+    border-radius: 13px !important;
+    font-size: 12.5px !important;
+  }
+
+  .category-strip button::before {
+    left: 11px !important;
+    width: 6px !important;
+    height: 6px !important;
+  }
+
+  .dish-grid {
+    width: calc(100% - 18px) !important;
+    margin-top: 15px !important;
+    gap: 17px !important;
+  }
+
+  .dish-card {
+    border-radius: 27px !important;
+  }
+
+  .dish-image {
+    margin: 7px 7px 0 !important;
+    border-radius: 21px !important;
+  }
+
+  .dish-meta {
+    padding: 15px 15px 17px !important;
+  }
+
+  .dish-meta h2 {
+    font-size: 18.5px !important;
+    line-height: 1.15 !important;
+  }
+
+  .dish-meta small {
+    font-size: 12.5px !important;
+  }
+
+  .dish-meta p {
+    min-height: 30px !important;
+    padding: 0 10px !important;
+    border-radius: 11px !important;
+  }
+
+  .dish-card .add,
+  .dish-card .stepper {
+    height: 45px !important;
+    border-radius: 15px !important;
+  }
+
+  .calc-bar {
+    width: calc(100% - 18px) !important;
+    bottom: calc(11px + env(safe-area-inset-bottom)) !important;
+  }
+
+  .dish-detail-sheet,
+  .calc-sheet {
+    border-radius: 27px 27px 0 0 !important;
+  }
+}
+
+@media (min-width: 641px) {
+  .category-strip button:hover {
+    transform: translateY(-1px);
+    border-color: #d6b98f !important;
+  }
+
+  .dish-card {
+    transition: transform .22s ease, box-shadow .22s ease !important;
+  }
+
+  .dish-card:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      0 26px 58px rgba(60,42,20,.125),
+      0 6px 15px rgba(18,46,80,.05),
+      inset 0 1px 0 rgba(255,255,255,.96) !important;
+  }
+
+  .dish-card:hover .dish-image img {
+    transform: scale(1.03) !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dish-grid > .dish-card {
+    animation: none !important;
+  }
+
+  .category-strip button,
+  .dish-card,
+  .dish-image img,
+  .dish-card .add,
+  .dish-card .stepper button {
+    transition: none !important;
+  }
+}
