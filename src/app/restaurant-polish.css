@@ -1,0 +1,425 @@
+/* Final restaurant polish layer.
+   Enhances category navigation, food cards and cart/sheets without changing behavior. */
+
+.menu-page {
+  background:
+    radial-gradient(circle at 12% 360px, rgba(205, 153, 83, .09), transparent 240px),
+    radial-gradient(circle at 88% 760px, rgba(22, 101, 211, .055), transparent 310px),
+    linear-gradient(180deg, #f8f1e7 0%, #fcfaf6 42%, #f8f4ec 100%) !important;
+}
+
+/* Category navigation: premium restaurant tabs. */
+.category-strip {
+  position: sticky;
+  isolation: isolate;
+  gap: 9px !important;
+  padding-left: max(12px, calc((100% - 1120px) / 2)) !important;
+  padding-right: max(12px, calc((100% - 1120px) / 2)) !important;
+  background:
+    linear-gradient(180deg, rgba(255,253,248,.985), rgba(250,245,237,.965)) !important;
+  border-top: 1px solid rgba(255,255,255,.86) !important;
+  border-bottom: 1px solid #e6d8c5 !important;
+  box-shadow:
+    0 10px 26px rgba(74, 50, 21, .075),
+    inset 0 1px 0 rgba(255,255,255,.82) !important;
+  scrollbar-width: none;
+}
+
+.category-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.category-strip button {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  flex: 0 0 auto;
+  min-width: max-content;
+  border: 1px solid #e5d7c5 !important;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.98), rgba(248,241,231,.98)) !important;
+  color: #4f4438 !important;
+  letter-spacing: -.01em;
+  box-shadow:
+    0 3px 9px rgba(94, 67, 32, .055),
+    inset 0 1px 0 rgba(255,255,255,.92) !important;
+  transition:
+    transform .18s ease,
+    box-shadow .18s ease,
+    border-color .18s ease,
+    background .18s ease !important;
+}
+
+.category-strip button::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(120deg, rgba(255,255,255,.44), transparent 46%);
+  opacity: .8;
+  pointer-events: none;
+}
+
+.category-strip button:active {
+  transform: scale(.965);
+}
+
+.category-strip button.active {
+  color: #fffdf8 !important;
+  border-color: rgba(220, 173, 105, .48) !important;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(255,255,255,.16), transparent 38%),
+    linear-gradient(135deg, #1978ec 0%, #0a5bd2 60%, #0649ad 100%) !important;
+  box-shadow:
+    0 9px 20px rgba(8, 83, 192, .24),
+    0 2px 5px rgba(83, 55, 20, .08),
+    inset 0 1px 0 rgba(255,255,255,.18),
+    inset 0 -2px 0 rgba(211, 153, 71, .23) !important;
+}
+
+.category-strip button.active::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 3px;
+  width: 18px;
+  height: 2px;
+  border-radius: 999px;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, transparent, #f3d39c 30%, #f7e2be 50%, #f3d39c 70%, transparent);
+  box-shadow: 0 1px 5px rgba(232, 185, 112, .42);
+}
+
+/* Hero detailing. */
+.menu-hero-pattern {
+  opacity: .7;
+  background-image:
+    radial-gradient(circle at center, transparent 0 46px, rgba(226,188,129,.045) 47px 48px, transparent 49px 82px, rgba(79,151,246,.04) 83px 84px, transparent 85px),
+    linear-gradient(115deg, transparent 0 48%, rgba(255,255,255,.018) 49%, transparent 50%);
+  background-size: 190px 190px, 92px 92px;
+}
+
+.menu-hero p {
+  text-shadow: 0 2px 10px rgba(0,0,0,.18);
+}
+
+.menu-hero h1 {
+  filter: drop-shadow(0 7px 20px rgba(0,0,0,.18));
+}
+
+/* Cards: ceramic plate warmth + clearer hierarchy. */
+.dish-card {
+  position: relative;
+  isolation: isolate;
+  border-color: #e6d7c3 !important;
+  background:
+    linear-gradient(180deg, #fffdfa 0%, #ffffff 55%, #fbf6ed 100%) !important;
+  box-shadow:
+    0 20px 46px rgba(58, 42, 22, .105),
+    0 4px 12px rgba(17, 45, 79, .045),
+    inset 0 1px 0 rgba(255,255,255,.9) !important;
+}
+
+.dish-card::before {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  top: 8px;
+  left: 28%;
+  right: 28%;
+  height: 1px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, rgba(226,183,119,.38), transparent);
+  pointer-events: none;
+}
+
+.dish-image {
+  background: #eee5d8;
+  box-shadow:
+    0 13px 28px rgba(54, 37, 18, .145),
+    0 2px 6px rgba(20, 30, 44, .04),
+    inset 0 0 0 1px rgba(255,255,255,.08) !important;
+}
+
+.dish-image img {
+  transition: transform .32s cubic-bezier(.2,.7,.2,1), filter .32s ease !important;
+}
+
+.dish-card:active .dish-image img {
+  transform: scale(1.018) !important;
+}
+
+.dish-image > span {
+  backdrop-filter: blur(9px) saturate(1.08);
+  -webkit-backdrop-filter: blur(9px) saturate(1.08);
+}
+
+.dish-meta {
+  align-items: center !important;
+}
+
+.dish-meta h2 {
+  letter-spacing: -.025em !important;
+}
+
+.dish-meta small {
+  max-width: 42ch;
+}
+
+.dish-meta p {
+  border-radius: 10px !important;
+  font-variant-numeric: tabular-nums;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.9),
+    0 3px 8px rgba(117, 79, 31, .055) !important;
+}
+
+.dish-card .add {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.12) !important;
+  box-shadow:
+    0 10px 22px rgba(7, 85, 199, .22),
+    inset 0 1px 0 rgba(255,255,255,.16),
+    inset 0 -2px 0 rgba(198,141,62,.14) !important;
+  transition: transform .18s ease, box-shadow .18s ease !important;
+}
+
+.dish-card .add::after {
+  content: "";
+  position: absolute;
+  top: -80%;
+  left: -35%;
+  width: 34%;
+  height: 240%;
+  transform: rotate(18deg);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent);
+  pointer-events: none;
+}
+
+.dish-card .add:active {
+  transform: scale(.965);
+  box-shadow: 0 5px 13px rgba(7, 85, 199, .18) !important;
+}
+
+.dish-card .add svg {
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,.12));
+}
+
+.dish-card .stepper {
+  overflow: hidden;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.9),
+    0 4px 10px rgba(87, 62, 31, .055) !important;
+}
+
+.dish-card .stepper button {
+  transition: background .16s ease, transform .16s ease;
+}
+
+.dish-card .stepper button:active {
+  transform: scale(.9);
+  background: rgba(213, 180, 129, .14) !important;
+}
+
+/* Language menu matches the same restaurant material. */
+.language-popover {
+  border: 1px solid rgba(226, 190, 137, .16) !important;
+  box-shadow:
+    0 24px 54px rgba(0, 16, 40, .34),
+    inset 0 1px 0 rgba(255,255,255,.055) !important;
+}
+
+.language-popover button {
+  transition: background .16s ease, transform .16s ease !important;
+}
+
+.language-popover button:active {
+  transform: scale(.985);
+}
+
+/* Floating cart: clearer CTA and restaurant-check feel. */
+.calc-bar {
+  border-radius: 22px !important;
+  border: 1px solid rgba(228, 185, 121, .30) !important;
+  box-shadow:
+    0 24px 52px rgba(1, 17, 40, .33),
+    0 6px 16px rgba(86, 59, 25, .105),
+    inset 0 1px 0 rgba(255,255,255,.07) !important;
+}
+
+.calc-bar > div:nth-child(2) b {
+  color: #fff5e3 !important;
+  letter-spacing: -.025em;
+}
+
+.calc-bar > button {
+  border: 1px solid rgba(255,255,255,.15) !important;
+  background: linear-gradient(135deg, #1a79ef, #0755c9) !important;
+  box-shadow:
+    0 7px 16px rgba(0,0,0,.15),
+    inset 0 1px 0 rgba(255,255,255,.17),
+    inset 0 -2px 0 rgba(210,153,72,.14) !important;
+}
+
+.calc-bar > button:active {
+  transform: scale(.97);
+}
+
+/* Bottom sheets / detail cards. */
+.sheet-backdrop {
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.dish-detail-sheet,
+.calc-sheet {
+  border: 1px solid rgba(225, 203, 170, .9);
+  box-shadow:
+    0 -24px 60px rgba(17, 23, 31, .19),
+    inset 0 1px 0 rgba(255,255,255,.9) !important;
+}
+
+.sheet-handle {
+  background: linear-gradient(90deg, #d7c3a7, #bda17a, #d7c3a7) !important;
+}
+
+.sheet-close,
+.dish-detail-close {
+  border-color: #e6d8c6 !important;
+  background: rgba(255,253,249,.94) !important;
+  color: #26364b !important;
+  box-shadow: 0 5px 15px rgba(65, 44, 19, .08) !important;
+}
+
+.dish-detail-content h2,
+.calc-sheet h2 {
+  color: #17263b !important;
+  letter-spacing: -.025em;
+}
+
+.calc-row {
+  border-bottom-color: #eee2d2 !important;
+}
+
+.calc-total {
+  margin-top: 6px;
+  padding-top: 16px !important;
+}
+
+/* Mobile: keep everything touch-friendly and visually compact. */
+@media (max-width: 640px) {
+  .category-strip {
+    height: 58px !important;
+    gap: 8px !important;
+    padding: 9px 11px !important;
+    scroll-padding-left: 11px;
+  }
+
+  .category-strip button {
+    height: 38px !important;
+    min-height: 38px !important;
+    padding: 0 16px !important;
+    border-radius: 13px !important;
+    font-size: 12.5px !important;
+    font-weight: 720 !important;
+  }
+
+  .category-strip button.active {
+    padding-left: 17px !important;
+    padding-right: 17px !important;
+  }
+
+  .dish-grid {
+    width: calc(100% - 20px) !important;
+    gap: 18px !important;
+  }
+
+  .dish-card {
+    border-radius: 26px !important;
+  }
+
+  .dish-image {
+    margin: 7px 7px 0 !important;
+    border-radius: 20px !important;
+  }
+
+  .dish-meta {
+    padding: 15px 15px 17px !important;
+  }
+
+  .dish-meta h2 {
+    font-size: 18px !important;
+  }
+
+  .dish-meta small {
+    line-height: 1.45 !important;
+  }
+
+  .dish-meta p {
+    min-height: 29px;
+    padding: 0 9px !important;
+  }
+
+  .dish-card .add,
+  .dish-card .stepper {
+    height: 44px !important;
+    border-radius: 14px !important;
+  }
+
+  .calc-bar {
+    width: calc(100% - 20px) !important;
+    bottom: calc(12px + env(safe-area-inset-bottom)) !important;
+  }
+
+  .dish-detail-sheet,
+  .calc-sheet {
+    border-radius: 25px 25px 0 0 !important;
+  }
+}
+
+@media (min-width: 641px) {
+  .category-strip button:hover {
+    transform: translateY(-1px);
+    border-color: #dac3a2 !important;
+    box-shadow:
+      0 7px 14px rgba(94,67,32,.075),
+      inset 0 1px 0 rgba(255,255,255,.94) !important;
+  }
+
+  .category-strip button.active:hover {
+    border-color: rgba(229, 188, 127, .56) !important;
+    box-shadow:
+      0 11px 23px rgba(8,83,192,.25),
+      inset 0 1px 0 rgba(255,255,255,.19),
+      inset 0 -2px 0 rgba(211,153,71,.23) !important;
+  }
+
+  .dish-card {
+    transition: transform .22s ease, box-shadow .22s ease;
+  }
+
+  .dish-card:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 24px 52px rgba(58,42,22,.12),
+      0 5px 14px rgba(17,45,79,.05),
+      inset 0 1px 0 rgba(255,255,255,.92) !important;
+  }
+
+  .dish-card:hover .dish-image img {
+    transform: scale(1.025) !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .category-strip button,
+  .dish-card,
+  .dish-image img,
+  .dish-card .add,
+  .dish-card .stepper button,
+  .language-popover button {
+    transition: none !important;
+  }
+}
