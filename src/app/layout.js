@@ -12,6 +12,7 @@ import "./admin-category-clean.css";
 import "./floating-cart.css";
 import "./mobile-premium.css";
 import "./mobile-design-v2.css";
+import "./kitchen-vibe.css";
 const inter=Inter({subsets:["latin"],variable:"--font-inter"});
 export const metadata={title:"CHAYKAHANA",description:"O‘zbek taomlari menyusi"};
 export default function RootLayout({children}){return <html lang="uz"><body className={inter.variable}>{children}</body></html>}
