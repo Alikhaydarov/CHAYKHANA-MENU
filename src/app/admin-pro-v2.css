@@ -1,0 +1,476 @@
+/* Professional desktop admin pass. Scoped to real admin shells only. */
+@media (min-width: 1180px) {
+  main:has(> aside) {
+    --pro-bg: #f2f5f9;
+    --pro-surface: #ffffff;
+    --pro-surface-soft: #f8fafc;
+    --pro-border: #dfe7f0;
+    --pro-border-strong: #cfd9e6;
+    --pro-text: #10213a;
+    --pro-muted: #71819a;
+    --pro-blue: #1168e8;
+    --pro-blue-dark: #084fbf;
+    --pro-blue-soft: #eaf3ff;
+    background:
+      radial-gradient(circle at 84% 8%, rgba(17,104,232,.045), transparent 360px),
+      linear-gradient(180deg, #f4f7fa 0%, var(--pro-bg) 100%) !important;
+    grid-template-columns: 242px minmax(0, 1fr) !important;
+  }
+
+  /* Sidebar */
+  main:has(> aside) > aside {
+    position: relative;
+    overflow: hidden;
+    padding: 22px 14px 18px !important;
+    background:
+      radial-gradient(circle at 22% -2%, rgba(48,132,255,.28), transparent 31%),
+      radial-gradient(circle at 100% 88%, rgba(17,104,232,.10), transparent 32%),
+      linear-gradient(180deg, #071a37 0%, #06152d 100%) !important;
+    border-right: 1px solid rgba(255,255,255,.045);
+    box-shadow: 12px 0 40px rgba(8,25,48,.075) !important;
+  }
+
+  main:has(> aside) > aside::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(90deg, rgba(255,255,255,.018), transparent 35%),
+      radial-gradient(circle at 50% 12%, transparent 0 68px, rgba(255,255,255,.018) 69px 70px, transparent 71px);
+  }
+
+  main:has(> aside) [class*="brand"] {
+    min-height: 70px;
+    padding: 2px 8px 20px !important;
+    margin-bottom: 2px;
+    border-bottom-color: rgba(255,255,255,.075) !important;
+  }
+
+  main:has(> aside) [class*="brandMark"] {
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 14px !important;
+    background: linear-gradient(145deg, #2e82f5, #0b56cb) !important;
+    box-shadow:
+      0 12px 28px rgba(17,104,232,.30),
+      inset 0 1px 0 rgba(255,255,255,.16) !important;
+  }
+
+  main:has(> aside) [class*="sidebarNav"] {
+    gap: 7px !important;
+    margin-top: 22px !important;
+  }
+
+  main:has(> aside) [class*="navLabel"] {
+    padding-left: 12px !important;
+    color: #758cac !important;
+    letter-spacing: .16em !important;
+  }
+
+  main:has(> aside) [class*="sidebarNav"] button {
+    min-height: 48px !important;
+    padding: 0 13px !important;
+    border-radius: 13px !important;
+    color: #a9bad2 !important;
+    transition: transform .18s ease, background .18s ease, color .18s ease, box-shadow .18s ease !important;
+  }
+
+  main:has(> aside) [class*="sidebarNav"] button:hover {
+    color: #fff !important;
+    background: rgba(255,255,255,.065) !important;
+    transform: translateX(2px);
+  }
+
+  main:has(> aside) [class*="sidebarNav"] button[class*="navActive"] {
+    color: #fff !important;
+    background:
+      radial-gradient(circle at 10% 0%, rgba(255,255,255,.15), transparent 40%),
+      linear-gradient(135deg, #2379ed, #0b55c8) !important;
+    box-shadow:
+      0 11px 26px rgba(3,63,151,.32),
+      inset 0 1px 0 rgba(255,255,255,.14) !important;
+  }
+
+  main:has(> aside) [class*="sidebarFooter"] {
+    padding-top: 16px !important;
+    border-top-color: rgba(255,255,255,.075) !important;
+  }
+
+  main:has(> aside) [class*="menuLink"],
+  main:has(> aside) [class*="logoutButton"] {
+    border-radius: 12px !important;
+  }
+
+  /* Topbar */
+  main:has(> aside) > section > header {
+    min-height: 92px !important;
+    padding: 17px 30px 16px !important;
+    background: rgba(255,255,255,.91) !important;
+    border-bottom: 1px solid rgba(213,223,235,.92) !important;
+    box-shadow: 0 8px 28px rgba(20,43,76,.025) !important;
+    backdrop-filter: blur(18px) saturate(1.1) !important;
+  }
+
+  main:has(> aside) [class*="eyebrow"] {
+    color: var(--pro-blue) !important;
+    letter-spacing: .145em !important;
+  }
+
+  main:has(> aside) > section > header h1 {
+    margin: 6px 0 3px !important;
+    font-size: 28px !important;
+    letter-spacing: -.04em !important;
+    color: #0d1d35 !important;
+  }
+
+  main:has(> aside) > section > header p {
+    color: #7a899e !important;
+  }
+
+  main:has(> aside) [class*="previewButton"] {
+    min-height: 43px !important;
+    border-radius: 12px !important;
+    border-color: #d7e0eb !important;
+    background: rgba(255,255,255,.92) !important;
+    color: #41516a !important;
+    box-shadow: 0 4px 12px rgba(17,41,78,.035);
+  }
+
+  main:has(> aside) [class*="primaryButton"],
+  main:has(> aside) [class*="iconPrimary"] {
+    border-radius: 12px !important;
+    background: linear-gradient(135deg, #1973eb, #0a54c8) !important;
+    box-shadow:
+      0 9px 20px rgba(17,104,232,.20),
+      inset 0 1px 0 rgba(255,255,255,.14) !important;
+    transition: transform .17s ease, box-shadow .17s ease !important;
+  }
+
+  main:has(> aside) [class*="primaryButton"]:hover:not(:disabled),
+  main:has(> aside) [class*="iconPrimary"]:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow:
+      0 12px 25px rgba(17,104,232,.25),
+      inset 0 1px 0 rgba(255,255,255,.15) !important;
+  }
+
+  /* Canvas */
+  main:has(> aside) > section > div {
+    padding: 24px 28px 30px !important;
+  }
+
+  main:has(> aside) > section > div > div {
+    width: 100%;
+    max-width: 1480px !important;
+    margin-inline: auto;
+  }
+
+  /* Dashboard metrics */
+  main:has(> aside) [class*="metricsGrid"] {
+    gap: 16px !important;
+    margin-bottom: 20px !important;
+  }
+
+  main:has(> aside) [class*="metricCard"] {
+    position: relative;
+    overflow: hidden;
+    min-height: 158px;
+    padding: 20px !important;
+    border: 1px solid var(--pro-border) !important;
+    border-radius: 20px !important;
+    background:
+      radial-gradient(circle at 95% 0%, rgba(17,104,232,.055), transparent 42%),
+      #fff !important;
+    box-shadow:
+      0 12px 32px rgba(17,41,78,.05),
+      inset 0 1px 0 rgba(255,255,255,.9) !important;
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease !important;
+  }
+
+  main:has(> aside) [class*="metricCard"]::after {
+    content: "";
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    bottom: 0;
+    height: 2px;
+    border-radius: 99px 99px 0 0;
+    background: linear-gradient(90deg, transparent, rgba(17,104,232,.28), transparent);
+  }
+
+  main:has(> aside) [class*="metricCard"]:hover {
+    transform: translateY(-2px);
+    border-color: #d0deed !important;
+    box-shadow: 0 17px 38px rgba(17,41,78,.075) !important;
+  }
+
+  main:has(> aside) [class*="metricIcon"] {
+    width: 42px !important;
+    height: 42px !important;
+    border-radius: 13px !important;
+    margin-bottom: 19px !important;
+    background: linear-gradient(145deg, #eef6ff, #e5f0ff) !important;
+    box-shadow: inset 0 0 0 1px rgba(17,104,232,.055);
+  }
+
+  main:has(> aside) [class*="metricValue"] {
+    font-size: 32px !important;
+    letter-spacing: -.045em !important;
+    color: #0c1d36 !important;
+  }
+
+  main:has(> aside) [class*="dashboardGrid"] {
+    grid-template-columns: minmax(0, 1.52fr) minmax(330px, .72fr) !important;
+    gap: 20px !important;
+  }
+
+  main:has(> aside) [class*="surfaceCard"] {
+    border: 1px solid var(--pro-border) !important;
+    border-radius: 20px !important;
+    padding: 22px !important;
+    box-shadow: 0 12px 32px rgba(17,41,78,.045) !important;
+    background: #fff !important;
+  }
+
+  main:has(> aside) [class*="quickActions"] > button {
+    min-height: 62px;
+    border-radius: 14px !important;
+    border-color: #e0e7f0 !important;
+    background: linear-gradient(180deg, #fff, #fbfcfe) !important;
+  }
+
+  main:has(> aside) [class*="quickActions"] > button:hover:not(:disabled) {
+    border-color: #cbdcf0 !important;
+    background: #f8fbff !important;
+    box-shadow: 0 8px 18px rgba(17,104,232,.055);
+  }
+
+  /* Dishes/categories split */
+  main:has(> aside) [class*="splitLayout"] {
+    grid-template-columns: 400px minmax(0, 1fr) !important;
+    gap: 20px !important;
+  }
+
+  main:has(> aside) [class*="panel"] {
+    border: 1px solid #dce5ef !important;
+    border-radius: 20px !important;
+    background: #fff !important;
+    box-shadow:
+      0 13px 34px rgba(17,41,78,.052),
+      inset 0 1px 0 rgba(255,255,255,.9) !important;
+  }
+
+  main:has(> aside) [class*="panelHeader"] {
+    min-height: 82px !important;
+    padding: 17px 20px !important;
+    border-bottom-color: #e3eaf2 !important;
+    background: linear-gradient(180deg, #fff, #fcfdff) !important;
+  }
+
+  main:has(> aside) [class*="panelHeader"] h2 {
+    font-size: 19px !important;
+    letter-spacing: -.028em !important;
+  }
+
+  main:has(> aside) [class*="filters"] {
+    padding: 12px !important;
+    gap: 9px !important;
+    background: #f7f9fc !important;
+    border-bottom-color: #e3eaf2 !important;
+  }
+
+  main:has(> aside) [class*="searchBox"],
+  main:has(> aside) [class*="filterSelect"] {
+    min-height: 42px !important;
+    border-radius: 12px !important;
+    border-color: #d7e1ec !important;
+    background: #fff !important;
+    box-shadow: inset 0 1px 2px rgba(17,41,78,.018);
+  }
+
+  main:has(> aside) [class*="listScroll"] {
+    padding: 9px !important;
+  }
+
+  main:has(> aside) [class*="listRow"] {
+    min-height: 76px !important;
+    margin-bottom: 5px !important;
+    padding: 9px !important;
+    border-radius: 14px !important;
+    transition: transform .15s ease, background .15s ease, border-color .15s ease, box-shadow .15s ease !important;
+  }
+
+  main:has(> aside) [class*="listRow"]:hover {
+    transform: translateX(2px);
+    background: #f7faff !important;
+  }
+
+  main:has(> aside) [class*="listRow"][class*="Active"] {
+    background:
+      linear-gradient(90deg, #eef6ff 0%, #f7fbff 75%, #fff 100%) !important;
+    border-color: #c9dcf4 !important;
+    box-shadow:
+      inset 3px 0 0 #1168e8,
+      0 6px 16px rgba(17,104,232,.055) !important;
+  }
+
+  main:has(> aside) [class*="dishThumb"] {
+    width: 56px !important;
+    height: 56px !important;
+    border-radius: 12px !important;
+    box-shadow: 0 5px 13px rgba(28,42,59,.09);
+  }
+
+  main:has(> aside) [class*="categoryGlyph"] {
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 13px !important;
+    background: linear-gradient(145deg, #eef6ff, #e5f0ff) !important;
+  }
+
+  main:has(> aside) [class*="rowMain"] b {
+    font-size: 13px !important;
+    color: #14243c !important;
+  }
+
+  main:has(> aside) [class*="rowMain"] small {
+    font-size: 10.5px !important;
+    color: #7b899c !important;
+  }
+
+  /* Editor */
+  main:has(> aside) [class*="editor"] [class*="panelHeader"],
+  main:has(> aside) [class*="editorPanel"] [class*="panelHeader"] {
+    background:
+      radial-gradient(circle at 92% 0%, rgba(17,104,232,.045), transparent 40%),
+      #fff !important;
+  }
+
+  main:has(> aside) [class*="editorScroll"] {
+    padding: 20px !important;
+    background:
+      linear-gradient(180deg, #f7f9fc 0%, #f9fbfd 100%) !important;
+  }
+
+  main:has(> aside) [class*="formSection"] {
+    border: 1px solid #e0e8f1 !important;
+    border-radius: 18px !important;
+    background: #fff !important;
+    box-shadow:
+      0 7px 22px rgba(17,41,78,.032),
+      inset 0 1px 0 rgba(255,255,255,.92) !important;
+  }
+
+  main:has(> aside) [class*="formSectionHeading"] {
+    padding-bottom: 2px;
+  }
+
+  main:has(> aside) [class*="formSectionHeading"] h3 {
+    font-size: 17px !important;
+    letter-spacing: -.025em !important;
+    color: #14233b !important;
+  }
+
+  main:has(> aside) [class*="field"] > span {
+    color: #53627a !important;
+    font-size: 11px !important;
+    font-weight: 750 !important;
+    letter-spacing: .01em;
+  }
+
+  main:has(> aside) [class*="field"] input,
+  main:has(> aside) [class*="field"] select,
+  main:has(> aside) [class*="field"] textarea {
+    border: 1px solid #d6e0eb !important;
+    border-radius: 12px !important;
+    background: #fbfcfe !important;
+    color: #17253b !important;
+    box-shadow: inset 0 1px 2px rgba(17,41,78,.025);
+    transition: border-color .16s ease, box-shadow .16s ease, background .16s ease !important;
+  }
+
+  main:has(> aside) [class*="field"] input:focus,
+  main:has(> aside) [class*="field"] select:focus,
+  main:has(> aside) [class*="field"] textarea:focus {
+    outline: 0 !important;
+    border-color: #86b4ef !important;
+    background: #fff !important;
+    box-shadow:
+      0 0 0 3px rgba(17,104,232,.085),
+      inset 0 1px 2px rgba(17,41,78,.02) !important;
+  }
+
+  main:has(> aside) [class*="fieldHint"] {
+    color: #8a97a8 !important;
+  }
+
+  main:has(> aside) [class*="langTabs"] {
+    padding: 4px !important;
+    border-radius: 13px !important;
+    background: #eef2f7 !important;
+  }
+
+  main:has(> aside) [class*="langTabs"] button {
+    border-radius: 10px !important;
+  }
+
+  main:has(> aside) [class*="langTabs"] button[class*="Active"] {
+    background: #fff !important;
+    color: var(--pro-blue) !important;
+    box-shadow: 0 4px 10px rgba(17,41,78,.07) !important;
+  }
+
+  main:has(> aside) [class*="toggle"] {
+    border-color: #dce5ef !important;
+    background: #f8fafc !important;
+  }
+
+  main:has(> aside) [class*="image"] img {
+    border-radius: 14px;
+  }
+
+  main:has(> aside) [class*="empty"] {
+    color: #74849a !important;
+  }
+
+  /* Scrollbars */
+  main:has(> aside) * {
+    scrollbar-width: thin;
+    scrollbar-color: #c3cfde transparent;
+  }
+}
+
+@media (min-width: 1540px) {
+  main:has(> aside) {
+    grid-template-columns: 250px minmax(0, 1fr) !important;
+  }
+
+  main:has(> aside) > section > div {
+    padding: 28px 34px 34px !important;
+  }
+
+  main:has(> aside) > section > div > div {
+    max-width: 1540px !important;
+  }
+
+  main:has(> aside) [class*="splitLayout"] {
+    grid-template-columns: 420px minmax(0, 1fr) !important;
+    gap: 22px !important;
+  }
+
+  main:has(> aside) [class*="metricCard"] {
+    min-height: 164px;
+    padding: 22px !important;
+  }
+}
+
+@media (min-width: 1880px) {
+  main:has(> aside) > section > div > div {
+    max-width: 1600px !important;
+  }
+
+  main:has(> aside) [class*="splitLayout"] {
+    grid-template-columns: 430px minmax(0, 1fr) !important;
+  }
+}
