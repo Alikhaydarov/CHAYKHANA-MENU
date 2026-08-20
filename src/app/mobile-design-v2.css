@@ -1,0 +1,369 @@
+/* Second mobile design pass. Keeps the current structure and behavior,
+   but sharpens hierarchy, depth and touch feel on phones only. */
+
+@media (max-width: 640px) {
+  .menu-page {
+    background:
+      radial-gradient(circle at 92% 340px, rgba(41, 121, 238, .08), transparent 210px),
+      linear-gradient(180deg, #edf4fd 0, #f5f8fc 360px, #f8fafc 760px, #f8fafc 100%) !important;
+    padding-bottom: 112px !important;
+  }
+
+  /* Navbar: calmer, cleaner, more app-like. */
+  .menu-header {
+    min-height: var(--menu-sticky-offset) !important;
+    padding: 8px 12px !important;
+    background:
+      radial-gradient(circle at 0 -40%, rgba(55, 139, 255, .32), transparent 45%),
+      linear-gradient(145deg, rgba(2, 23, 53, .99), rgba(4, 47, 101, .99)) !important;
+    border-bottom: 1px solid rgba(179, 208, 247, .11) !important;
+    box-shadow: 0 10px 30px rgba(1, 20, 48, .20) !important;
+  }
+
+  .menu-brand::before {
+    width: 59px !important;
+    height: 50px !important;
+    filter: drop-shadow(0 7px 16px rgba(0,0,0,.22)) !important;
+  }
+
+  .language-trigger {
+    min-width: 78px !important;
+    height: 40px !important;
+    padding: 0 10px !important;
+    border-radius: 15px !important;
+    border: 1px solid rgba(255,255,255,.17) !important;
+    background: linear-gradient(180deg, rgba(255,255,255,.105), rgba(255,255,255,.055)) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 6px 16px rgba(0,0,0,.10) !important;
+  }
+
+  .language-trigger strong {
+    font-size: 12px !important;
+    letter-spacing: .03em;
+  }
+
+  .language-trigger .language-caret {
+    opacity: .72;
+  }
+
+  .language-popover {
+    border-radius: 17px !important;
+    padding: 6px !important;
+    background: rgba(2, 25, 58, .985) !important;
+    box-shadow: 0 22px 52px rgba(0, 16, 41, .34) !important;
+  }
+
+  .language-popover button {
+    min-height: 42px !important;
+    border-radius: 11px !important;
+  }
+
+  /* Hero: tighter focal point and smoother handoff into categories. */
+  .menu-hero {
+    min-height: 246px !important;
+    padding: 13px 16px 18px !important;
+    background:
+      radial-gradient(circle at 50% 31%, rgba(54, 137, 255, .28), transparent 35%),
+      radial-gradient(circle at 12% 4%, rgba(73, 153, 255, .17), transparent 31%),
+      linear-gradient(157deg, #02162f 0%, #052e64 55%, #031d43 100%) !important;
+    box-shadow:
+      inset 0 -34px 46px rgba(0, 14, 34, .12),
+      0 8px 24px rgba(2, 27, 63, .08) !important;
+  }
+
+  .menu-hero-logo {
+    width: 88px !important;
+    height: 76px !important;
+    margin-bottom: 8px !important;
+    filter: drop-shadow(0 13px 28px rgba(0,0,0,.25)) drop-shadow(0 0 18px rgba(78,153,255,.12)) !important;
+  }
+
+  .menu-hero p {
+    margin-bottom: 5px !important;
+    color: #c4dcff !important;
+    font-size: 9px !important;
+    letter-spacing: .42em !important;
+  }
+
+  .menu-hero h1 {
+    font-size: clamp(31px, 9.5vw, 39px) !important;
+    letter-spacing: .105em !important;
+    text-shadow: 0 9px 25px rgba(0,0,0,.24) !important;
+  }
+
+  .menu-hero > span {
+    margin-top: 8px !important;
+    color: #dceaff !important;
+    font-size: 8.5px !important;
+    letter-spacing: .25em !important;
+  }
+
+  /* Category rail: subtle floating surface with refined pills. */
+  .category-strip {
+    height: 50px !important;
+    gap: 6px !important;
+    padding: 7px 11px !important;
+    background: rgba(255,255,255,.94) !important;
+    border-bottom: 1px solid rgba(219, 228, 239, .86) !important;
+    box-shadow: 0 8px 22px rgba(5, 37, 82, .065) !important;
+    backdrop-filter: blur(18px) saturate(1.08) !important;
+    -webkit-backdrop-filter: blur(18px) saturate(1.08) !important;
+  }
+
+  .category-strip button {
+    height: 34px !important;
+    min-height: 34px !important;
+    padding: 0 13px !important;
+    border-radius: 12px !important;
+    border: 1px solid #e6ecf4 !important;
+    background: linear-gradient(180deg, #fff, #fbfcfe) !important;
+    color: #354a67 !important;
+    font-size: 12px !important;
+    font-weight: 680 !important;
+    box-shadow: 0 2px 6px rgba(15,48,94,.025) !important;
+  }
+
+  .category-strip button.active {
+    color: #fff !important;
+    border-color: rgba(255,255,255,.08) !important;
+    background: linear-gradient(135deg, #177cff, #0757d8) !important;
+    box-shadow: 0 7px 16px rgba(12,99,244,.24), inset 0 1px 0 rgba(255,255,255,.13) !important;
+  }
+
+  /* Food cards: inset photography + cleaner content hierarchy. */
+  .dish-grid {
+    width: calc(100% - 18px) !important;
+    margin: 14px auto 30px !important;
+    gap: 17px !important;
+  }
+
+  .dish-card {
+    overflow: hidden !important;
+    border-radius: 24px !important;
+    border: 1px solid rgba(219, 228, 240, .92) !important;
+    background: linear-gradient(180deg, #fff, #fcfdff) !important;
+    box-shadow:
+      0 18px 42px rgba(15, 48, 94, .105),
+      0 3px 10px rgba(15, 48, 94, .04) !important;
+  }
+
+  .dish-card:active {
+    transform: scale(.992) !important;
+    box-shadow:
+      0 12px 28px rgba(15, 48, 94, .10),
+      0 2px 7px rgba(15, 48, 94, .035) !important;
+  }
+
+  .dish-image {
+    height: clamp(226px, 61vw, 276px) !important;
+    min-height: 0 !important;
+    margin: 6px 6px 0 !important;
+    border-radius: 19px !important;
+    overflow: hidden !important;
+    box-shadow:
+      0 11px 24px rgba(4, 33, 75, .13),
+      inset 0 0 0 1px rgba(255,255,255,.06) !important;
+  }
+
+  .dish-image img {
+    filter: saturate(1.055) contrast(1.025) brightness(1.01) !important;
+  }
+
+  .dish-image::after {
+    background:
+      linear-gradient(180deg, rgba(2,24,56,.01) 46%, rgba(2,24,56,.21) 100%),
+      radial-gradient(circle at 50% 14%, rgba(255,255,255,.12), transparent 48%) !important;
+    box-shadow: inset 0 -26px 34px rgba(2,24,56,.075) !important;
+  }
+
+  .dish-image > span {
+    top: 11px !important;
+    left: 11px !important;
+    padding: 6px 10px !important;
+    border-radius: 10px !important;
+    border: 1px solid rgba(255,255,255,.15) !important;
+    background: rgba(2, 23, 54, .72) !important;
+    color: #fff !important;
+    font-size: 10px !important;
+    font-weight: 760 !important;
+    box-shadow: 0 6px 16px rgba(0,0,0,.13) !important;
+  }
+
+  .dish-meta {
+    position: relative;
+    min-height: 112px !important;
+    padding: 15px 15px 16px !important;
+    gap: 12px !important;
+    background: transparent !important;
+  }
+
+  .dish-meta::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 15px;
+    right: 15px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(220,228,239,.75), transparent);
+  }
+
+  .dish-meta h2 {
+    margin: 0 0 5px !important;
+    color: #0b2141 !important;
+    font-size: 18px !important;
+    line-height: 1.18 !important;
+    font-weight: 800 !important;
+    letter-spacing: -.02em !important;
+  }
+
+  .dish-meta small {
+    margin: 0 0 9px !important;
+    color: #7c899a !important;
+    font-size: 11px !important;
+    line-height: 1.4 !important;
+  }
+
+  .dish-meta p {
+    display: inline-flex;
+    align-items: center;
+    min-height: 27px;
+    margin: 0 !important;
+    padding: 0 8px;
+    border-radius: 9px;
+    color: #0758d9 !important;
+    background: #eef5ff;
+    font-size: 16px !important;
+    font-weight: 860 !important;
+    letter-spacing: -.015em !important;
+  }
+
+  .dish-card .add {
+    min-width: 92px;
+    height: 43px !important;
+    padding: 0 13px !important;
+    border-radius: 14px !important;
+    background: linear-gradient(135deg, #177cff, #0757d8) !important;
+    box-shadow: 0 9px 20px rgba(12,99,244,.22), inset 0 1px 0 rgba(255,255,255,.12) !important;
+  }
+
+  .dish-card .stepper {
+    height: 43px !important;
+    border-radius: 14px !important;
+    border-color: #c9dcfa !important;
+    background: #f1f6fe !important;
+    box-shadow: inset 0 1px 0 #fff !important;
+  }
+
+  .dish-card .stepper button {
+    width: 39px !important;
+    height: 41px !important;
+  }
+
+  .dish-card .stepper span {
+    width: 36px !important;
+    height: 41px !important;
+    border-radius: 9px;
+    background: linear-gradient(135deg, #177cff, #0757d8) !important;
+    box-shadow: 0 4px 10px rgba(12,99,244,.18);
+  }
+
+  /* Floating cart: visually tied to the same card language. */
+  .calc-bar {
+    overflow: hidden;
+    bottom: calc(10px + env(safe-area-inset-bottom)) !important;
+    width: calc(100% - 18px) !important;
+    min-height: 66px !important;
+    padding: 8px 9px 8px 10px !important;
+    border-radius: 21px !important;
+    border: 1px solid rgba(129, 179, 246, .28) !important;
+    background:
+      radial-gradient(circle at 0 0, rgba(37, 123, 245, .27), transparent 38%),
+      linear-gradient(145deg, rgba(2, 25, 59, .985), rgba(3, 39, 84, .985)) !important;
+    box-shadow:
+      0 22px 48px rgba(1, 18, 45, .32),
+      0 5px 14px rgba(1, 18, 45, .14),
+      inset 0 1px 0 rgba(255,255,255,.055) !important;
+  }
+
+  .calc-bar::before {
+    content: "";
+    position: absolute;
+    inset: 0 18px auto;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(155,199,255,.22), transparent);
+    pointer-events: none;
+  }
+
+  .calc-bar > div:first-child > svg {
+    background: linear-gradient(135deg, #1a80ff, #0757d8) !important;
+    box-shadow: 0 8px 18px rgba(12,99,244,.31), inset 0 1px 0 rgba(255,255,255,.13) !important;
+  }
+
+  .calc-bar > button {
+    border: 1px solid rgba(226,236,249,.8) !important;
+    background: linear-gradient(180deg, #fff, #f3f7fd) !important;
+    box-shadow: 0 7px 17px rgba(0,0,0,.13) !important;
+  }
+
+  /* Bottom sheets: more intentional edge/radius treatment. */
+  .dish-detail-sheet,
+  .calc-sheet {
+    border: 1px solid rgba(228, 235, 244, .9) !important;
+    border-bottom: 0 !important;
+    background: linear-gradient(180deg, #fff, #fbfcfe) !important;
+  }
+
+  .sheet-handle {
+    background: #cfd9e7 !important;
+  }
+
+  .dish-detail-image {
+    height: 236px !important;
+  }
+
+  .dish-detail-content h2 {
+    letter-spacing: -.025em !important;
+  }
+
+  .dish-detail-price {
+    display: inline-flex;
+    padding: 6px 9px;
+    border-radius: 10px;
+    background: #eef5ff;
+  }
+}
+
+@media (max-width: 390px) {
+  .dish-grid {
+    width: calc(100% - 14px) !important;
+  }
+
+  .dish-image {
+    height: 218px !important;
+  }
+
+  .dish-meta {
+    padding: 14px 13px 15px !important;
+    gap: 9px !important;
+  }
+
+  .dish-meta::before {
+    left: 13px;
+    right: 13px;
+  }
+
+  .dish-card .add {
+    min-width: 84px;
+    padding: 0 11px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dish-card,
+  .dish-image img,
+  .language-trigger,
+  .category-strip button,
+  .dish-card .add,
+  .calc-bar > button {
+    transition: none !important;
+  }
+}
