@@ -1,0 +1,40 @@
+/* Hero logo-only title treatment. Keep menu label/subtitle, remove duplicate CHAYHANA text. */
+.menu-hero h1 {
+  display: none !important;
+}
+
+.menu-hero-logo {
+  width: 92px !important;
+  height: 80px !important;
+  margin: 2px 0 7px !important;
+}
+
+.menu-hero p {
+  margin-bottom: 5px !important;
+}
+
+.menu-hero > span {
+  margin-top: 4px !important;
+}
+
+@media (min-width: 760px) {
+  .menu-hero-logo {
+    width: 106px !important;
+    height: 91px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .menu-hero-logo {
+    width: 82px !important;
+    height: 71px !important;
+    margin-bottom: 5px !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .menu-hero-logo {
+    width: 78px !important;
+    height: 67px !important;
+  }
+}
