@@ -1,0 +1,92 @@
+/* Logo-only entrance loader.
+   Loaded last so it cleanly wins over earlier loader styling. */
+
+.loader {
+  padding: 24px;
+}
+
+/* The official logo is the only brand mark in the loader. */
+.loader > b {
+  display: none !important;
+}
+
+.loader .loader-orbit {
+  width: 138px !important;
+  height: 120px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: url('/assets/chayhana-logo.svg') center / contain no-repeat !important;
+  animation: none !important;
+  transform: none !important;
+  opacity: 1 !important;
+  filter:
+    drop-shadow(0 18px 34px rgba(0, 10, 28, .28))
+    drop-shadow(0 0 24px rgba(77, 150, 255, .12));
+}
+
+.loader .loader-mark {
+  display: none !important;
+}
+
+/* Welcome copy becomes the single clear text focus. */
+.loader > span {
+  width: min(92vw, 680px) !important;
+  margin-top: 22px !important;
+  padding: 0 14px !important;
+  color: #edf5ff !important;
+  font-size: clamp(24px, 4.8vw, 32px) !important;
+  line-height: 1.12 !important;
+  font-weight: 780 !important;
+  letter-spacing: -.032em !important;
+  text-align: center !important;
+  text-wrap: balance;
+  text-shadow: 0 8px 24px rgba(0, 15, 42, .24);
+}
+
+html[lang="ko"] .loader > span {
+  font-size: clamp(25px, 5vw, 33px) !important;
+  letter-spacing: -.025em !important;
+}
+
+html[lang="ru"] .loader > span {
+  font-size: clamp(21px, 4.2vw, 29px) !important;
+  line-height: 1.16 !important;
+  letter-spacing: -.028em !important;
+}
+
+html[lang="en"] .loader > span,
+html[lang="uz"] .loader > span {
+  font-size: clamp(24px, 4.8vw, 32px) !important;
+}
+
+@media (max-width: 640px) {
+  .loader .loader-orbit {
+    width: 124px !important;
+    height: 108px !important;
+  }
+
+  .loader > span {
+    margin-top: 18px !important;
+    font-size: clamp(23px, 7vw, 29px) !important;
+  }
+
+  html[lang="ko"] .loader > span {
+    font-size: clamp(24px, 7.2vw, 30px) !important;
+  }
+
+  html[lang="ru"] .loader > span {
+    width: min(94vw, 520px) !important;
+    font-size: clamp(20px, 5.9vw, 26px) !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .loader .loader-orbit {
+    width: 116px !important;
+    height: 101px !important;
+  }
+
+  .loader > span {
+    margin-top: 16px !important;
+  }
+}
