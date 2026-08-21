@@ -1,4 +1,4 @@
-/* Logo-only loader with premium focus transition.
+/* Logo-only loader with slower premium reveal and dissolve.
    The logo never changes position: motion comes from opacity, blur and the backdrop. */
 
 .loader {
@@ -7,7 +7,7 @@
   isolation: isolate;
   overflow: hidden;
   padding: 24px;
-  animation: loaderSceneIn .32s cubic-bezier(.2,.72,.2,1) both;
+  animation: loaderSceneIn .56s cubic-bezier(.22,.7,.22,1) both;
 }
 
 .loader::before {
@@ -20,11 +20,11 @@
     radial-gradient(circle at 50% 43%, rgba(64,137,241,.18), transparent 26%),
     radial-gradient(circle at 50% 48%, rgba(255,255,255,.055), transparent 42%);
   opacity: 0;
-  filter: blur(18px);
-  animation: loaderBackdropFocus .62s cubic-bezier(.2,.72,.2,1) both;
+  filter: blur(26px);
+  transform: scale(.96);
+  animation: loaderBackdropFocus .92s cubic-bezier(.22,.7,.22,1) both;
 }
 
-/* The official logo is the only brand mark in the loader. */
 .loader > b {
   display: none !important;
 }
@@ -41,14 +41,13 @@
   filter:
     drop-shadow(0 18px 34px rgba(0, 10, 28, .28))
     drop-shadow(0 0 24px rgba(77, 150, 255, .12));
-  animation: loaderLogoResolve .44s cubic-bezier(.2,.72,.2,1) .025s both !important;
+  animation: loaderLogoResolve .72s cubic-bezier(.22,.7,.22,1) .07s both !important;
 }
 
 .loader .loader-mark {
   display: none !important;
 }
 
-/* Welcome copy is the single text focus. */
 .loader > span {
   position: relative;
   z-index: 1;
@@ -63,7 +62,7 @@
   text-align: center !important;
   text-wrap: balance;
   text-shadow: 0 8px 24px rgba(0, 15, 42, .24);
-  animation: loaderCopyResolve .4s cubic-bezier(.2,.72,.2,1) .1s both;
+  animation: loaderCopyResolve .66s cubic-bezier(.22,.7,.22,1) .17s both;
 }
 
 html[lang="ko"] .loader > span {
@@ -82,25 +81,41 @@ html[lang="uz"] .loader > span {
   font-size: clamp(24px, 4.8vw, 32px) !important;
 }
 
-/* Language changes use one quick cinematic focus cycle.
-   No bounce, rotation or physical logo movement. */
+/* Initial loader now has a real exit phase before React removes it. */
+.loader.loader-closing {
+  animation: loaderSceneOut .46s cubic-bezier(.3,0,.35,1) both;
+}
+
+.loader.loader-closing::before {
+  animation: loaderBackdropOut .46s cubic-bezier(.3,0,.35,1) both;
+}
+
+.loader.loader-closing .loader-orbit {
+  animation: loaderLogoOut .46s cubic-bezier(.3,0,.35,1) both !important;
+}
+
+.loader.loader-closing > span {
+  animation: loaderCopyOut .42s cubic-bezier(.3,0,.35,1) both;
+}
+
+/* Language changes use a slower reveal + dissolve cycle. */
 .language-transition-loader {
-  animation: languageScene .9s cubic-bezier(.2,.72,.2,1) both;
+  animation: languageScene 1.25s cubic-bezier(.22,.7,.22,1) both;
   will-change: opacity;
 }
 
 .language-transition-loader::before {
-  animation: languageBackdrop .9s cubic-bezier(.2,.72,.2,1) both;
+  animation: languageBackdrop 1.25s cubic-bezier(.22,.7,.22,1) both;
 }
 
 .language-transition-loader .loader-orbit {
   transform: none !important;
-  animation: languageLogoResolve .9s cubic-bezier(.2,.72,.2,1) both !important;
+  animation: languageLogoResolve 1.25s cubic-bezier(.22,.7,.22,1) both !important;
   will-change: opacity, filter;
 }
 
 .language-transition-loader > span {
-  animation: languageCopyResolve .9s cubic-bezier(.2,.72,.2,1) both;
+  animation: languageCopyResolve 1.25s cubic-bezier(.22,.7,.22,1) both;
   will-change: opacity, transform, filter;
 }
 
@@ -110,17 +125,17 @@ html[lang="uz"] .loader > span {
 }
 
 @keyframes loaderBackdropFocus {
-  0% { opacity: 0; filter: blur(24px); }
-  58% { opacity: 1; filter: blur(8px); }
-  100% { opacity: .78; filter: blur(10px); }
+  0% { opacity: 0; filter: blur(28px); transform: scale(.96); }
+  68% { opacity: .9; filter: blur(10px); transform: scale(1); }
+  100% { opacity: .78; filter: blur(10px); transform: scale(1.01); }
 }
 
 @keyframes loaderLogoResolve {
   from {
-    opacity: .18;
+    opacity: .08;
     filter:
-      blur(4px)
-      drop-shadow(0 14px 28px rgba(0,10,28,.2));
+      blur(6px)
+      drop-shadow(0 12px 24px rgba(0,10,28,.16));
   }
   to {
     opacity: 1;
@@ -134,8 +149,8 @@ html[lang="uz"] .loader > span {
 @keyframes loaderCopyResolve {
   from {
     opacity: 0;
-    transform: translateY(6px);
-    filter: blur(3px);
+    transform: translateY(7px);
+    filter: blur(5px);
   }
   to {
     opacity: 1;
@@ -144,28 +159,67 @@ html[lang="uz"] .loader > span {
   }
 }
 
+@keyframes loaderSceneOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes loaderBackdropOut {
+  from { opacity: .78; filter: blur(10px); transform: scale(1.01); }
+  to { opacity: 0; filter: blur(30px); transform: scale(1.09); }
+}
+
+@keyframes loaderLogoOut {
+  from {
+    opacity: 1;
+    filter:
+      blur(0)
+      drop-shadow(0 18px 34px rgba(0,10,28,.28))
+      drop-shadow(0 0 24px rgba(77,150,255,.12));
+  }
+  to {
+    opacity: 0;
+    filter:
+      blur(5px)
+      drop-shadow(0 14px 28px rgba(0,10,28,.12));
+  }
+}
+
+@keyframes loaderCopyOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-2px);
+    filter: blur(4px);
+  }
+}
+
 @keyframes languageScene {
   0% { opacity: 0; }
-  11% { opacity: 1; }
-  76% { opacity: 1; }
+  20% { opacity: 1; }
+  66% { opacity: 1; }
   100% { opacity: 0; }
 }
 
 @keyframes languageBackdrop {
-  0% { opacity: 0; filter: blur(24px); }
-  22% { opacity: .82; filter: blur(10px); }
-  72% { opacity: .72; filter: blur(11px); }
-  100% { opacity: 0; filter: blur(18px); }
+  0% { opacity: 0; filter: blur(28px); transform: scale(.96); }
+  28% { opacity: .84; filter: blur(10px); transform: scale(1); }
+  64% { opacity: .76; filter: blur(11px); transform: scale(1.01); }
+  100% { opacity: 0; filter: blur(30px); transform: scale(1.09); }
 }
 
 @keyframes languageLogoResolve {
   0% {
-    opacity: .18;
+    opacity: .08;
     filter:
-      blur(4px)
-      drop-shadow(0 14px 28px rgba(0,10,28,.18));
+      blur(6px)
+      drop-shadow(0 12px 24px rgba(0,10,28,.14));
   }
-  20%, 72% {
+  28%, 64% {
     opacity: 1;
     filter:
       blur(0)
@@ -173,28 +227,28 @@ html[lang="uz"] .loader > span {
       drop-shadow(0 0 24px rgba(77,150,255,.12));
   }
   100% {
-    opacity: .12;
+    opacity: 0;
     filter:
-      blur(3px)
-      drop-shadow(0 14px 28px rgba(0,10,28,.16));
+      blur(5px)
+      drop-shadow(0 14px 28px rgba(0,10,28,.12));
   }
 }
 
 @keyframes languageCopyResolve {
   0% {
     opacity: 0;
-    transform: translateY(7px);
-    filter: blur(4px);
+    transform: translateY(8px);
+    filter: blur(5px);
   }
-  23%, 72% {
+  31%, 64% {
     opacity: 1;
     transform: translateY(0);
     filter: blur(0);
   }
   100% {
     opacity: 0;
-    transform: translateY(-3px);
-    filter: blur(2px);
+    transform: translateY(-2px);
+    filter: blur(4px);
   }
 }
 
