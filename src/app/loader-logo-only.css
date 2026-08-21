@@ -1,8 +1,9 @@
 /* Logo-only entrance loader.
-   Loaded last so it cleanly wins over earlier loader styling. */
+   Clean motion: the logo stays physically still; only the overlay/text fade. */
 
 .loader {
   padding: 24px;
+  animation: loaderBackdropIn .18s ease-out both;
 }
 
 /* The official logo is the only brand mark in the loader. */
@@ -16,6 +17,7 @@
   border: 0 !important;
   border-radius: 0 !important;
   background: url('/assets/chayhana-logo.svg') center / contain no-repeat !important;
+  animation: none !important;
   transform: none !important;
   opacity: 1 !important;
   filter:
@@ -27,7 +29,7 @@
   display: none !important;
 }
 
-/* Welcome copy becomes the single clear text focus. */
+/* Welcome copy is the single text focus. */
 .loader > span {
   width: min(92vw, 680px) !important;
   margin-top: 22px !important;
@@ -40,6 +42,7 @@
   text-align: center !important;
   text-wrap: balance;
   text-shadow: 0 8px 24px rgba(0, 15, 42, .24);
+  animation: loaderCopyIn .24s cubic-bezier(.22,.72,.22,1) .035s both;
 }
 
 html[lang="ko"] .loader > span {
@@ -58,58 +61,32 @@ html[lang="uz"] .loader > span {
   font-size: clamp(24px, 4.8vw, 32px) !important;
 }
 
-/* Calm entrance loader motion: no movement, only a soft light cue. */
-.loader:not(.language-transition-loader) .loader-orbit {
-  animation: loaderSoftGlow .95s ease-out both !important;
-}
-
-.loader:not(.language-transition-loader) > span {
-  animation: loaderTextReveal .34s cubic-bezier(.2,.75,.2,1) .06s both;
-}
-
-/* Language switching is one short, self-contained fade cycle.
-   It matches the existing 1.2s language timer, so the overlay fades out
-   naturally right before React removes it. */
+/* Language switch: quick clean fade-in, short hold, fade-out.
+   Parent opacity handles the logo too, so the logo never moves independently. */
 .language-transition-loader {
-  animation: languageLoaderFade 1.2s cubic-bezier(.22,.72,.2,1) both;
+  animation: languageLoaderFade 1.2s cubic-bezier(.22,.72,.22,1) both;
   will-change: opacity;
 }
 
 .language-transition-loader .loader-orbit {
-  animation: languageLogoGlow 1.2s ease both !important;
-  will-change: opacity, filter;
+  animation: none !important;
+  transform: none !important;
 }
 
 .language-transition-loader > span {
-  animation: languageTextFlow 1.2s cubic-bezier(.22,.72,.2,1) both;
+  animation: languageCopyFade 1.2s cubic-bezier(.22,.72,.22,1) both;
   will-change: opacity, transform;
 }
 
-@keyframes loaderSoftGlow {
-  0% {
-    opacity: .76;
-    filter:
-      drop-shadow(0 14px 28px rgba(0, 10, 28, .22))
-      drop-shadow(0 0 8px rgba(77, 150, 255, .03));
-  }
-  48% {
-    opacity: 1;
-    filter:
-      drop-shadow(0 18px 34px rgba(0, 10, 28, .28))
-      drop-shadow(0 0 30px rgba(77, 150, 255, .18));
-  }
-  100% {
-    opacity: 1;
-    filter:
-      drop-shadow(0 18px 34px rgba(0, 10, 28, .28))
-      drop-shadow(0 0 24px rgba(77, 150, 255, .12));
-  }
+@keyframes loaderBackdropIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-@keyframes loaderTextReveal {
+@keyframes loaderCopyIn {
   from {
     opacity: 0;
-    transform: translateY(4px);
+    transform: translateY(2px);
   }
   to {
     opacity: 1;
@@ -119,48 +96,27 @@ html[lang="uz"] .loader > span {
 
 @keyframes languageLoaderFade {
   0% { opacity: 0; }
-  12% { opacity: 1; }
-  78% { opacity: 1; }
+  10% { opacity: 1; }
+  82% { opacity: 1; }
   100% { opacity: 0; }
 }
 
-@keyframes languageLogoGlow {
-  0% {
-    opacity: .72;
-    filter:
-      drop-shadow(0 14px 28px rgba(0, 10, 28, .18))
-      drop-shadow(0 0 8px rgba(77, 150, 255, .02));
-  }
-  18%, 72% {
-    opacity: 1;
-    filter:
-      drop-shadow(0 18px 34px rgba(0, 10, 28, .28))
-      drop-shadow(0 0 30px rgba(77, 150, 255, .18));
-  }
-  100% {
-    opacity: .68;
-    filter:
-      drop-shadow(0 14px 28px rgba(0, 10, 28, .18))
-      drop-shadow(0 0 10px rgba(77, 150, 255, .04));
-  }
-}
-
-@keyframes languageTextFlow {
+@keyframes languageCopyFade {
   0% {
     opacity: 0;
-    transform: translateY(5px);
+    transform: translateY(2px);
   }
-  16% {
+  14% {
     opacity: 1;
     transform: translateY(0);
   }
-  78% {
+  80% {
     opacity: 1;
     transform: translateY(0);
   }
   100% {
     opacity: 0;
-    transform: translateY(-2px);
+    transform: translateY(-1px);
   }
 }
 
