@@ -122,7 +122,7 @@ export default function MenuClient() {
     languageTimerRef.current = window.setTimeout(() => {
       setLanguageLoading(false);
       languageTimerRef.current = null;
-    }, 1200);
+    }, 900);
   };
 
   const categoryMap = useMemo(() => Object.fromEntries(categories.map((item) => [item.id, item])), [categories]);
