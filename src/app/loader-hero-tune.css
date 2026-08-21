@@ -1,0 +1,137 @@
+/* Loader + hero tuning requested for a calmer, faster-looking entrance. */
+
+/* Keep the loader logo completely still. */
+.loader-orbit,
+.loader-mark {
+  animation: none !important;
+  transform: none !important;
+}
+
+.loader-orbit {
+  width: 88px !important;
+  height: 88px !important;
+  border-color: rgba(255,255,255,.22) !important;
+  box-shadow:
+    0 0 0 1px rgba(103,169,255,.05),
+    0 14px 34px rgba(0,12,32,.16);
+}
+
+.loader-mark {
+  filter: drop-shadow(0 0 16px rgba(103,169,255,.75)) !important;
+}
+
+/* Welcome copy is the main loader message in every language. */
+.loader > span {
+  width: min(92vw, 620px);
+  margin-top: 12px !important;
+  padding-inline: 14px;
+  color: #d9e9ff !important;
+  font-size: clamp(20px, 4.8vw, 28px) !important;
+  line-height: 1.18 !important;
+  font-weight: 760 !important;
+  letter-spacing: -.025em !important;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.loader > b {
+  margin-top: 17px !important;
+  font-size: 23px !important;
+  letter-spacing: .15em !important;
+}
+
+/* Make the main banner shorter and keep CHAYHANA secondary to the logo. */
+.menu-hero {
+  min-height: 236px !important;
+  padding: 17px 18px 20px !important;
+}
+
+.menu-hero-logo {
+  width: 86px !important;
+  height: 74px !important;
+  margin-bottom: 7px !important;
+}
+
+.menu-hero p {
+  margin-bottom: 5px !important;
+  font-size: 10px !important;
+}
+
+.menu-hero h1 {
+  font-size: clamp(29px, 6vw, 42px) !important;
+  line-height: 1 !important;
+  letter-spacing: .035em !important;
+}
+
+.menu-hero > span {
+  margin-top: 8px !important;
+  font-size: 9.5px !important;
+  letter-spacing: .14em !important;
+}
+
+@media (min-width: 760px) {
+  .menu-hero {
+    min-height: 252px !important;
+    padding: 20px 20px 23px !important;
+  }
+
+  .menu-hero-logo {
+    width: 96px !important;
+    height: 82px !important;
+  }
+
+  .menu-hero h1 {
+    font-size: 40px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .loader-orbit {
+    width: 82px !important;
+    height: 82px !important;
+  }
+
+  .loader > span {
+    font-size: clamp(21px, 6.2vw, 27px) !important;
+  }
+
+  .menu-hero {
+    min-height: 208px !important;
+    padding: 13px 14px 16px !important;
+  }
+
+  .menu-hero-logo {
+    width: 70px !important;
+    height: 60px !important;
+    margin-bottom: 6px !important;
+  }
+
+  .menu-hero p {
+    margin-bottom: 4px !important;
+    font-size: 9px !important;
+  }
+
+  .menu-hero h1 {
+    font-size: clamp(27px, 8.4vw, 33px) !important;
+  }
+
+  .menu-hero > span {
+    margin-top: 7px !important;
+    font-size: 8.8px !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .menu-hero {
+    min-height: 198px !important;
+  }
+
+  .menu-hero-logo {
+    width: 65px !important;
+    height: 56px !important;
+  }
+
+  .menu-hero h1 {
+    font-size: 27px !important;
+  }
+}
