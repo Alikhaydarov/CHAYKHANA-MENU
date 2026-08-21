@@ -14,12 +14,15 @@ const copy = {
 
 const labels = { uz: "O‘zbekcha", ko: "한국어", ru: "Русский", en: "English" };
 const LOADER_MIN_MS = 1000;
+const LOADER_EXIT_MS = 460;
+const LANGUAGE_LOADER_MS = 1250;
 
 export default function MenuClient() {
   const [dishes, setDishes] = useState([]);
   const [categories, setCategories] = useState([]);
   const [categoriesReady, setCategoriesReady] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [loadingClosing, setLoadingClosing] = useState(false);
   const [languageLoading, setLanguageLoading] = useState(false);
   const [error, setError] = useState("");
   const [lang, setLang] = useState("uz");
@@ -29,6 +32,7 @@ export default function MenuClient() {
   const [open, setOpen] = useState(false);
   const [detailDish, setDetailDish] = useState(null);
   const languageTimerRef = useRef(null);
+  const loaderCloseTimerRef = useRef(null);
 
   const fetchMenu = async () => {
     const dishRequest = fetch("/api/dishes", { cache: "no-store" });
@@ -63,11 +67,20 @@ export default function MenuClient() {
   const finishLoadingAfterMinimum = (startedAt) => {
     const elapsed = Date.now() - startedAt;
     const remaining = Math.max(0, LOADER_MIN_MS - elapsed);
-    window.setTimeout(() => setLoading(false), remaining);
+    window.setTimeout(() => {
+      setLoadingClosing(true);
+      loaderCloseTimerRef.current = window.setTimeout(() => {
+        setLoading(false);
+        setLoadingClosing(false);
+        loaderCloseTimerRef.current = null;
+      }, LOADER_EXIT_MS);
+    }, remaining);
   };
 
   const load = () => {
     const startedAt = Date.now();
+    if (loaderCloseTimerRef.current) window.clearTimeout(loaderCloseTimerRef.current);
+    setLoadingClosing(false);
     setLoading(true);
     setError("");
     fetchMenu()
@@ -89,6 +102,7 @@ export default function MenuClient() {
 
     return () => {
       if (languageTimerRef.current) window.clearTimeout(languageTimerRef.current);
+      if (loaderCloseTimerRef.current) window.clearTimeout(loaderCloseTimerRef.current);
     };
   }, []);
 
@@ -122,7 +136,7 @@ export default function MenuClient() {
     languageTimerRef.current = window.setTimeout(() => {
       setLanguageLoading(false);
       languageTimerRef.current = null;
-    }, 900);
+    }, LANGUAGE_LOADER_MS);
   };
 
   const categoryMap = useMemo(() => Object.fromEntries(categories.map((item) => [item.id, item])), [categories]);
@@ -171,7 +185,7 @@ export default function MenuClient() {
     return <button className="add" onClick={(event) => handle(event, 1)}><Plus/>{t.add}</button>;
   };
 
-  if (loading || languageLoading) return <div className={`loader${languageLoading ? " language-transition-loader" : ""}`}>
+  if (loading || languageLoading) return <div className={`loader${languageLoading ? " language-transition-loader" : ""}${loadingClosing && !languageLoading ? " loader-closing" : ""}`}>
     <div className="loader-orbit"><div className="loader-mark">✦</div></div>
     <b>CHAYHANA</b>
     <span>{t.welcome}</span>
