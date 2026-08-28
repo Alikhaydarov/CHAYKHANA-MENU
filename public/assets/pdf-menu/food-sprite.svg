@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="840" viewBox="0 0 700 840">
+<image href="food-sprite.webp" x="0" y="0" width="700" height="840"/>
+<view id="achiq-gusht" viewBox="0 0 140 105"/><view id="assorti-manti" viewBox="140 0 140 105"/><view id="assorti-plov" viewBox="280 0 140 105"/><view id="beef-cutlet" viewBox="420 0 140 105"/><view id="borsh" viewBox="560 0 140 105"/>
+<view id="carrot-salad" viewBox="0 105 140 105"/><view id="cottage-pancake" viewBox="140 105 140 105"/><view id="dumplings-soup" viewBox="280 105 140 105"/><view id="eggs-sausage" viewBox="420 105 140 105"/><view id="fresh-salad" viewBox="560 105 140 105"/>
+<view id="fried-lagman" viewBox="0 210 140 105"/><view id="fries" viewBox="140 210 140 105"/><view id="gardan-kabob" viewBox="280 210 140 105"/><view id="golubtsi" viewBox="420 210 140 105"/><view id="grilled-chicken" viewBox="560 210 140 105"/>
+<view id="gulyash" viewBox="0 315 140 105"/><view id="hanum" viewBox="140 315 140 105"/><view id="jiz-biz-fries" viewBox="280 315 140 105"/><view id="jiz-biz-ribs" viewBox="420 315 140 105"/><view id="kazan-kebab" viewBox="560 315 140 105"/>
+<view id="kuza-shurpa" viewBox="0 420 140 105"/><view id="lagmon-soup" viewBox="140 420 140 105"/><view id="lamb-soup" viewBox="280 420 140 105"/><view id="manti" viewBox="420 420 140 105"/><view id="mastava" viewBox="560 420 140 105"/>
+<view id="mujskoy" viewBox="0 525 140 105"/><view id="norin" viewBox="140 525 140 105"/><view id="okroshka" viewBox="280 525 140 105"/><view id="olivie" viewBox="420 525 140 105"/><view id="plov" viewBox="560 525 140 105"/>
+<view id="qurtob" viewBox="0 630 140 105"/><view id="salted-cabbage" viewBox="140 630 140 105"/><view id="salted-pickles" viewBox="280 630 140 105"/><view id="salty-assorted" viewBox="420 630 140 105"/><view id="samarkand" viewBox="560 630 140 105"/>
+<view id="shox-kabob" viewBox="0 735 140 105"/><view id="smak" viewBox="140 735 140 105"/><view id="suzma" viewBox="280 735 140 105"/><view id="tandoor-lamb" viewBox="420 735 140 105"/>
+</svg>
