@@ -1,0 +1,410 @@
+/* Final PDF-inspired public menu layer.
+   Mobile-first. The official hero logo is intentionally NOT styled here. */
+
+.menu-page {
+  --pdf-navy: #082f72;
+  --pdf-blue: #0b397f;
+  --pdf-blue-2: #123f7f;
+  --pdf-card: #3f628d;
+  --pdf-card-deep: #294f80;
+  --pdf-cream: #fff4cf;
+  --pdf-cream-soft: #f5e8c2;
+  --pdf-ice: #dce8f7;
+  --pdf-line: rgba(255, 244, 207, .42);
+  --pdf-shadow: rgba(2, 20, 53, .34);
+  background: #eef3f9;
+}
+
+@media (max-width: 759px) {
+  .menu-page {
+    position: relative;
+    isolation: isolate;
+    min-height: 100dvh;
+    overflow-x: clip;
+    padding-bottom: calc(104px + env(safe-area-inset-bottom));
+    background:
+      linear-gradient(180deg, rgba(7, 40, 98, .98), rgba(9, 52, 119, .98) 38%, rgba(7, 43, 101, .99)),
+      #0b397f !important;
+  }
+
+  /* Real ornament extracted from the supplied PDF. */
+  .menu-page::before,
+  .menu-page::after {
+    content: "";
+    position: fixed;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    width: 22px;
+    pointer-events: none;
+    background: url('/assets/pdf-menu/ornament.svg') center top / 34px auto repeat-y;
+    opacity: .46;
+    filter: saturate(.86) contrast(1.04);
+  }
+
+  .menu-page::before { left: 0; }
+  .menu-page::after { right: 0; transform: scaleX(-1); }
+
+  .menu-header {
+    min-height: 58px !important;
+    padding: 8px 14px !important;
+    background: rgba(5, 31, 78, .88) !important;
+    border-bottom: 1px solid rgba(255, 244, 207, .2) !important;
+    box-shadow: 0 10px 28px rgba(2, 18, 48, .18) !important;
+    backdrop-filter: blur(16px) saturate(1.15);
+  }
+
+  .menu-brand::after { display: none !important; }
+
+  .language-trigger {
+    min-height: 40px !important;
+    padding: 0 11px !important;
+    color: var(--pdf-cream) !important;
+    background: rgba(255,255,255,.08) !important;
+    border-color: rgba(255,244,207,.28) !important;
+    box-shadow: inset 0 1px rgba(255,255,255,.08) !important;
+  }
+
+  /* Keep the existing logo untouched; only frame the hero with PDF language. */
+  .menu-hero {
+    border-bottom: 1px solid rgba(255,244,207,.2) !important;
+    box-shadow:
+      inset 0 -1px rgba(255,255,255,.05),
+      0 14px 34px rgba(2,20,53,.2) !important;
+  }
+
+  .category-strip {
+    position: sticky !important;
+    top: 58px !important;
+    z-index: 25 !important;
+    width: calc(100% - 44px) !important;
+    height: auto !important;
+    min-height: 60px !important;
+    margin: -7px auto 0 !important;
+    padding: 9px !important;
+    gap: 7px !important;
+    border-radius: 18px !important;
+    border: 1px solid rgba(255,244,207,.22) !important;
+    background:
+      linear-gradient(180deg, rgba(25,72,137,.96), rgba(8,48,111,.97)) !important;
+    box-shadow:
+      0 14px 28px rgba(1,18,49,.25),
+      inset 0 1px rgba(255,255,255,.08) !important;
+    backdrop-filter: blur(16px);
+    scrollbar-width: none;
+  }
+
+  .category-strip::-webkit-scrollbar { display: none; }
+
+  .category-strip button {
+    flex: 0 0 auto !important;
+    min-width: max-content !important;
+    height: 40px !important;
+    padding: 0 13px !important;
+    border-radius: 12px !important;
+    border: 1px solid rgba(255,244,207,.18) !important;
+    background: rgba(255,255,255,.07) !important;
+    color: rgba(255,244,207,.76) !important;
+    font-size: 12.5px !important;
+    font-weight: 760 !important;
+    letter-spacing: -.01em !important;
+    box-shadow: none !important;
+  }
+
+  .category-strip button::before,
+  .category-strip button::after { display: none !important; }
+
+  .category-strip button.active {
+    color: #082f72 !important;
+    background: linear-gradient(180deg, #fff8dc, #eedbaa) !important;
+    border-color: rgba(255,247,215,.95) !important;
+    box-shadow:
+      0 7px 16px rgba(2,20,52,.2),
+      inset 0 1px rgba(255,255,255,.7) !important;
+  }
+
+  .dish-grid {
+    width: calc(100% - 54px) !important;
+    max-width: 520px !important;
+    margin: 16px auto 0 !important;
+    padding: 0 !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 11px !important;
+  }
+
+  .dish-card {
+    min-height: 144px !important;
+    display: grid !important;
+    grid-template-columns: 132px minmax(0, 1fr) !important;
+    align-items: stretch !important;
+    gap: 0 !important;
+    overflow: hidden !important;
+    border-radius: 20px !important;
+    border: 1px solid rgba(255,244,207,.18) !important;
+    background:
+      radial-gradient(circle at 14% 15%, rgba(255,255,255,.08), transparent 32%),
+      linear-gradient(145deg, rgba(65,101,146,.98), rgba(42,79,126,.99)) !important;
+    box-shadow:
+      0 12px 28px rgba(2,20,53,.24),
+      inset 0 1px rgba(255,255,255,.08) !important;
+    transform: none !important;
+  }
+
+  .dish-card::after {
+    display: block !important;
+    width: 40px !important;
+    height: 2px !important;
+    left: auto !important;
+    right: 18px !important;
+    bottom: 9px !important;
+    background: linear-gradient(90deg, transparent, rgba(255,244,207,.5)) !important;
+  }
+
+  .dish-card-open { z-index: 3 !important; }
+
+  .dish-image {
+    position: relative !important;
+    width: 132px !important;
+    height: 100% !important;
+    min-height: 144px !important;
+    margin: 0 !important;
+    border: 0 !important;
+    border-right: 1px solid rgba(255,244,207,.12) !important;
+    border-radius: 0 !important;
+    overflow: hidden !important;
+    background:
+      radial-gradient(circle at 50% 44%, rgba(255,255,255,.12), transparent 48%),
+      rgba(9,53,121,.66) !important;
+    box-shadow: none !important;
+  }
+
+  .dish-image::after {
+    background: linear-gradient(180deg, transparent 58%, rgba(4,25,64,.24)) !important;
+  }
+
+  .dish-image img {
+    object-fit: contain !important;
+    object-position: center !important;
+    padding: 7px !important;
+    transform: none !important;
+    filter: drop-shadow(0 9px 12px rgba(1,17,44,.2));
+  }
+
+  .dish-image > span {
+    top: auto !important;
+    right: auto !important;
+    bottom: 8px !important;
+    left: 8px !important;
+    max-width: calc(100% - 16px) !important;
+    padding: 5px 8px !important;
+    border-radius: 9px !important;
+    color: var(--pdf-cream) !important;
+    background: rgba(4,28,71,.78) !important;
+    border: 1px solid rgba(255,244,207,.17) !important;
+    font-size: 9.5px !important;
+    line-height: 1.1 !important;
+    font-weight: 750 !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    backdrop-filter: blur(8px);
+  }
+
+  .dish-meta {
+    min-width: 0 !important;
+    min-height: 144px !important;
+    padding: 13px 12px 12px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: space-between !important;
+    gap: 9px !important;
+  }
+
+  .dish-meta > div:first-child {
+    min-width: 0;
+    display: grid;
+    gap: 5px;
+  }
+
+  .dish-meta h2 {
+    margin: 0 !important;
+    color: var(--pdf-cream) !important;
+    font-size: 17px !important;
+    line-height: 1.08 !important;
+    font-weight: 820 !important;
+    letter-spacing: -.025em !important;
+  }
+
+  .dish-meta small {
+    display: -webkit-box !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    color: rgba(228,238,250,.78) !important;
+    font-size: 11.2px !important;
+    line-height: 1.34 !important;
+    font-weight: 520 !important;
+  }
+
+  .dish-meta p {
+    justify-self: start !important;
+    width: max-content !important;
+    min-height: 28px !important;
+    margin: 1px 0 0 !important;
+    padding: 5px 9px !important;
+    border-radius: 10px !important;
+    color: #082f72 !important;
+    background: linear-gradient(180deg, #fff7d7, #efdcaa) !important;
+    border: 1px solid rgba(255,248,220,.7) !important;
+    font-size: 13.5px !important;
+    line-height: 1 !important;
+    font-weight: 850 !important;
+    letter-spacing: -.02em !important;
+    box-shadow: 0 5px 12px rgba(2,18,48,.14) !important;
+  }
+
+  .dish-card .add,
+  .dish-card .stepper {
+    position: relative !important;
+    z-index: 4 !important;
+    width: 100% !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    border-radius: 11px !important;
+  }
+
+  .dish-card .add {
+    justify-content: center !important;
+    color: #082f72 !important;
+    background: linear-gradient(180deg, #fff7d9, #ead39b) !important;
+    border: 1px solid rgba(255,248,220,.82) !important;
+    box-shadow:
+      0 7px 15px rgba(1,18,48,.18),
+      inset 0 1px rgba(255,255,255,.72) !important;
+    font-size: 12px !important;
+    font-weight: 820 !important;
+  }
+
+  .dish-card .add svg { width: 15px !important; height: 15px !important; }
+
+  .dish-card .stepper {
+    overflow: hidden;
+    background: rgba(5,34,81,.58) !important;
+    border: 1px solid rgba(255,244,207,.22) !important;
+  }
+
+  .dish-card .stepper button {
+    color: var(--pdf-cream) !important;
+    background: transparent !important;
+  }
+
+  .dish-card .stepper span {
+    color: #082f72 !important;
+    background: linear-gradient(180deg, #fff7d9, #ead39b) !important;
+    font-weight: 850 !important;
+  }
+
+  .calc-bar {
+    width: calc(100% - 42px) !important;
+    max-width: 520px !important;
+    bottom: calc(10px + env(safe-area-inset-bottom)) !important;
+    border-radius: 19px !important;
+    border: 1px solid rgba(255,244,207,.26) !important;
+    background:
+      linear-gradient(145deg, rgba(5,31,78,.98), rgba(12,56,122,.98)) !important;
+    box-shadow: 0 18px 40px rgba(1,15,42,.38) !important;
+    backdrop-filter: blur(18px);
+  }
+
+  .calc-bar small { color: rgba(255,244,207,.66) !important; }
+  .calc-bar b { color: var(--pdf-cream) !important; }
+  .calc-bar button {
+    color: #082f72 !important;
+    background: linear-gradient(180deg, #fff7d9, #ead39b) !important;
+    border-color: rgba(255,248,220,.75) !important;
+    font-weight: 830 !important;
+  }
+
+  .sheet-backdrop { background: rgba(1,14,39,.66) !important; backdrop-filter: blur(7px); }
+
+  .dish-detail-sheet,
+  .calc-sheet {
+    color: var(--pdf-cream) !important;
+    background:
+      radial-gradient(circle at 50% 0, rgba(61,106,166,.24), transparent 38%),
+      linear-gradient(180deg, #0d428c, #082f72) !important;
+    border-color: rgba(255,244,207,.22) !important;
+    box-shadow: 0 -24px 60px rgba(1,15,42,.42) !important;
+  }
+
+  .dish-detail-image {
+    background: rgba(4,29,73,.44) !important;
+    border-color: rgba(255,244,207,.15) !important;
+  }
+
+  .dish-detail-image img { object-fit: contain !important; padding: 14px !important; }
+  .dish-detail-image > span {
+    color: var(--pdf-cream) !important;
+    background: rgba(4,27,68,.8) !important;
+    border-color: rgba(255,244,207,.18) !important;
+  }
+
+  .dish-detail-content h2,
+  .calc-sheet h2 { color: var(--pdf-cream) !important; }
+  .dish-detail-content > p,
+  .calc-sheet > p { color: rgba(228,238,250,.8) !important; }
+
+  .dish-detail-price,
+  .calc-total b { color: var(--pdf-cream) !important; }
+
+  .dish-detail-close,
+  .sheet-close {
+    color: var(--pdf-cream) !important;
+    background: rgba(255,255,255,.08) !important;
+    border-color: rgba(255,244,207,.2) !important;
+  }
+
+  .sheet-handle { background: rgba(255,244,207,.56) !important; }
+  .calc-row { border-color: rgba(255,244,207,.12) !important; }
+  .calc-row span { color: rgba(239,245,252,.84) !important; }
+  .calc-row b { color: var(--pdf-cream) !important; }
+
+  .menu-empty {
+    width: calc(100% - 54px) !important;
+    margin: 22px auto !important;
+    color: var(--pdf-cream) !important;
+    background: rgba(48,87,137,.54) !important;
+    border: 1px solid rgba(255,244,207,.16) !important;
+    border-radius: 20px !important;
+  }
+
+  .menu-empty h2 { color: var(--pdf-cream) !important; }
+}
+
+@media (max-width: 390px) {
+  .menu-page::before,
+  .menu-page::after { width: 17px; background-size: 29px auto; opacity: .4; }
+
+  .category-strip { width: calc(100% - 34px) !important; }
+  .dish-grid { width: calc(100% - 42px) !important; }
+  .dish-card { grid-template-columns: 116px minmax(0, 1fr) !important; }
+  .dish-image { width: 116px !important; }
+  .dish-meta { padding: 12px 10px 11px !important; }
+  .dish-meta h2 { font-size: 16px !important; }
+  .dish-meta small { font-size: 10.7px !important; }
+  .calc-bar { width: calc(100% - 32px) !important; }
+}
+
+@media (min-width: 760px) {
+  /* Desktop keeps the existing layout, with restrained PDF brand material only. */
+  .menu-page {
+    background:
+      linear-gradient(90deg, rgba(11,57,127,.045), transparent 9%, transparent 91%, rgba(11,57,127,.045)),
+      #f5f7fa !important;
+  }
+
+  .dish-card { border-color: rgba(11,57,127,.12) !important; }
+}
