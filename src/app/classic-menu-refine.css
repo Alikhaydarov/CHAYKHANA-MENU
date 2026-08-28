@@ -1,0 +1,127 @@
+/* Restores the pre-PDF warm restaurant design and only adds a light mobile refinement.
+   Also renders PDF food photos directly from the local sprite so SVG subresources cannot fail. */
+
+@media (max-width: 640px) {
+  .menu-page { padding-bottom: 112px !important; }
+
+  .dish-grid {
+    width: calc(100% - 18px) !important;
+    gap: 15px !important;
+    margin-top: 14px !important;
+  }
+
+  .dish-card {
+    border-radius: 25px !important;
+    box-shadow: 0 17px 38px rgba(67, 46, 23, .10), 0 3px 9px rgba(15, 45, 80, .035) !important;
+  }
+
+  .dish-image {
+    height: auto !important;
+    min-height: 0 !important;
+    aspect-ratio: 4 / 3;
+    margin: 7px 7px 0 !important;
+    border-radius: 20px !important;
+    background-repeat: no-repeat !important;
+  }
+
+  .dish-meta { padding: 14px 15px 16px !important; }
+  .dish-meta h2 { font-size: 18px !important; }
+  .dish-meta small { font-size: 12px !important; line-height: 1.42 !important; }
+  .dish-meta p { font-size: 15px !important; }
+
+  .dish-card .add,
+  .dish-card .stepper { height: 44px !important; border-radius: 14px !important; }
+
+  .category-strip {
+    box-shadow: 0 13px 28px rgba(72, 48, 19, .09), 0 3px 8px rgba(18, 47, 82, .035) !important;
+  }
+}
+
+.dish-detail-image { background-repeat: no-repeat !important; }
+
+/* Hide the broken SVG-wrapper image itself; its parent receives the real sprite crop below. */
+.dish-image img[src*="pdf-menu%2Ffood%2F"],
+.dish-image img[src*="/pdf-menu/food/"],
+.dish-detail-image img[src*="pdf-menu%2Ffood%2F"],
+.dish-detail-image img[src*="/pdf-menu/food/"] { opacity: 0 !important; }
+
+.dish-image:has(img[src*="achiq-gusht.svg"]),
+.dish-detail-image:has(img[src*="achiq-gusht.svg"]) { background-image: url("/assets/pdf-menu/food-sprite.webp") !important; background-size: 500% 800% !important; background-position: 0% 0% !important; }
+.dish-image:has(img[src*="assorti-manti.svg"]),
+.dish-detail-image:has(img[src*="assorti-manti.svg"]) { background-image: url("/assets/pdf-menu/food-sprite.webp") !important; background-size: 500% 800% !important; background-position: 25% 0% !important; }
+.dish-image:has(img[src*="assorti-plov.svg"]),
+.dish-detail-image:has(img[src*="assorti-plov.svg"]) { background-image: url("/assets/pdf-menu/food-sprite.webp") !important; background-size: 500% 800% !important; background-position: 50% 0% !important; }
+.dish-image:has(img[src*="beef-cutlet.svg"]),
+.dish-detail-image:has(img[src*="beef-cutlet.svg"]) { background-image: url("/assets/pdf-menu/food-sprite.webp") !important; background-size: 500% 800% !important; background-position: 75% 0% !important; }
+.dish-image:has(img[src*="borsh.svg"]),
+.dish-detail-image:has(img[src*="borsh.svg"]) { background-image: url("/assets/pdf-menu/food-sprite.webp") !important; background-size: 500% 800% !important; background-position: 100% 0% !important; }
+.dish-image:has(img[src*="carrot-salad.svg"]),
+.dish-detail-image:has(img[src*="carrot-salad.svg"]) { background-image: url("/assets/pdf-menu/food-sprite.webp") !important; background-size: 500% 800% !important; background-position: 0% 14.2857% !important; }
+.dish-image:has(img[src*="cottage-pancake.svg"]),
+.dish-detail-image:has(img[src*="cottage-pancake.svg"]) { background-image: url("/assets/pdf-menu/food-sprite.webp") !important; background-size: 500% 800% !important; background-position: 25% 14.2857% !important; }
+.dish-image:has(img[src*="dumplings-soup.svg"]),
+.dish-detail-image:has(img[src*="dumplings-soup.svg"]) { background-image: url("/assets/pdf-menu/food-sprite.webp") !important; background-size: 500% 800% !important; background-position: 50% 14.2857% !important; }
+.dish-image:has(img[src*="eggs-sausage.svg"]),
+.dish-detail-image:has(img[src*="eggs-sausage.svg"]) { background-image: url("/assets/pdf-menu/food-sprite.webp") !important; background-size: 500% 800% !important; background-position: 75% 14.2857% !important; }
+.dish-image:has(img[src*="fresh-salad.svg"]),
+.dish-detail-image:has(img[src*="fresh-salad.svg"]) { background-image: url("/assets/pdf-menu/food-sprite.webp") !important; background-size: 500% 800% !important; background-position: 100% 14.2857% !important; }
+.dish-image:has(img[src*="fried-lagman.svg"]),
+.dish-detail-image:has(img[src*="fried-lagman.svg"]) { background-image: url("/assets/pdf-menu/food-sprite.webp") !important; background-size: 500% 800% !important; background-position: 0% 28.5714% !important; }
+.dish-image:has(img[src*="fries.svg"]),
+.dish-detail-image:has(img[src*="fries.svg"]) { background-image: url("/assets/pdf-menu/food-sprite.webp") !important; background-size: 500% 800% !important; background-position: 25% 28.5714% !important; }
+.dish-image:has(img[src*="gardan-kabob.svg"]),
+.dish-detail-image:has(img[src*="gardan-kabob.svg"]) { background-image: url("/assets/pdf-menu/food-sprite.webp") !important; background-size: 500% 800% !important; background-position: 50% 28.5714% !important; }
+.dish-image:has(img[src*="golubtsi.svg"]),
+.dish-detail-image:has(img[src*="golubtsi.svg"]) { background-image: url("/assets/pdf-menu/food-sprite.webp") !important; background-size: 500% 800% !important; background-position: 75% 28.5714% !important; }
+.dish-image:has(img[src*="grilled-chicken.svg"]),
+.dish-detail-image:has(img[src*="grilled-chicken.svg"]) { background-image: url("/assets/pdf-menu/food-sprite.webp") !important; background-size: 500% 800% !important; background-position: 100% 28.5714% !important; }
+.dish-image:has(img[src*="gulyash.svg"]),
+.dish-detail-image:has(img[src*="gulyash.svg"]) { background-image: url("/assets/pdf-menu/food-sprite.webp") !important; background-size: 500% 800% !important; background-position: 0% 42.8571% !important; }
+.dish-image:has(img[src*="hanum.svg"]),
+.dish-detail-image:has(img[src*="hanum.svg"]) { background-image: url("/assets/pdf-menu/food-sprite.webp") !important; background-size: 500% 800% !important; background-position: 25% 42.8571% !important; }
+.dish-image:has(img[src*="jiz-biz-fries.svg"]),
+.dish-detail-image:has(img[src*="jiz-biz-fries.svg"]) { background-image: url("/assets/pdf-menu/food-sprite.webp") !important; background-size: 500% 800% !important; background-position: 50% 42.8571% !important; }
+.dish-image:has(img[src*="jiz-biz-ribs.svg"]),
+.dish-detail-image:has(img[src*="jiz-biz-ribs.svg"]) { background-image: url("/assets/pdf-menu/food-sprite.webp") !important; background-size: 500% 800% !important; background-position: 75% 42.8571% !important; }
+.dish-image:has(img[src*="kazan-kebab.svg"]),
+.dish-detail-image:has(img[src*="kazan-kebab.svg"]) { background-image: url("/assets/pdf-menu/food-sprite.webp") !important; background-size: 500% 800% !important; background-position: 100% 42.8571% !important; }
+.dish-image:has(img[src*="kuza-shurpa.svg"]),
+.dish-detail-image:has(img[src*="kuza-shurpa.svg"]) { background-image: url("/assets/pdf-menu/food-sprite.webp") !important; background-size: 500% 800% !important; background-position: 0% 57.1429% !important; }
+.dish-image:has(img[src*="lagmon-soup.svg"]),
+.dish-detail-image:has(img[src*="lagmon-soup.svg"]) { background-image: url("/assets/pdf-menu/food-sprite.webp") !important; background-size: 500% 800% !important; background-position: 25% 57.1429% !important; }
+.dish-image:has(img[src*="lamb-soup.svg"]),
+.dish-detail-image:has(img[src*="lamb-soup.svg"]) { background-image: url("/assets/pdf-menu/food-sprite.webp") !important; background-size: 500% 800% !important; background-position: 50% 57.1429% !important; }
+.dish-image:has(img[src*="manti.svg"]),
+.dish-detail-image:has(img[src*="manti.svg"]) { background-image: url("/assets/pdf-menu/food-sprite.webp") !important; background-size: 500% 800% !important; background-position: 75% 57.1429% !important; }
+.dish-image:has(img[src*="mastava.svg"]),
+.dish-detail-image:has(img[src*="mastava.svg"]) { background-image: url("/assets/pdf-menu/food-sprite.webp") !important; background-size: 500% 800% !important; background-position: 100% 57.1429% !important; }
+.dish-image:has(img[src*="mujskoy.svg"]),
+.dish-detail-image:has(img[src*="mujskoy.svg"]) { background-image: url("/assets/pdf-menu/food-sprite.webp") !important; background-size: 500% 800% !important; background-position: 0% 71.4286% !important; }
+.dish-image:has(img[src*="norin.svg"]),
+.dish-detail-image:has(img[src*="norin.svg"]) { background-image: url("/assets/pdf-menu/food-sprite.webp") !important; background-size: 500% 800% !important; background-position: 25% 71.4286% !important; }
+.dish-image:has(img[src*="okroshka.svg"]),
+.dish-detail-image:has(img[src*="okroshka.svg"]) { background-image: url("/assets/pdf-menu/food-sprite.webp") !important; background-size: 500% 800% !important; background-position: 50% 71.4286% !important; }
+.dish-image:has(img[src*="olivie.svg"]),
+.dish-detail-image:has(img[src*="olivie.svg"]) { background-image: url("/assets/pdf-menu/food-sprite.webp") !important; background-size: 500% 800% !important; background-position: 75% 71.4286% !important; }
+.dish-image:has(img[src*="plov.svg"]),
+.dish-detail-image:has(img[src*="plov.svg"]) { background-image: url("/assets/pdf-menu/food-sprite.webp") !important; background-size: 500% 800% !important; background-position: 100% 71.4286% !important; }
+.dish-image:has(img[src*="qurtob.svg"]),
+.dish-detail-image:has(img[src*="qurtob.svg"]) { background-image: url("/assets/pdf-menu/food-sprite.webp") !important; background-size: 500% 800% !important; background-position: 0% 85.7143% !important; }
+.dish-image:has(img[src*="salted-cabbage.svg"]),
+.dish-detail-image:has(img[src*="salted-cabbage.svg"]) { background-image: url("/assets/pdf-menu/food-sprite.webp") !important; background-size: 500% 800% !important; background-position: 25% 85.7143% !important; }
+.dish-image:has(img[src*="salted-pickles.svg"]),
+.dish-detail-image:has(img[src*="salted-pickles.svg"]) { background-image: url("/assets/pdf-menu/food-sprite.webp") !important; background-size: 500% 800% !important; background-position: 50% 85.7143% !important; }
+.dish-image:has(img[src*="salty-assorted.svg"]),
+.dish-detail-image:has(img[src*="salty-assorted.svg"]) { background-image: url("/assets/pdf-menu/food-sprite.webp") !important; background-size: 500% 800% !important; background-position: 75% 85.7143% !important; }
+.dish-image:has(img[src*="samarkand.svg"]),
+.dish-detail-image:has(img[src*="samarkand.svg"]) { background-image: url("/assets/pdf-menu/food-sprite.webp") !important; background-size: 500% 800% !important; background-position: 100% 85.7143% !important; }
+.dish-image:has(img[src*="shox-kabob.svg"]),
+.dish-detail-image:has(img[src*="shox-kabob.svg"]) { background-image: url("/assets/pdf-menu/food-sprite.webp") !important; background-size: 500% 800% !important; background-position: 0% 100% !important; }
+.dish-image:has(img[src*="smak.svg"]),
+.dish-detail-image:has(img[src*="smak.svg"]) { background-image: url("/assets/pdf-menu/food-sprite.webp") !important; background-size: 500% 800% !important; background-position: 25% 100% !important; }
+.dish-image:has(img[src*="suzma.svg"]),
+.dish-detail-image:has(img[src*="suzma.svg"]) { background-image: url("/assets/pdf-menu/food-sprite.webp") !important; background-size: 500% 800% !important; background-position: 50% 100% !important; }
+.dish-image:has(img[src*="tandoor-lamb.svg"]),
+.dish-detail-image:has(img[src*="tandoor-lamb.svg"]) { background-image: url("/assets/pdf-menu/food-sprite.webp") !important; background-size: 500% 800% !important; background-position: 75% 100% !important; }
+
+@media (prefers-reduced-motion: reduce) { .dish-card { transition: none !important; } }
