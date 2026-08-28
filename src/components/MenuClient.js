@@ -14,8 +14,8 @@ const copy = {
 
 const labels = { uz: "O‘zbekcha", ko: "한국어", ru: "Русский", en: "English" };
 const LOADER_MIN_MS = 1000;
-const LOADER_EXIT_MS = 460;
-const LANGUAGE_LOADER_MS = 1250;
+const LOADER_EXIT_MS = 560;
+const LANGUAGE_LOADER_MS = 1350;
 
 export default function MenuClient() {
   const [dishes, setDishes] = useState([]);
