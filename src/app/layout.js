@@ -22,6 +22,7 @@ import "./banner-height-tune.css";
 import "./hero-logo-only.css";
 import "./loader-logo-only.css";
 import "./pdf-menu-premium.css";
+import "./mobile-premium-v4.css";
 const inter=Inter({subsets:["latin"],variable:"--font-inter"});
 export const metadata={title:"CHAYKAHANA",description:"O‘zbek taomlari menyusi"};
 export default function RootLayout({children}){return <html lang="uz"><body className={inter.variable}>{children}</body></html>}
