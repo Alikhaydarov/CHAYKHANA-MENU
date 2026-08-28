@@ -6,16 +6,16 @@ import { Calculator, MagnifyingGlass, Minus, Plus, X } from "@phosphor-icons/rea
 import LanguageMenu from "./LanguageMenu";
 
 const copy = {
-  uz: { welcome: "Xush kelibsiz", loading: "Menu yangilanmoqda", language: "Til", search: "Taom yoki kategoriya qidiring", all: "Barchasi", add: "Qo‘shish", selected: "Tanlangan", total: "Jami", view: "Hisobni ko‘rish", empty: "Hali taom tanlanmagan", noResult: "Taom topilmadi", categoryEmpty: "Bu kategoriyada hozircha taom yo‘q", retry: "Qayta urinish", heroMenu: "MENYU", heroSubtitle: "O‘ZBEK TAOMLARI" },
-  ko: { welcome: "환영합니다", loading: "메뉴를 불러오는 중", language: "언어", search: "음식 또는 카테고리 검색", all: "전체", add: "추가", selected: "선택", total: "합계", view: "계산 보기", empty: "선택한 음식이 없습니다", noResult: "음식을 찾을 수 없습니다", categoryEmpty: "이 카테고리에는 아직 음식이 없습니다", retry: "다시 시도", heroMenu: "메뉴", heroSubtitle: "우즈베키스탄 요리" },
-  ru: { welcome: "Добро пожаловать", loading: "Обновляем меню", language: "Язык", search: "Найти блюдо или категорию", all: "Все", add: "Добавить", selected: "Выбрано", total: "Итого", view: "Посмотреть счёт", empty: "Блюда не выбраны", noResult: "Блюда не найдены", categoryEmpty: "В этой категории пока нет блюд", retry: "Повторить", heroMenu: "МЕНЮ", heroSubtitle: "УЗБЕКСКАЯ КУХНЯ" },
-  en: { welcome: "Welcome", loading: "Updating menu", language: "Language", search: "Search dishes or categories", all: "All", add: "Add", selected: "Selected", total: "Total", view: "View total", empty: "No dishes selected", noResult: "No dishes found", categoryEmpty: "No dishes in this category yet", retry: "Try again", heroMenu: "MENU", heroSubtitle: "UZBEK CUISINE" },
+  uz: { welcome: "Xush kelibsiz!", loading: "Menu yangilanmoqda", language: "Til", search: "Taom yoki kategoriya qidiring", all: "Barchasi", add: "Qo‘shish", selected: "Tanlangan", total: "Jami", view: "Hisobni ko‘rish", empty: "Hali taom tanlanmagan", noResult: "Taom topilmadi", categoryEmpty: "Bu kategoriyada hozircha taom yo‘q", retry: "Qayta urinish", heroMenu: "MENYU", heroSubtitle: "O‘ZBEK TAOMLARI" },
+  ko: { welcome: "환영합니다!", loading: "메뉴를 불러오는 중", language: "언어", search: "음식 또는 카테고리 검색", all: "전체", add: "추가", selected: "선택", total: "합계", view: "계산 보기", empty: "선택한 음식이 없습니다", noResult: "음식을 찾을 수 없습니다", categoryEmpty: "이 카테고리에는 아직 음식이 없습니다", retry: "다시 시도", heroMenu: "메뉴", heroSubtitle: "우즈베키스탄 요리" },
+  ru: { welcome: "Добро пожаловать!", loading: "Обновляем меню", language: "Язык", search: "Найти блюдо или категорию", all: "Все", add: "Добавить", selected: "Выбрано", total: "Итого", view: "Посмотреть счёт", empty: "Блюда не выбраны", noResult: "Блюда не найдены", categoryEmpty: "В этой категории пока нет блюд", retry: "Повторить", heroMenu: "МЕНЮ", heroSubtitle: "УЗБЕКСКАЯ КУХНЯ" },
+  en: { welcome: "Welcome!", loading: "Updating menu", language: "Language", search: "Search dishes or categories", all: "All", add: "Add", selected: "Selected", total: "Total", view: "View total", empty: "No dishes selected", noResult: "No dishes found", categoryEmpty: "No dishes in this category yet", retry: "Try again", heroMenu: "MENU", heroSubtitle: "UZBEK CUISINE" },
 };
 
 const labels = { uz: "O‘zbekcha", ko: "한국어", ru: "Русский", en: "English" };
 const LOADER_MIN_MS = 1000;
-const LOADER_EXIT_MS = 560;
-const LANGUAGE_LOADER_MS = 1350;
+const LOADER_EXIT_MS = 640;
+const LANGUAGE_LOADER_MS = 1450;
 
 export default function MenuClient() {
   const [dishes, setDishes] = useState([]);
