@@ -1,5 +1,5 @@
-/* Logo-only loader with slower premium reveal and dissolve.
-   The logo never changes position: motion comes from opacity, blur and the backdrop. */
+/* Chayhana branded loader + banner pattern.
+   The logo stays physically still; motion comes from focus, opacity and backdrop spread. */
 
 .loader {
   position: fixed;
@@ -7,62 +7,90 @@
   isolation: isolate;
   overflow: hidden;
   padding: 24px;
-  animation: loaderSceneIn .56s cubic-bezier(.22,.7,.22,1) both;
+  background: #183f82 !important;
+  animation: loaderSceneIn .68s cubic-bezier(.22,.72,.2,1) both;
 }
 
+/* Real pattern layer from the supplied Chayhana artwork. */
+.loader::after {
+  content: "";
+  position: absolute;
+  z-index: -2;
+  inset: -3%;
+  pointer-events: none;
+  background: url('/assets/chayhana-pattern-bg.jpg') center / cover no-repeat;
+  opacity: .84;
+  transform: scale(1.035);
+  filter: blur(5px);
+  animation: loaderPatternIn .95s cubic-bezier(.2,.72,.2,1) both;
+}
+
+/* Blue veil keeps the logo/text readable without hiding the pattern. */
 .loader::before {
   content: "";
   position: absolute;
   z-index: -1;
-  inset: -18%;
+  inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(circle at 50% 43%, rgba(64,137,241,.18), transparent 26%),
-    radial-gradient(circle at 50% 48%, rgba(255,255,255,.055), transparent 42%);
+    radial-gradient(circle at 50% 44%, rgba(31,82,166,.08), rgba(8,35,86,.22) 46%, rgba(4,24,65,.34) 100%),
+    linear-gradient(180deg, rgba(12,48,108,.12), rgba(4,26,70,.24));
   opacity: 0;
-  filter: blur(26px);
-  transform: scale(.96);
-  animation: loaderBackdropFocus .92s cubic-bezier(.22,.7,.22,1) both;
+  animation: loaderVeilIn .8s ease-out both;
 }
 
 .loader > b {
   display: none !important;
 }
 
+/* Fully clean transparent logo holder — removes every old orbit/card/background style. */
 .loader .loader-orbit {
   position: relative;
   z-index: 1;
-  width: 138px !important;
-  height: 120px !important;
+  width: 142px !important;
+  height: 124px !important;
+  padding: 0 !important;
   border: 0 !important;
   border-radius: 0 !important;
-  background: url('/assets/chayhana-logo.svg') center / contain no-repeat !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  background-color: transparent !important;
+  background-image: url('/assets/chayhana-logo.svg') !important;
+  background-position: center !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
   transform: none !important;
   filter:
-    drop-shadow(0 18px 34px rgba(0, 10, 28, .28))
-    drop-shadow(0 0 24px rgba(77, 150, 255, .12));
-  animation: loaderLogoResolve .72s cubic-bezier(.22,.7,.22,1) .07s both !important;
+    drop-shadow(0 16px 28px rgba(0, 13, 42, .24))
+    drop-shadow(0 0 16px rgba(255, 241, 191, .06));
+  animation: loaderLogoResolve .8s cubic-bezier(.2,.72,.2,1) .08s both !important;
 }
 
+.loader .loader-orbit::before,
+.loader .loader-orbit::after,
 .loader .loader-mark {
+  content: none !important;
   display: none !important;
+  background: none !important;
+  box-shadow: none !important;
 }
 
 .loader > span {
   position: relative;
   z-index: 1;
   width: min(92vw, 680px) !important;
-  margin-top: 22px !important;
+  margin-top: 20px !important;
   padding: 0 14px !important;
-  color: #edf5ff !important;
+  color: #fff4cf !important;
   font-size: clamp(24px, 4.8vw, 32px) !important;
   line-height: 1.12 !important;
   font-weight: 780 !important;
   letter-spacing: -.032em !important;
   text-align: center !important;
   text-wrap: balance;
-  text-shadow: 0 8px 24px rgba(0, 15, 42, .24);
-  animation: loaderCopyResolve .66s cubic-bezier(.22,.7,.22,1) .17s both;
+  text-shadow: 0 8px 24px rgba(0, 16, 48, .28);
+  animation: loaderCopyResolve .72s cubic-bezier(.2,.72,.2,1) .2s both;
 }
 
 html[lang="ko"] .loader > span {
@@ -81,41 +109,49 @@ html[lang="uz"] .loader > span {
   font-size: clamp(24px, 4.8vw, 32px) !important;
 }
 
-/* Initial loader now has a real exit phase before React removes it. */
+/* Initial loader exits only after the page is actually ready. */
 .loader.loader-closing {
-  animation: loaderSceneOut .46s cubic-bezier(.3,0,.35,1) both;
+  animation: loaderSceneOut .56s cubic-bezier(.32,0,.28,1) both;
+}
+
+.loader.loader-closing::after {
+  animation: loaderPatternOut .56s cubic-bezier(.32,0,.28,1) both;
 }
 
 .loader.loader-closing::before {
-  animation: loaderBackdropOut .46s cubic-bezier(.3,0,.35,1) both;
+  animation: loaderVeilOut .56s cubic-bezier(.32,0,.28,1) both;
 }
 
 .loader.loader-closing .loader-orbit {
-  animation: loaderLogoOut .46s cubic-bezier(.3,0,.35,1) both !important;
+  animation: loaderLogoOut .54s cubic-bezier(.32,0,.28,1) both !important;
 }
 
 .loader.loader-closing > span {
-  animation: loaderCopyOut .42s cubic-bezier(.3,0,.35,1) both;
+  animation: loaderCopyOut .48s cubic-bezier(.32,0,.28,1) both;
 }
 
-/* Language changes use a slower reveal + dissolve cycle. */
+/* Language switch keeps the same composition but runs as one smooth cinematic cycle. */
 .language-transition-loader {
-  animation: languageScene 1.25s cubic-bezier(.22,.7,.22,1) both;
+  animation: languageScene 1.35s cubic-bezier(.22,.72,.2,1) both;
   will-change: opacity;
 }
 
+.language-transition-loader::after {
+  animation: languagePattern 1.35s cubic-bezier(.22,.72,.2,1) both;
+}
+
 .language-transition-loader::before {
-  animation: languageBackdrop 1.25s cubic-bezier(.22,.7,.22,1) both;
+  animation: languageVeil 1.35s cubic-bezier(.22,.72,.2,1) both;
 }
 
 .language-transition-loader .loader-orbit {
   transform: none !important;
-  animation: languageLogoResolve 1.25s cubic-bezier(.22,.7,.22,1) both !important;
+  animation: languageLogoResolve 1.35s cubic-bezier(.22,.72,.2,1) both !important;
   will-change: opacity, filter;
 }
 
 .language-transition-loader > span {
-  animation: languageCopyResolve 1.25s cubic-bezier(.22,.7,.22,1) both;
+  animation: languageCopyResolve 1.35s cubic-bezier(.22,.72,.2,1) both;
   will-change: opacity, transform, filter;
 }
 
@@ -124,39 +160,34 @@ html[lang="uz"] .loader > span {
   to { opacity: 1; }
 }
 
-@keyframes loaderBackdropFocus {
-  0% { opacity: 0; filter: blur(28px); transform: scale(.96); }
-  68% { opacity: .9; filter: blur(10px); transform: scale(1); }
-  100% { opacity: .78; filter: blur(10px); transform: scale(1.01); }
+@keyframes loaderPatternIn {
+  0% { opacity: 0; transform: scale(1.075); filter: blur(12px); }
+  60% { opacity: .82; transform: scale(1.025); filter: blur(3px); }
+  100% { opacity: .84; transform: scale(1); filter: blur(0); }
+}
+
+@keyframes loaderVeilIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 @keyframes loaderLogoResolve {
   from {
-    opacity: .08;
-    filter:
-      blur(6px)
-      drop-shadow(0 12px 24px rgba(0,10,28,.16));
+    opacity: 0;
+    filter: blur(6px) drop-shadow(0 12px 22px rgba(0,13,42,.12));
   }
   to {
     opacity: 1;
     filter:
       blur(0)
-      drop-shadow(0 18px 34px rgba(0,10,28,.28))
-      drop-shadow(0 0 24px rgba(77,150,255,.12));
+      drop-shadow(0 16px 28px rgba(0,13,42,.24))
+      drop-shadow(0 0 16px rgba(255,241,191,.06));
   }
 }
 
 @keyframes loaderCopyResolve {
-  from {
-    opacity: 0;
-    transform: translateY(7px);
-    filter: blur(5px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
-  }
+  from { opacity: 0; transform: translateY(8px); filter: blur(5px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
 }
 
 @keyframes loaderSceneOut {
@@ -164,9 +195,14 @@ html[lang="uz"] .loader > span {
   to { opacity: 0; }
 }
 
-@keyframes loaderBackdropOut {
-  from { opacity: .78; filter: blur(10px); transform: scale(1.01); }
-  to { opacity: 0; filter: blur(30px); transform: scale(1.09); }
+@keyframes loaderPatternOut {
+  from { opacity: .84; transform: scale(1); filter: blur(0); }
+  to { opacity: 0; transform: scale(1.065); filter: blur(12px); }
+}
+
+@keyframes loaderVeilOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
 }
 
 @keyframes loaderLogoOut {
@@ -174,88 +210,97 @@ html[lang="uz"] .loader > span {
     opacity: 1;
     filter:
       blur(0)
-      drop-shadow(0 18px 34px rgba(0,10,28,.28))
-      drop-shadow(0 0 24px rgba(77,150,255,.12));
+      drop-shadow(0 16px 28px rgba(0,13,42,.24));
   }
-  to {
-    opacity: 0;
-    filter:
-      blur(5px)
-      drop-shadow(0 14px 28px rgba(0,10,28,.12));
-  }
+  to { opacity: 0; filter: blur(5px) drop-shadow(0 10px 20px rgba(0,13,42,.1)); }
 }
 
 @keyframes loaderCopyOut {
-  from {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateY(-2px);
-    filter: blur(4px);
-  }
+  from { opacity: 1; transform: translateY(0); filter: blur(0); }
+  to { opacity: 0; transform: translateY(-3px); filter: blur(5px); }
 }
 
 @keyframes languageScene {
   0% { opacity: 0; }
-  20% { opacity: 1; }
-  66% { opacity: 1; }
+  18% { opacity: 1; }
+  68% { opacity: 1; }
   100% { opacity: 0; }
 }
 
-@keyframes languageBackdrop {
-  0% { opacity: 0; filter: blur(28px); transform: scale(.96); }
-  28% { opacity: .84; filter: blur(10px); transform: scale(1); }
-  64% { opacity: .76; filter: blur(11px); transform: scale(1.01); }
-  100% { opacity: 0; filter: blur(30px); transform: scale(1.09); }
+@keyframes languagePattern {
+  0% { opacity: 0; transform: scale(1.07); filter: blur(12px); }
+  24% { opacity: .84; transform: scale(1.015); filter: blur(2px); }
+  66% { opacity: .84; transform: scale(1); filter: blur(0); }
+  100% { opacity: 0; transform: scale(1.065); filter: blur(12px); }
+}
+
+@keyframes languageVeil {
+  0%, 100% { opacity: 0; }
+  22%, 70% { opacity: 1; }
 }
 
 @keyframes languageLogoResolve {
-  0% {
-    opacity: .08;
-    filter:
-      blur(6px)
-      drop-shadow(0 12px 24px rgba(0,10,28,.14));
-  }
-  28%, 64% {
+  0% { opacity: 0; filter: blur(6px) drop-shadow(0 12px 22px rgba(0,13,42,.12)); }
+  25%, 67% {
     opacity: 1;
     filter:
       blur(0)
-      drop-shadow(0 18px 34px rgba(0,10,28,.28))
-      drop-shadow(0 0 24px rgba(77,150,255,.12));
+      drop-shadow(0 16px 28px rgba(0,13,42,.24))
+      drop-shadow(0 0 16px rgba(255,241,191,.06));
   }
-  100% {
-    opacity: 0;
-    filter:
-      blur(5px)
-      drop-shadow(0 14px 28px rgba(0,10,28,.12));
-  }
+  100% { opacity: 0; filter: blur(5px) drop-shadow(0 10px 20px rgba(0,13,42,.1)); }
 }
 
 @keyframes languageCopyResolve {
-  0% {
-    opacity: 0;
-    transform: translateY(8px);
-    filter: blur(5px);
-  }
-  31%, 64% {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(-2px);
-    filter: blur(4px);
-  }
+  0% { opacity: 0; transform: translateY(8px); filter: blur(5px); }
+  29%, 67% { opacity: 1; transform: translateY(0); filter: blur(0); }
+  100% { opacity: 0; transform: translateY(-3px); filter: blur(5px); }
+}
+
+/* Banner uses the exact same Chayhana pattern family. */
+.menu-hero {
+  background:
+    linear-gradient(180deg, rgba(17,59,129,.12), rgba(7,36,91,.28)),
+    url('/assets/chayhana-pattern-bg.jpg') center 44% / cover no-repeat !important;
+  box-shadow: inset 0 -1px rgba(255,255,255,.06) !important;
+}
+
+.menu-hero-pattern {
+  display: none !important;
+}
+
+.menu-hero::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+  background: radial-gradient(circle at 50% 46%, rgba(255,244,207,.055), transparent 38%) !important;
+  opacity: 1 !important;
+}
+
+.menu-hero-logo,
+.menu-hero p,
+.menu-hero > span {
+  position: relative;
+  z-index: 1;
+}
+
+.menu-hero-logo {
+  filter:
+    drop-shadow(0 9px 18px rgba(0,20,58,.2))
+    drop-shadow(0 0 10px rgba(255,244,207,.05)) !important;
+}
+
+.menu-hero p,
+.menu-hero > span {
+  color: #fff4cf !important;
+  text-shadow: 0 3px 14px rgba(0,20,58,.28);
 }
 
 @media (max-width: 640px) {
   .loader .loader-orbit {
-    width: 124px !important;
-    height: 108px !important;
+    width: 128px !important;
+    height: 111px !important;
   }
 
   .loader > span {
@@ -275,8 +320,8 @@ html[lang="uz"] .loader > span {
 
 @media (max-width: 390px) {
   .loader .loader-orbit {
-    width: 116px !important;
-    height: 101px !important;
+    width: 120px !important;
+    height: 104px !important;
   }
 
   .loader > span {
@@ -287,6 +332,7 @@ html[lang="uz"] .loader > span {
 @media (prefers-reduced-motion: reduce) {
   .loader,
   .loader::before,
+  .loader::after,
   .loader .loader-orbit,
   .loader > span {
     animation: none !important;
