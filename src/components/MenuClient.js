@@ -236,7 +236,7 @@ export default function MenuClient() {
 
     {error ? <section className="menu-empty"><b>!</b><h2>{error}</h2><button onClick={load}>{t.retry}</button></section> : list.length === 0 ? <section className="menu-empty"><MagnifyingGlass/><h2>{emptyMessage}</h2></section> : <section className="dish-grid">
       {list.map((dish, index) => <article className="dish-card" key={dish.id}>
-        <button className="dish-card-open" aria-label={`${dish.names[lang] || dish.names.uz} — ₩${dish.price.toLocaleString()}`} onClick={() => setDetailDish(dish)} />
+        <button className="dish-card-open" aria-label={`Rasmni ochish: ${dish.names[lang] || dish.names.uz}`} onClick={() => setDetailDish(dish)} />
         <div className="dish-image"><Image src={dish.image} alt={dish.names[lang] || dish.names.uz} fill sizes="(max-width: 759px) 100vw, 540px" priority={index === 0}/><span>{categoryLabel(dish.category)}</span></div>
         <div className="dish-meta"><div><h2>{dish.names[lang] || dish.names.uz}</h2><small>{dish.descriptions[lang] || dish.descriptions.uz}</small><p>₩{dish.price.toLocaleString()}</p></div>{quantityControl(dish, true)}</div>
       </article>)}
@@ -244,20 +244,15 @@ export default function MenuClient() {
 
     {count > 0 && <footer className="calc-bar"><div><Calculator/><span><small>{t.selected}</small><b>{count}</b></span></div><div><small>{t.total}</small><b>₩{total.toLocaleString()}</b></div><button onClick={() => setOpen(true)}>{t.view}</button></footer>}
 
-    {detailDish && <div className="sheet-backdrop" onClick={() => setDetailDish(null)}>
-      <section className="dish-detail-sheet" role="dialog" aria-modal="true" aria-label={detailDish.names[lang] || detailDish.names.uz} onClick={(event) => event.stopPropagation()}>
-        <button className="dish-detail-close" aria-label="Yopish" onClick={() => setDetailDish(null)}><X/></button>
-        <div className="dish-detail-image">
-          <Image src={detailDish.image} alt={detailDish.names[lang] || detailDish.names.uz} fill sizes="(max-width: 620px) 100vw, 620px"/>
-          <span>{categoryLabel(detailDish.category)}</span>
+    {detailDish && <div className="image-lightbox-backdrop" onClick={() => setDetailDish(null)}>
+      <section className="image-lightbox" role="dialog" aria-modal="true" aria-label={detailDish.names[lang] || detailDish.names.uz} onClick={(event) => event.stopPropagation()}>
+        <button className="image-lightbox-close" aria-label="Yopish" onClick={() => setDetailDish(null)}><X/></button>
+        <div className="image-lightbox-frame">
+          <Image src={detailDish.image} alt={detailDish.names[lang] || detailDish.names.uz} fill sizes="(max-width: 759px) 96vw, 720px"/>
         </div>
-        <div className="dish-detail-content">
-          <h2>{detailDish.names[lang] || detailDish.names.uz}</h2>
-          <p>{detailDish.descriptions[lang] || detailDish.descriptions.uz || categoryLabel(detailDish.category)}</p>
-          <div className="dish-detail-footer">
-            <strong className="dish-detail-price">₩{detailDish.price.toLocaleString()}</strong>
-            {quantityControl(detailDish)}
-          </div>
+        <div className="image-lightbox-caption">
+          <b>{detailDish.names[lang] || detailDish.names.uz}</b>
+          <span>₩{detailDish.price.toLocaleString()}</span>
         </div>
       </section>
     </div>}
