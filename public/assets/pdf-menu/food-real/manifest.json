@@ -1,0 +1,197 @@
+[
+  {
+    "slug": "lamb-soup",
+    "page": 1,
+    "image": "/assets/pdf-menu/food-real/lamb-soup.webp"
+  },
+  {
+    "slug": "borsh",
+    "page": 1,
+    "image": "/assets/pdf-menu/food-real/borsh.webp"
+  },
+  {
+    "slug": "lagmon-soup",
+    "page": 1,
+    "image": "/assets/pdf-menu/food-real/lagmon-soup.webp"
+  },
+  {
+    "slug": "mastava",
+    "page": 1,
+    "image": "/assets/pdf-menu/food-real/mastava.webp"
+  },
+  {
+    "slug": "dumplings-soup",
+    "page": 1,
+    "image": "/assets/pdf-menu/food-real/dumplings-soup.webp"
+  },
+  {
+    "slug": "kuza-shurpa",
+    "page": 1,
+    "image": "/assets/pdf-menu/food-real/kuza-shurpa.webp"
+  },
+  {
+    "slug": "manti",
+    "page": 2,
+    "image": "/assets/pdf-menu/food-real/manti.webp"
+  },
+  {
+    "slug": "shox-kabob",
+    "page": 2,
+    "image": "/assets/pdf-menu/food-real/shox-kabob.webp"
+  },
+  {
+    "slug": "hanum",
+    "page": 2,
+    "image": "/assets/pdf-menu/food-real/hanum.webp"
+  },
+  {
+    "slug": "norin",
+    "page": 2,
+    "image": "/assets/pdf-menu/food-real/norin.webp"
+  },
+  {
+    "slug": "kazan-kebab",
+    "page": 3,
+    "image": "/assets/pdf-menu/food-real/kazan-kebab.webp"
+  },
+  {
+    "slug": "gulyash",
+    "page": 3,
+    "image": "/assets/pdf-menu/food-real/gulyash.webp"
+  },
+  {
+    "slug": "tandoor-lamb",
+    "page": 3,
+    "image": "/assets/pdf-menu/food-real/tandoor-lamb.webp"
+  },
+  {
+    "slug": "jiz-biz-fries",
+    "page": 3,
+    "image": "/assets/pdf-menu/food-real/jiz-biz-fries.webp"
+  },
+  {
+    "slug": "fried-lagman",
+    "page": 4,
+    "image": "/assets/pdf-menu/food-real/fried-lagman.webp"
+  },
+  {
+    "slug": "beef-cutlet",
+    "page": 4,
+    "image": "/assets/pdf-menu/food-real/beef-cutlet.webp"
+  },
+  {
+    "slug": "golubtsi",
+    "page": 4,
+    "image": "/assets/pdf-menu/food-real/golubtsi.webp"
+  },
+  {
+    "slug": "grilled-chicken",
+    "page": 4,
+    "image": "/assets/pdf-menu/food-real/grilled-chicken.webp"
+  },
+  {
+    "slug": "gardan-kabob",
+    "page": 5,
+    "image": "/assets/pdf-menu/food-real/gardan-kabob.webp"
+  },
+  {
+    "slug": "achiq-gusht",
+    "page": 5,
+    "image": "/assets/pdf-menu/food-real/achiq-gusht.webp"
+  },
+  {
+    "slug": "assorti-plov",
+    "page": 5,
+    "image": "/assets/pdf-menu/food-real/assorti-plov.webp"
+  },
+  {
+    "slug": "assorti-manti",
+    "page": 5,
+    "image": "/assets/pdf-menu/food-real/assorti-manti.webp"
+  },
+  {
+    "slug": "plov",
+    "page": 6,
+    "image": "/assets/pdf-menu/food-real/plov.webp"
+  },
+  {
+    "slug": "qurtob",
+    "page": 6,
+    "image": "/assets/pdf-menu/food-real/qurtob.webp"
+  },
+  {
+    "slug": "jiz-biz-ribs",
+    "page": 6,
+    "image": "/assets/pdf-menu/food-real/jiz-biz-ribs.webp"
+  },
+  {
+    "slug": "olivie",
+    "page": 7,
+    "image": "/assets/pdf-menu/food-real/olivie.webp"
+  },
+  {
+    "slug": "mujskoy",
+    "page": 7,
+    "image": "/assets/pdf-menu/food-real/mujskoy.webp"
+  },
+  {
+    "slug": "smak",
+    "page": 7,
+    "image": "/assets/pdf-menu/food-real/smak.webp"
+  },
+  {
+    "slug": "samarkand",
+    "page": 7,
+    "image": "/assets/pdf-menu/food-real/samarkand.webp"
+  },
+  {
+    "slug": "suzma",
+    "page": 7,
+    "image": "/assets/pdf-menu/food-real/suzma.webp"
+  },
+  {
+    "slug": "okroshka",
+    "page": 7,
+    "image": "/assets/pdf-menu/food-real/okroshka.webp"
+  },
+  {
+    "slug": "fresh-salad",
+    "page": 8,
+    "image": "/assets/pdf-menu/food-real/fresh-salad.webp"
+  },
+  {
+    "slug": "carrot-salad",
+    "page": 8,
+    "image": "/assets/pdf-menu/food-real/carrot-salad.webp"
+  },
+  {
+    "slug": "salted-cabbage",
+    "page": 8,
+    "image": "/assets/pdf-menu/food-real/salted-cabbage.webp"
+  },
+  {
+    "slug": "salted-pickles",
+    "page": 8,
+    "image": "/assets/pdf-menu/food-real/salted-pickles.webp"
+  },
+  {
+    "slug": "salty-assorted",
+    "page": 8,
+    "image": "/assets/pdf-menu/food-real/salty-assorted.webp"
+  },
+  {
+    "slug": "eggs-sausage",
+    "page": 9,
+    "image": "/assets/pdf-menu/food-real/eggs-sausage.webp"
+  },
+  {
+    "slug": "fries",
+    "page": 9,
+    "image": "/assets/pdf-menu/food-real/fries.webp"
+  },
+  {
+    "slug": "cottage-pancake",
+    "page": 9,
+    "image": "/assets/pdf-menu/food-real/cottage-pancake.webp"
+  }
+]
