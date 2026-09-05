@@ -13,9 +13,38 @@ const copy = {
 };
 
 const labels = { uz: "O‘zbekcha", ko: "한국어", ru: "Русский", en: "English" };
-const LOADER_MIN_MS = 1000;
-const LOADER_EXIT_MS = 640;
-const LANGUAGE_LOADER_MS = 1450;
+const LOADER_MIN_MS = 280;
+const LOADER_EXIT_MS = 180;
+const LANGUAGE_LOADER_MS = 360;
+const SPRITE_SLUGS = [
+  "achiq-gusht", "assorti-manti", "assorti-plov", "beef-cutlet", "borsh",
+  "carrot-salad", "cottage-pancake", "dumplings-soup", "eggs-sausage", "fresh-salad",
+  "fried-lagman", "fries", "gardan-kabob", "golubtsi", "grilled-chicken",
+  "gulyash", "hanum", "jiz-biz-fries", "jiz-biz-ribs", "kazan-kebab",
+  "kuza-shurpa", "lagmon-soup", "lamb-soup", "manti", "mastava",
+  "mujskoy", "norin", "okroshka", "olivie", "plov",
+  "qurtob", "salted-cabbage", "salted-pickles", "salty-assorted", "samarkand",
+  "shox-kabob", "smak", "suzma", "tandoor-lamb",
+];
+
+function getSpriteStyle(image) {
+  const slug = image?.match(/\/assets\/pdf-menu\/food\/([^/]+)\.svg$/)?.[1];
+  const index = SPRITE_SLUGS.indexOf(slug);
+  if (index < 0) return null;
+  const col = index % 5;
+  const row = Math.floor(index / 5);
+  return {
+    backgroundImage: "url('/assets/pdf-menu/food-sprite.webp')",
+    backgroundSize: "500% 800%",
+    backgroundPosition: `${col * 25}% ${(row / 7) * 100}%`,
+  };
+}
+
+function DishPhoto({ dish, alt, priority = false }) {
+  const spriteStyle = getSpriteStyle(dish.image);
+  if (spriteStyle) return <div className="dish-sprite" role="img" aria-label={alt} style={spriteStyle} />;
+  return <Image src={dish.image} alt={alt} fill sizes="(max-width: 759px) 110px, 360px" priority={priority} />;
+}
 
 export default function MenuClient() {
   const [dishes, setDishes] = useState([]);
@@ -50,7 +79,7 @@ export default function MenuClient() {
       if (!categoryResponse.ok) throw new Error(categoryData.error || "Category error");
       setCategories(categoryData);
       setCategoriesReady(true);
-      setCategory((current) => current && categoryData.some((item) => item.id === current) ? current : (categoryData[0]?.id || ""));
+      setCategory((current) => current && categoryData.some((item) => item.id === current) ? current : "");
     } catch {
       const fallback = [...new Set(dishData.map((dish) => dish.category))].map((id, index) => ({
         id,
@@ -60,7 +89,7 @@ export default function MenuClient() {
       }));
       setCategories(fallback);
       setCategoriesReady(false);
-      setCategory((current) => current && fallback.some((item) => item.id === current) ? current : (fallback[0]?.id || ""));
+      setCategory((current) => current && fallback.some((item) => item.id === current) ? current : "");
     }
   };
 
@@ -96,6 +125,7 @@ export default function MenuClient() {
     }
 
     const startedAt = Date.now();
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchMenu()
       .catch(() => setError("Menu yuklanmadi"))
       .finally(() => finishLoadingAfterMinimum(startedAt));
@@ -116,14 +146,6 @@ export default function MenuClient() {
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
   }, []);
-
-  useEffect(() => {
-    if (!categories.length) {
-      if (category) setCategory("");
-      return;
-    }
-    if (!category || !categories.some((item) => item.id === category)) setCategory(categories[0].id);
-  }, [categories, category]);
 
   const selectLanguage = (value) => {
     if (!labels[value] || value === lang) return;
@@ -193,7 +215,7 @@ export default function MenuClient() {
 
   return <main className="menu-page">
     <header className="menu-header">
-      <div className="menu-brand"><span className="logo-mark">✦</span><div><b>CHAYKAHANA</b><small>O‘ZBEK TAOMLARI</small></div></div>
+      <div className="menu-brand"><div><b>CHAYKAHANA</b><small>O‘ZBEK TAOMLARI</small></div></div>
       <div className="header-actions">
         <LanguageMenu lang={lang} ariaLabel={t.language} onSelect={selectLanguage} />
         <button aria-label={t.total} onClick={() => setOpen(true)}><Calculator/><span>{t.total}</span>{count > 0 && <em>{count}</em>}</button>
@@ -201,22 +223,15 @@ export default function MenuClient() {
       <div className="menu-search"><MagnifyingGlass/><input aria-label={t.search} placeholder={t.search} value={query} onChange={(event) => setQuery(event.target.value)}/>{query && <button aria-label="Tozalash" onClick={() => setQuery("")}><X/></button>}</div>
     </header>
 
-    <section className="menu-hero" aria-label={`${t.heroMenu} CHAYHANA`}>
-      <div className="menu-hero-pattern" aria-hidden="true" />
-      <div className="menu-hero-logo" aria-hidden="true" />
-      <p>{t.heroMenu}</p>
-      <h1>CHAYHANA</h1>
-      <span>{t.heroSubtitle}</span>
-    </section>
-
     <nav className="category-strip" aria-label="Kategoriyalar">
+      <button className={category === "" ? "active" : ""} onClick={() => setCategory("")}>{t.all}</button>
       {availableCategories.map((item) => <button key={item.id} className={category === item.id ? "active" : ""} onClick={() => setCategory(item.id)}>{item.names[lang] || item.names.uz || item.id}</button>)}
     </nav>
 
     {error ? <section className="menu-empty"><b>!</b><h2>{error}</h2><button onClick={load}>{t.retry}</button></section> : list.length === 0 ? <section className="menu-empty"><MagnifyingGlass/><h2>{emptyMessage}</h2></section> : <section className="dish-grid">
       {list.map((dish, index) => <article className="dish-card" key={dish.id}>
         <button className="dish-card-open" aria-label={`${dish.names[lang] || dish.names.uz} — ₩${dish.price.toLocaleString()}`} onClick={() => setDetailDish(dish)} />
-        <div className="dish-image"><Image src={dish.image} alt={dish.names[lang] || dish.names.uz} fill sizes="(max-width: 759px) 100vw, 540px" priority={index === 0}/><span>{categoryLabel(dish.category)}</span></div>
+        <div className="dish-image"><DishPhoto dish={dish} alt={dish.names[lang] || dish.names.uz} priority={index === 0}/><span>{categoryLabel(dish.category)}</span></div>
         <div className="dish-meta"><div><h2>{dish.names[lang] || dish.names.uz}</h2><small>{dish.descriptions[lang] || dish.descriptions.uz}</small><p>₩{dish.price.toLocaleString()}</p></div>{quantityControl(dish, true)}</div>
       </article>)}
     </section>}
@@ -227,7 +242,7 @@ export default function MenuClient() {
       <section className="dish-detail-sheet" role="dialog" aria-modal="true" aria-label={detailDish.names[lang] || detailDish.names.uz} onClick={(event) => event.stopPropagation()}>
         <button className="dish-detail-close" aria-label="Yopish" onClick={() => setDetailDish(null)}><X/></button>
         <div className="dish-detail-image">
-          <Image src={detailDish.image} alt={detailDish.names[lang] || detailDish.names.uz} fill sizes="(max-width: 620px) 100vw, 620px"/>
+          <DishPhoto dish={detailDish} alt={detailDish.names[lang] || detailDish.names.uz} />
           <span>{categoryLabel(detailDish.category)}</span>
         </div>
         <div className="dish-detail-content">

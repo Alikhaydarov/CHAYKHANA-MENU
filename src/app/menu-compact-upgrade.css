@@ -1,0 +1,547 @@
+/* Compact customer menu upgrade.
+   Keeps the Chayhana identity, removes visual weight, and surfaces only photo, name, price and action. */
+.menu-page {
+  --compact-ink: #152238;
+  --compact-muted: #66758a;
+  --compact-line: rgba(24, 42, 66, .10);
+  --compact-blue: #0b55b6;
+  --compact-gold: #b47b35;
+  background: linear-gradient(180deg, #f7f1e8 0%, #fffcf7 34%, #f8f3eb 100%) !important;
+}
+
+.menu-header {
+  background: rgba(7, 42, 94, .96) !important;
+  box-shadow: 0 8px 26px rgba(4, 25, 58, .16) !important;
+}
+
+.menu-brand {
+  display: grid !important;
+  align-content: center !important;
+  gap: 2px !important;
+}
+
+.menu-brand::before,
+.menu-brand > .logo-mark {
+  display: none !important;
+}
+
+.menu-brand > div {
+  display: block !important;
+}
+
+.menu-brand > div > b {
+  display: block !important;
+  color: #fff7e4 !important;
+  font-weight: 850 !important;
+  letter-spacing: .08em !important;
+}
+
+.menu-brand > div > small {
+  display: block !important;
+  color: rgba(255, 247, 228, .68) !important;
+  font-weight: 800 !important;
+  letter-spacing: .18em !important;
+}
+
+.menu-search {
+  height: 42px !important;
+  border-radius: 12px !important;
+  background: rgba(255, 255, 255, .09) !important;
+}
+
+.menu-hero {
+  min-height: 72px !important;
+  display: grid !important;
+  grid-template-columns: 1fr auto !important;
+  align-items: center !important;
+  justify-items: start !important;
+  gap: 8px !important;
+  padding: 12px max(14px, calc((100% - 1120px) / 2)) !important;
+  background-color: #123d83 !important;
+  background-image:
+    linear-gradient(90deg, rgba(5, 29, 70, .38), rgba(18, 61, 131, .68)),
+    url('/assets/chayhana-pattern-bg.jpg') !important;
+  background-position: center, center !important;
+  background-size: auto, 620px auto !important;
+  box-shadow: inset 0 -1px rgba(255, 255, 255, .08), 0 7px 18px rgba(9, 39, 81, .10) !important;
+}
+
+.menu-hero-logo {
+  display: none !important;
+}
+
+.menu-hero p,
+.menu-hero h1,
+.menu-hero > span {
+  position: relative !important;
+  z-index: 1 !important;
+  display: block !important;
+  margin: 0 !important;
+  color: #fff8e6 !important;
+  filter: none !important;
+  text-shadow: 0 2px 10px rgba(0, 10, 32, .22) !important;
+}
+
+.menu-hero p {
+  grid-column: 1 !important;
+  font-size: 10px !important;
+  line-height: 1 !important;
+  font-weight: 850 !important;
+  letter-spacing: .12em !important;
+  opacity: .72 !important;
+}
+
+.menu-hero h1 {
+  grid-column: 1 !important;
+  font-size: 24px !important;
+  line-height: 1 !important;
+  font-weight: 880 !important;
+  letter-spacing: .04em !important;
+}
+
+.menu-hero > span {
+  grid-column: 2 !important;
+  grid-row: 1 / span 2 !important;
+  align-self: center !important;
+  padding: 7px 10px !important;
+  border: 1px solid rgba(255, 244, 207, .18) !important;
+  border-radius: 999px !important;
+  background: rgba(4, 25, 61, .34) !important;
+  font-size: 10px !important;
+  line-height: 1 !important;
+  font-weight: 800 !important;
+  letter-spacing: .08em !important;
+  white-space: nowrap !important;
+}
+
+.category-strip {
+  height: 50px !important;
+  min-height: 50px !important;
+  gap: 7px !important;
+  padding-top: 7px !important;
+  padding-bottom: 7px !important;
+  background: rgba(255, 253, 248, .96) !important;
+  border-bottom: 1px solid rgba(214, 197, 171, .65) !important;
+  box-shadow: 0 7px 18px rgba(48, 35, 20, .06) !important;
+}
+
+.category-strip button {
+  height: 34px !important;
+  min-height: 34px !important;
+  padding: 0 13px !important;
+  border-radius: 11px !important;
+  border-color: rgba(30, 56, 86, .10) !important;
+  background: #fff !important;
+  color: #33445c !important;
+  font-size: 12px !important;
+  font-weight: 760 !important;
+  box-shadow: none !important;
+}
+
+.category-strip button.active {
+  color: #fffdf7 !important;
+  border-color: #0b55b6 !important;
+  background: #0b55b6 !important;
+  box-shadow: 0 6px 14px rgba(11, 85, 182, .18) !important;
+}
+
+.category-strip button::before,
+.category-strip button::after {
+  display: none !important;
+}
+
+.dish-grid {
+  width: min(1120px, calc(100% - 24px)) !important;
+  margin-top: 12px !important;
+  gap: 12px !important;
+}
+
+.dish-card {
+  border-radius: 16px !important;
+  border: 1px solid var(--compact-line) !important;
+  background: #fffefb !important;
+  box-shadow: 0 10px 24px rgba(42, 31, 20, .075) !important;
+}
+
+.dish-card::before,
+.dish-card::after {
+  display: none !important;
+}
+
+.dish-image {
+  background-color: #f0eadf !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .55) !important;
+}
+
+.dish-sprite {
+  position: absolute;
+  inset: 0;
+  background-repeat: no-repeat;
+  background-color: #f0eadf;
+}
+
+.dish-image > span {
+  display: none !important;
+}
+
+.dish-meta {
+  color: var(--compact-ink) !important;
+  background: transparent !important;
+}
+
+.dish-meta h2 {
+  color: var(--compact-ink) !important;
+  letter-spacing: 0 !important;
+}
+
+.dish-meta small {
+  color: var(--compact-muted) !important;
+}
+
+.dish-meta p {
+  margin: 0 !important;
+  color: var(--compact-gold) !important;
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+  min-height: 0 !important;
+  font-variant-numeric: tabular-nums;
+  box-shadow: none !important;
+}
+
+.dish-card .add,
+.dish-card .stepper {
+  border-radius: 11px !important;
+}
+
+.dish-card .add {
+  background: #0b55b6 !important;
+  border-color: #0b55b6 !important;
+  box-shadow: 0 7px 16px rgba(11, 85, 182, .18) !important;
+}
+
+.dish-card .add::after {
+  display: none !important;
+}
+
+.dish-card .stepper {
+  border-color: rgba(11, 85, 182, .16) !important;
+  background: #eef4fb !important;
+  box-shadow: none !important;
+}
+
+.dish-card .stepper span {
+  background: #0b55b6 !important;
+}
+
+.calc-bar {
+  border-radius: 16px !important;
+  background: rgba(7, 42, 94, .97) !important;
+  box-shadow: 0 16px 34px rgba(4, 25, 58, .25) !important;
+}
+
+.calc-bar > button {
+  background: #fff2d8 !important;
+  color: #0a3674 !important;
+}
+
+@media (max-width: 759px) {
+  .menu-page {
+    padding-bottom: calc(88px + env(safe-area-inset-bottom)) !important;
+  }
+
+  .menu-header {
+    grid-template-columns: 1fr auto !important;
+    gap: 7px 9px !important;
+    min-height: 0 !important;
+    padding: 6px 10px 8px !important;
+  }
+
+  .menu-brand {
+    min-height: 38px !important;
+  }
+
+  .menu-brand > div > b {
+    font-size: 15px !important;
+    line-height: 1 !important;
+  }
+
+  .menu-brand > div > small {
+    margin-top: 4px !important;
+    font-size: 8px !important;
+    line-height: 1 !important;
+  }
+
+  .header-actions {
+    height: 38px !important;
+    gap: 6px !important;
+  }
+
+  .header-actions > button,
+  .language-trigger {
+    width: 38px !important;
+    min-width: 38px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    padding: 0 !important;
+    border-radius: 10px !important;
+  }
+
+  .header-actions > button span,
+  .language-trigger strong,
+  .language-caret {
+    display: none !important;
+  }
+
+  .header-actions em {
+    right: -5px !important;
+    top: -6px !important;
+    width: 20px !important;
+    height: 20px !important;
+    font-size: 11px !important;
+  }
+
+  .menu-search {
+    height: 38px !important;
+    padding: 0 11px !important;
+  }
+
+  .menu-hero {
+    display: none !important;
+  }
+
+  .category-strip {
+    top: 92px !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    border-radius: 0 !important;
+  }
+
+  .dish-grid {
+    width: calc(100% - 16px) !important;
+    max-width: 560px !important;
+    margin-top: 9px !important;
+    gap: 8px !important;
+  }
+
+  .dish-card {
+    display: grid !important;
+    grid-template-columns: 102px minmax(0, 1fr) !important;
+    min-height: 104px !important;
+    border-radius: 14px !important;
+    overflow: hidden !important;
+  }
+
+  .dish-image {
+    grid-column: 1 !important;
+    width: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 6px !important;
+    border-radius: 11px !important;
+  }
+
+  .dish-image::after {
+    display: none !important;
+  }
+
+  .dish-image img {
+    object-fit: cover !important;
+    padding: 0 !important;
+    filter: none !important;
+  }
+
+  .dish-sprite {
+    background-size: 500% 800% !important;
+  }
+
+  .dish-meta {
+    grid-column: 2 !important;
+    min-height: 0 !important;
+    padding: 10px 9px 10px 0 !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    align-items: center !important;
+    gap: 8px !important;
+  }
+
+  .dish-meta > div:first-child {
+    gap: 5px !important;
+  }
+
+  .dish-meta h2 {
+    font-size: 15px !important;
+    line-height: 1.18 !important;
+    font-weight: 820 !important;
+  }
+
+  .dish-meta small {
+    -webkit-line-clamp: 1 !important;
+    font-size: 11px !important;
+    line-height: 1.32 !important;
+  }
+
+  .dish-meta p {
+    font-size: 14px !important;
+    font-weight: 860 !important;
+  }
+
+  .dish-card .add {
+    width: 38px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    padding: 0 !important;
+    font-size: 0 !important;
+  }
+
+  .dish-card .add svg {
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  .dish-card .stepper {
+    width: 92px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+  }
+
+  .dish-card .stepper button,
+  .dish-card .stepper span {
+    width: 30px !important;
+    height: 36px !important;
+  }
+
+  .calc-bar {
+    width: calc(100% - 16px) !important;
+    max-width: 560px !important;
+    bottom: calc(8px + env(safe-area-inset-bottom)) !important;
+    grid-template-columns: 1fr auto auto !important;
+    gap: 10px !important;
+    padding: 8px 9px !important;
+  }
+
+  .calc-bar > div:first-child {
+    min-width: 0 !important;
+  }
+
+  .calc-bar > div:nth-child(2) {
+    text-align: right !important;
+  }
+
+  .calc-bar button {
+    grid-column: auto !important;
+    height: 38px !important;
+    padding: 0 12px !important;
+    border-radius: 11px !important;
+    font-size: 12px !important;
+    white-space: nowrap !important;
+  }
+
+  .dish-detail-image {
+    height: 230px !important;
+  }
+}
+
+@media (min-width: 760px) {
+  .menu-header {
+    padding-top: 12px !important;
+    padding-bottom: 12px !important;
+  }
+
+  .category-strip {
+    top: 118px !important;
+  }
+
+  .dish-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+
+  .dish-card {
+    border-radius: 18px !important;
+  }
+
+  .dish-image {
+    height: 186px !important;
+    margin: 7px 7px 0 !important;
+    border-radius: 13px !important;
+  }
+
+  .dish-image img {
+    object-fit: cover !important;
+    padding: 0 !important;
+    filter: none !important;
+  }
+
+  .dish-sprite {
+    background-size: 500% 800% !important;
+  }
+
+  .dish-meta {
+    min-height: 104px !important;
+    padding: 12px 13px 14px !important;
+    align-items: end !important;
+  }
+
+  .dish-meta h2 {
+    font-size: 17px !important;
+    line-height: 1.18 !important;
+  }
+
+  .dish-meta small {
+    -webkit-line-clamp: 1 !important;
+    font-size: 11.5px !important;
+  }
+
+  .dish-card .add,
+  .dish-card .stepper {
+    height: 39px !important;
+    min-height: 39px !important;
+  }
+
+  .dish-card .add {
+    width: auto !important;
+    min-width: 98px !important;
+    padding: 0 13px !important;
+  }
+
+  .dish-card .stepper {
+    width: 86px !important;
+  }
+}
+
+@media (min-width: 760px) and (max-width: 1040px) {
+  .dish-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .dish-card {
+    grid-template-columns: 92px minmax(0, 1fr) !important;
+  }
+
+  .dish-meta h2 {
+    font-size: 14px !important;
+  }
+
+  .dish-meta small {
+    display: none !important;
+  }
+
+  .calc-bar button {
+    padding: 0 9px !important;
+  }
+}
+
+@media (max-width: 430px) {
+  .calc-bar {
+    grid-template-columns: 1fr auto !important;
+  }
+
+  .calc-bar button {
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+  }
+}
