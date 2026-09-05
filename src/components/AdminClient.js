@@ -105,7 +105,6 @@ export default function AdminClient() {
   }, []);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     load()
       .then(({ dishes, cats }) => {
         if (dishes[0]) {
