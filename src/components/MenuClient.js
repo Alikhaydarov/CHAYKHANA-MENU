@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Calculator, MagnifyingGlass, Minus, Plus, X } from "@phosphor-icons/react";
+import { BowlFood, BowlSteam, Bread, Cake, Calculator, Coffee, CookingPot, ForkKnife, Leaf, MagnifyingGlass, Minus, Plus, X } from "@phosphor-icons/react";
 import LanguageMenu from "./LanguageMenu";
 
 const copy = {
@@ -16,6 +16,25 @@ const labels = { uz: "O‘zbekcha", ko: "한국어", ru: "Русский", en: "
 const LOADER_MIN_MS = 1000;
 const LOADER_EXIT_MS = 640;
 const LANGUAGE_LOADER_MS = 1450;
+
+const categoryIcons = [
+  { match: ["soup", "sho", "shur", "supa", "borsh", "lagmon"], Icon: BowlSteam },
+  { match: ["main", "meal", "asosiy", "taom", "plov", "osh", "manti"], Icon: ForkKnife },
+  { match: ["salad", "salat", "olivie", "fresh"], Icon: Leaf },
+  { match: ["garnish", "garnir", "fries", "kartoshka"], Icon: BowlFood },
+  { match: ["bread", "non"], Icon: Bread },
+  { match: ["drink", "ichim", "tea", "choy", "coffee", "kofe"], Icon: Coffee },
+  { match: ["dessert", "cake", "sweet"], Icon: Cake },
+];
+
+function CategoryIcon({ item }) {
+  const names = Object.values(item.names || {}).join(" ").toLowerCase();
+  const id = String(item.id || "").toLowerCase();
+  const key = `${id} ${names}`;
+  const match = categoryIcons.find(({ match }) => match.some((value) => key.includes(value)));
+  const Icon = match?.Icon || CookingPot;
+  return <Icon aria-hidden="true" weight="duotone" />;
+}
 
 export default function MenuClient() {
   const [dishes, setDishes] = useState([]);
@@ -96,6 +115,7 @@ export default function MenuClient() {
     }
 
     const startedAt = Date.now();
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchMenu()
       .catch(() => setError("Menu yuklanmadi"))
       .finally(() => finishLoadingAfterMinimum(startedAt));
@@ -119,6 +139,7 @@ export default function MenuClient() {
 
   useEffect(() => {
     if (!categories.length) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       if (category) setCategory("");
       return;
     }
@@ -210,7 +231,7 @@ export default function MenuClient() {
     </section>
 
     <nav className="category-strip" aria-label="Kategoriyalar">
-      {availableCategories.map((item) => <button key={item.id} className={category === item.id ? "active" : ""} onClick={() => setCategory(item.id)}>{item.names[lang] || item.names.uz || item.id}</button>)}
+      {availableCategories.map((item) => <button key={item.id} className={category === item.id ? "active" : ""} onClick={() => setCategory(item.id)}><CategoryIcon item={item} /><span>{item.names[lang] || item.names.uz || item.id}</span></button>)}
     </nav>
 
     {error ? <section className="menu-empty"><b>!</b><h2>{error}</h2><button onClick={load}>{t.retry}</button></section> : list.length === 0 ? <section className="menu-empty"><MagnifyingGlass/><h2>{emptyMessage}</h2></section> : <section className="dish-grid">

@@ -1,0 +1,92 @@
+/* Focused public-menu polish: calmer hero logo and useful category icons. */
+.category-strip button {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+}
+
+.category-strip button::before,
+.category-strip button::after {
+  display: none !important;
+}
+
+.category-strip button svg {
+  flex: 0 0 auto !important;
+  width: 18px !important;
+  height: 18px !important;
+  color: #9b6a2d !important;
+}
+
+.category-strip button span {
+  display: block !important;
+  line-height: 1 !important;
+}
+
+.category-strip button.active svg {
+  color: #ffe3ae !important;
+}
+
+@media (max-width: 759px) {
+  .menu-hero {
+    min-height: 136px !important;
+    padding: 14px 16px 22px !important;
+    display: grid !important;
+    place-items: center !important;
+    background-position: center, center 40% !important;
+    background-size: auto, 620px auto !important;
+    box-shadow:
+      inset 0 -18px 34px rgba(2, 18, 44, .18),
+      0 12px 26px rgba(6, 38, 88, .14) !important;
+  }
+
+  .menu-hero::after {
+    display: none !important;
+  }
+
+  .menu-hero-logo {
+    width: 116px !important;
+    height: 101px !important;
+    margin: -2px 0 0 !important;
+    filter:
+      drop-shadow(0 8px 16px rgba(0, 17, 46, .20))
+      drop-shadow(0 0 1px rgba(255, 248, 226, .32)) !important;
+  }
+
+  .category-strip {
+    min-height: 58px !important;
+    margin-top: -10px !important;
+    padding: 8px !important;
+    gap: 7px !important;
+    border-radius: 16px !important;
+  }
+
+  .category-strip button {
+    gap: 7px !important;
+    height: 42px !important;
+    min-height: 42px !important;
+    padding: 0 13px 0 10px !important;
+    border-radius: 13px !important;
+    font-size: 12px !important;
+    white-space: nowrap !important;
+  }
+
+}
+
+@media (max-width: 390px) {
+  .menu-hero {
+    min-height: 128px !important;
+    background-size: auto, 580px auto !important;
+  }
+
+  .menu-hero-logo {
+    width: 106px !important;
+    height: 92px !important;
+  }
+
+  .category-strip button {
+    height: 40px !important;
+    min-height: 40px !important;
+    padding-right: 12px !important;
+  }
+}
