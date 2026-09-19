@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="CHAYHANA dish image placeholder">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f7f0e2"/>
+      <stop offset="1" stop-color="#eee5d4"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <circle cx="600" cy="370" r="122" fill="#174484" opacity=".08"/>
+  <path d="M475 442h250c-16 74-64 112-125 112s-109-38-125-112Z" fill="#174484" opacity=".18"/>
+  <path d="M520 416c20-60 55-92 80-92s60 32 80 92" fill="none" stroke="#174484" stroke-width="22" stroke-linecap="round" opacity=".28"/>
+  <text x="600" y="650" text-anchor="middle" fill="#174484" font-family="Arial, sans-serif" font-size="42" font-weight="700" opacity=".64">CHAYHANA</text>
+</svg>
