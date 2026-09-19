@@ -47,10 +47,10 @@
   height: auto !important;
   aspect-ratio: 463 / 401 !important;
   margin: 0 !important;
-  background: #d7aa4f !important;
-  -webkit-mask: url('/assets/chayhana-logo.svg') center / contain no-repeat !important;
-  mask: url('/assets/chayhana-logo.svg') center / contain no-repeat !important;
-  filter: drop-shadow(0 8px 16px rgba(74,45,7,.18)) !important;
+  background: url('/assets/chayhana-logo.svg') center / contain no-repeat !important;
+  -webkit-mask: none !important;
+  mask: none !important;
+  filter: none !important;
   transform: none !important;
 }
 
