@@ -62,9 +62,15 @@
 }
 
 .category-strip button {
-  color: #59677a !important;
-  background: #f3ede1 !important;
-  border-color: rgba(16,55,112,.08) !important;
+  flex: 0 0 auto !important;
+  white-space: nowrap !important;
+  color: #31435a !important;
+  background: #fffaf2 !important;
+  border-color: rgba(14,61,131,.12) !important;
+  font-weight: 750 !important;
+  letter-spacing: -.012em !important;
+  line-height: 1 !important;
+  text-shadow: none !important;
 }
 
 .category-strip button svg {
@@ -72,10 +78,12 @@
 }
 
 .category-strip button.active {
-  color: #fff7df !important;
+  color: #fff9e9 !important;
   background: linear-gradient(180deg, #1d58a5, #0e3d83) !important;
   border-color: #0e3d83 !important;
+  font-weight: 800 !important;
   box-shadow: 0 6px 14px rgba(14,61,131,.20) !important;
+  text-shadow: 0 1px 1px rgba(3,26,64,.18) !important;
 }
 
 .category-strip button.active svg {
@@ -194,11 +202,26 @@
   }
 
   .category-strip button {
-    min-height: 40px !important;
-    height: 40px !important;
-    padding: 0 12px 0 10px !important;
+    min-height: 42px !important;
+    height: 42px !important;
+    padding: 0 15px 0 12px !important;
     border-radius: 12px !important;
-    font-size: 12px !important;
+    font-size: 13.5px !important;
+    font-weight: 750 !important;
+    gap: 8px !important;
+  }
+
+  .category-strip button span {
+    display: inline-block !important;
+    white-space: nowrap !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    line-height: 1.05 !important;
+  }
+
+  .category-strip button svg {
+    width: 18px !important;
+    height: 18px !important;
   }
 
   .dish-grid {
