@@ -93,7 +93,7 @@
 .dish-image-media img {
   opacity: 0 !important;
   transform: scale(1.025) !important;
-  transition: opacity .32s ease, transform .42s cubic-bezier(.22,.72,.2,1) !important;
+  transition: opacity .14s ease-out, transform .18s cubic-bezier(.22,.72,.2,1) !important;
 }
 
 .dish-image-media.is-loaded img {
@@ -113,7 +113,7 @@
     #ece6dc;
   background-size: 220% 100%, auto;
   animation: brandShimmer 1.05s linear infinite;
-  transition: opacity .22s ease;
+  transition: opacity .1s ease-out;
 }
 
 .dish-image-media.is-loaded .dish-image-shimmer {
