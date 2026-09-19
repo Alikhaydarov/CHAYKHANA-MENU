@@ -88,6 +88,27 @@ export async function listDishes(admin = false) {
   return publicDishes.filter((dish) => visibleCategoryIds.has(dish.category));
 }
 
+export async function listPublicMenu() {
+  const database = getDb();
+  const [dishResult, categoryResult] = await Promise.all([
+    database.from("dishes").select("*").eq("visible", true).order("position").order("id"),
+    database.from("categories").select("*").eq("visible", true).order("position").order("created_at"),
+  ]);
+
+  if (dishResult.error) throw dishResult.error;
+  if (categoryResult.error) throw categoryResult.error;
+
+  const categories = categoryResult.data
+    .map(mapCategory)
+    .filter((category) => !isCategoryPlaceholder(category));
+  const visibleCategoryIds = new Set(categories.map((category) => category.id));
+  const dishes = dishResult.data
+    .map(mapDish)
+    .filter((dish) => !isDishPlaceholder(dish) && visibleCategoryIds.has(dish.category));
+
+  return { dishes, categories };
+}
+
 export async function listCategories(admin = false) {
   let query = getDb().from("categories").select("*").order("position").order("created_at");
   if (!admin) query = query.eq("visible", true);

@@ -25,6 +25,7 @@ import "./classic-menu-refine.css";
 import "./mobile-premium-v4.css";
 import "./mobile-logo-category.css";
 import "./image-lightbox.css";
+import "./brand-2004.css";
 const inter=Inter({subsets:["latin"],variable:"--font-inter"});
-export const metadata={title:"CHAYKAHANA",description:"O‘zbek taomlari menyusi"};
+export const metadata={title:"CHAYHANA",description:"O‘zbek taomlari menyusi"};
 export default function RootLayout({children}){return <html lang="uz"><body className={inter.variable}>{children}</body></html>}

@@ -13,9 +13,9 @@ const copy = {
 };
 
 const labels = { uz: "O‘zbekcha", ko: "한국어", ru: "Русский", en: "English" };
-const LOADER_MIN_MS = 1000;
-const LOADER_EXIT_MS = 640;
-const LANGUAGE_LOADER_MS = 1450;
+const LOADER_MIN_MS = 380;
+const LOADER_EXIT_MS = 240;
+const LANGUAGE_LOADER_MS = 620;
 
 const categoryIcons = [
   { match: ["soup", "sho", "shur", "supa", "borsh", "lagmon"], Icon: BowlSteam },
@@ -36,6 +36,23 @@ function CategoryIcon({ item }) {
   return <Icon aria-hidden="true" weight="duotone" />;
 }
 
+function DishPhoto({ dish, alt, priority = false }) {
+  const [loaded, setLoaded] = useState(false);
+  return <div className={`dish-image-media${loaded ? " is-loaded" : ""}`}>
+    <span className="dish-image-shimmer" aria-hidden="true" />
+    <Image
+      src={dish.image}
+      alt={alt}
+      fill
+      sizes="(max-width: 759px) calc(100vw - 30px), 540px"
+      priority={priority}
+      fetchPriority={priority ? "high" : "auto"}
+      loading={priority ? "eager" : "lazy"}
+      onLoad={() => setLoaded(true)}
+    />
+  </div>;
+}
+
 export default function MenuClient() {
   const [dishes, setDishes] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -54,33 +71,30 @@ export default function MenuClient() {
   const loaderCloseTimerRef = useRef(null);
 
   const fetchMenu = async () => {
-    const dishRequest = fetch("/api/dishes", { cache: "no-store" });
-    const categoryRequest = fetch("/api/categories", { cache: "no-store" }).catch(() => null);
+    const response = await fetch("/api/menu");
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || "Server error");
 
-    const dishResponse = await dishRequest;
-    const dishData = await dishResponse.json();
-    if (!dishResponse.ok) throw new Error(dishData.error || "Server error");
+    const dishData = Array.isArray(data.dishes) ? data.dishes : [];
+    const categoryData = Array.isArray(data.categories) ? data.categories : [];
     setDishes(dishData);
 
-    try {
-      const categoryResponse = await categoryRequest;
-      if (!categoryResponse) throw new Error("Category error");
-      const categoryData = await categoryResponse.json();
-      if (!categoryResponse.ok) throw new Error(categoryData.error || "Category error");
+    if (categoryData.length) {
       setCategories(categoryData);
       setCategoriesReady(true);
-      setCategory((current) => current && categoryData.some((item) => item.id === current) ? current : (categoryData[0]?.id || ""));
-    } catch {
-      const fallback = [...new Set(dishData.map((dish) => dish.category))].map((id, index) => ({
-        id,
-        names: { uz: id, ko: "", ru: "", en: "" },
-        visible: true,
-        position: index,
-      }));
-      setCategories(fallback);
-      setCategoriesReady(false);
-      setCategory((current) => current && fallback.some((item) => item.id === current) ? current : (fallback[0]?.id || ""));
+      setCategory((current) => current && categoryData.some((item) => item.id === current) ? current : categoryData[0].id);
+      return;
     }
+
+    const fallback = [...new Set(dishData.map((dish) => dish.category))].map((id, index) => ({
+      id,
+      names: { uz: id, ko: "", ru: "", en: "" },
+      visible: true,
+      position: index,
+    }));
+    setCategories(fallback);
+    setCategoriesReady(false);
+    setCategory((current) => current && fallback.some((item) => item.id === current) ? current : (fallback[0]?.id || ""));
   };
 
   const finishLoadingAfterMinimum = (startedAt) => {
@@ -237,7 +251,7 @@ export default function MenuClient() {
     {error ? <section className="menu-empty"><b>!</b><h2>{error}</h2><button onClick={load}>{t.retry}</button></section> : list.length === 0 ? <section className="menu-empty"><MagnifyingGlass/><h2>{emptyMessage}</h2></section> : <section className="dish-grid">
       {list.map((dish, index) => <article className="dish-card" key={dish.id}>
         <button className="dish-card-open" aria-label={`Rasmni ochish: ${dish.names[lang] || dish.names.uz}`} onClick={() => setDetailDish(dish)} />
-        <div className="dish-image"><Image src={dish.image} alt={dish.names[lang] || dish.names.uz} fill sizes="(max-width: 759px) 100vw, 540px" priority={index === 0}/><span>{categoryLabel(dish.category)}</span></div>
+        <div className="dish-image"><DishPhoto dish={dish} alt={dish.names[lang] || dish.names.uz} priority={index < 2}/><span>{categoryLabel(dish.category)}</span></div>
         <div className="dish-meta"><div><h2>{dish.names[lang] || dish.names.uz}</h2><small>{dish.descriptions[lang] || dish.descriptions.uz}</small><p>₩{dish.price.toLocaleString()}</p></div>{quantityControl(dish, true)}</div>
       </article>)}
     </section>}
