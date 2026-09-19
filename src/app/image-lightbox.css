@@ -6,8 +6,9 @@
   align-items: center;
   justify-content: center;
   padding: max(18px, env(safe-area-inset-top)) 12px max(18px, env(safe-area-inset-bottom));
-  background: rgba(3, 15, 35, .72);
-  backdrop-filter: blur(10px) saturate(1.05);
+  background: rgba(3, 15, 35, .76);
+  backdrop-filter: none;
+  animation: imageLightboxBackdropIn .14s ease-out both;
 }
 
 .image-lightbox {
@@ -15,6 +16,8 @@
   width: min(720px, 100%);
   display: grid;
   gap: 10px;
+  animation: imageLightboxIn .16s cubic-bezier(.22,.72,.2,1) both;
+  will-change: transform, opacity;
 }
 
 .image-lightbox-frame {
@@ -131,4 +134,20 @@
     padding: 7px 9px;
     font-size: 13px;
   }
+}
+
+
+@keyframes imageLightboxBackdropIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes imageLightboxIn {
+  from { opacity: 0; transform: scale(.985); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .image-lightbox-backdrop,
+  .image-lightbox { animation: none !important; }
 }
