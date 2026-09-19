@@ -16,16 +16,22 @@
 }
 
 .menu-hero {
-  min-height: 178px !important;
-  padding: 12px 16px !important;
+  position: relative !important;
+  overflow: hidden !important;
+  min-height: 206px !important;
+  padding: 16px !important;
   display: grid !important;
   place-items: center !important;
-  background:
-    linear-gradient(180deg, rgba(7,39,96,.05), rgba(5,31,78,.15)),
-    url('/assets/chayhana-pattern-bg.jpg') center / 720px auto repeat !important;
-  box-shadow: inset 0 -1px rgba(255,244,207,.12) !important;
+  background-color: #21488d !important;
+  background-image: url('/assets/chayhana-pattern-reference.webp') !important;
+  background-repeat: repeat !important;
+  background-position: center center !important;
+  background-size: 720px auto !important;
+  box-shadow: none !important;
 }
 
+.menu-hero::before,
+.menu-hero::after,
 .menu-hero-pattern,
 .menu-hero h1,
 .menu-hero p,
@@ -36,12 +42,13 @@
 .menu-hero-logo {
   position: relative !important;
   z-index: 1 !important;
-  width: 188px !important;
-  aspect-ratio: 463 / 401;
+  width: 190px !important;
   height: auto !important;
+  aspect-ratio: 463 / 401 !important;
   margin: 0 !important;
   background: url('/assets/chayhana-logo.svg') center / contain no-repeat !important;
-  filter: drop-shadow(0 10px 18px rgba(0,18,55,.18)) !important;
+  filter: none !important;
+  transform: none !important;
 }
 
 .category-strip {
@@ -161,15 +168,17 @@
   }
 
   .menu-hero {
-    min-height: 146px !important;
-    padding: 10px 14px 18px !important;
-    background-size: auto, 610px auto !important;
-    box-shadow: inset 0 -10px 24px rgba(3,24,63,.10) !important;
+    min-height: 168px !important;
+    padding: 12px !important;
+    background-position: center center !important;
+    background-size: 520px auto !important;
+    box-shadow: none !important;
   }
 
   .menu-hero-logo {
-    width: 132px !important;
+    width: 154px !important;
     height: auto !important;
+    aspect-ratio: 463 / 401 !important;
     margin: 0 !important;
   }
 
@@ -223,8 +232,11 @@
 }
 
 @media (max-width: 390px) {
-  .menu-hero { min-height: 138px !important; background-size: auto, 570px auto !important; }
-  .menu-hero-logo { width: 124px !important; }
+  .menu-hero {
+    min-height: 160px !important;
+    background-size: 490px auto !important;
+  }
+  .menu-hero-logo { width: 146px !important; }
 }
 
 @media (prefers-reduced-motion: reduce) {

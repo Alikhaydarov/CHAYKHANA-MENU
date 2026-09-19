@@ -1,63 +1,45 @@
-/* Fast CHAYHANA EST.2004 brand loader.
-   Full lockup stays still; only opacity/soft focus transitions animate. */
+/* Loader based on the supplied CHAYHANA EST.2004 reference.
+   Pattern and logo keep their original aspect ratios; nothing is stretched. */
 .loader {
   position: fixed;
   inset: 0;
   z-index: 100;
   isolation: isolate;
   overflow: hidden;
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 18px !important;
-  padding: 22px !important;
-  background: #184486 !important;
-  animation: brandLoaderIn .38s cubic-bezier(.22,.72,.2,1) both;
+  display: grid !important;
+  place-items: center !important;
+  padding: 20px !important;
+  background-color: #21488d !important;
+  background-image: url('/assets/chayhana-pattern-reference.webp') !important;
+  background-repeat: repeat !important;
+  background-position: center center !important;
+  background-size: 720px auto !important;
+  animation: referenceLoaderIn .28s ease-out both;
 }
 
-.loader::before {
-  content: "";
-  position: absolute;
-  z-index: -2;
-  inset: -2%;
-  background:
-    linear-gradient(180deg, rgba(7,39,96,.08), rgba(5,31,78,.18)),
-    url('/assets/chayhana-pattern-bg.jpg') center / 680px auto repeat;
-  opacity: 0;
-  transform: scale(1.025);
-  animation: brandPatternIn .46s cubic-bezier(.22,.72,.2,1) both;
-}
-
-.loader::after {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(circle at 50% 47%, rgba(255,247,218,.08), transparent 38%);
-}
-
+.loader::before,
+.loader::after,
 .loader > b,
+.loader > span,
 .loader .loader-mark {
   display: none !important;
 }
 
 .loader .loader-orbit {
-  position: relative;
-  z-index: 1;
-  width: clamp(190px, 27vw, 250px) !important;
-  aspect-ratio: 463 / 401;
+  position: relative !important;
+  z-index: 1 !important;
+  width: clamp(190px, 25vw, 242px) !important;
   height: auto !important;
+  aspect-ratio: 463 / 401 !important;
   margin: 0 !important;
   padding: 0 !important;
   border: 0 !important;
   border-radius: 0 !important;
   background: url('/assets/chayhana-logo.svg') center / contain no-repeat !important;
   box-shadow: none !important;
+  filter: none !important;
   transform: none !important;
-  filter: drop-shadow(0 12px 22px rgba(0,18,55,.18));
-  animation: brandLogoIn .42s cubic-bezier(.22,.72,.2,1) .04s both !important;
+  animation: referenceLogoIn .32s ease-out both !important;
 }
 
 .loader .loader-orbit::before,
@@ -65,102 +47,76 @@
   display: none !important;
 }
 
-.loader > span {
-  position: relative;
-  z-index: 1;
-  width: min(88vw, 520px) !important;
-  margin: 0 !important;
-  padding: 0 12px !important;
-  color: #fff5d8 !important;
-  font-size: clamp(24px, 4.4vw, 32px) !important;
-  line-height: 1.12 !important;
-  font-weight: 780 !important;
-  letter-spacing: -.03em !important;
-  text-align: center !important;
-  text-wrap: balance;
-  text-shadow: 0 6px 18px rgba(0,17,51,.2);
-  animation: brandCopyIn .4s cubic-bezier(.22,.72,.2,1) .08s both;
-}
-
-html[lang="ru"] .loader > span {
-  font-size: clamp(21px, 3.8vw, 28px) !important;
-}
-html[lang="ko"] .loader > span {
-  letter-spacing: -.018em !important;
-}
-
 .loader.loader-closing {
-  animation: brandLoaderOut .24s ease-out both;
+  animation: referenceLoaderOut .24s ease-in both;
 }
-.loader.loader-closing::before {
-  animation: brandPatternOut .24s ease-out both;
-}
+
 .loader.loader-closing .loader-orbit {
-  animation: brandLogoOut .22s ease-out both !important;
-}
-.loader.loader-closing > span {
-  animation: brandCopyOut .2s ease-out both;
+  animation: referenceLogoOut .2s ease-in both !important;
 }
 
 .language-transition-loader {
-  animation: languageBrandScene .62s cubic-bezier(.22,.72,.2,1) both;
+  animation: referenceLanguageScene .62s ease-in-out both;
 }
-.language-transition-loader::before {
-  animation: languageBrandPattern .62s cubic-bezier(.22,.72,.2,1) both;
-}
+
 .language-transition-loader .loader-orbit {
-  animation: languageBrandLogo .62s cubic-bezier(.22,.72,.2,1) both !important;
-}
-.language-transition-loader > span {
-  animation: languageBrandCopy .62s cubic-bezier(.22,.72,.2,1) both;
+  animation: referenceLanguageLogo .62s ease-in-out both !important;
 }
 
-@keyframes brandLoaderIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes brandPatternIn {
-  from { opacity: 0; transform: scale(1.025); }
-  to { opacity: 1; transform: scale(1); }
+@keyframes referenceLoaderIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
-@keyframes brandLogoIn {
-  from { opacity: 0; filter: blur(4px) drop-shadow(0 8px 14px rgba(0,18,55,.08)); }
-  to { opacity: 1; filter: blur(0) drop-shadow(0 12px 22px rgba(0,18,55,.18)); }
-}
-@keyframes brandCopyIn {
-  from { opacity: 0; transform: translateY(5px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes brandLoaderOut { from { opacity: 1; } to { opacity: 0; } }
-@keyframes brandPatternOut { from { opacity: 1; transform: scale(1); } to { opacity: 0; transform: scale(1.018); } }
-@keyframes brandLogoOut { from { opacity: 1; } to { opacity: 0; } }
-@keyframes brandCopyOut { from { opacity: 1; } to { opacity: 0; } }
 
-@keyframes languageBrandScene {
+@keyframes referenceLogoIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes referenceLoaderOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes referenceLogoOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes referenceLanguageScene {
   0%, 100% { opacity: 0; }
-  22%, 72% { opacity: 1; }
+  20%, 76% { opacity: 1; }
 }
-@keyframes languageBrandPattern {
-  0%, 100% { opacity: 0; transform: scale(1.02); }
-  24%, 72% { opacity: 1; transform: scale(1); }
-}
-@keyframes languageBrandLogo {
-  0%, 100% { opacity: 0; filter: blur(3px); }
-  26%, 72% { opacity: 1; filter: blur(0) drop-shadow(0 12px 22px rgba(0,18,55,.18)); }
-}
-@keyframes languageBrandCopy {
-  0%, 100% { opacity: 0; transform: translateY(4px); }
-  29%, 72% { opacity: 1; transform: translateY(0); }
+
+@keyframes referenceLanguageLogo {
+  0%, 100% { opacity: 0; }
+  24%, 74% { opacity: 1; }
 }
 
 @media (max-width: 640px) {
-  .loader { gap: 14px !important; padding: 16px !important; }
-  .loader::before { background-size: 610px auto; }
-  .loader .loader-orbit { width: clamp(178px, 52vw, 220px) !important; }
-  .loader > span { font-size: clamp(23px, 7vw, 30px) !important; }
-  html[lang="ru"] .loader > span { font-size: clamp(20px, 5.7vw, 26px) !important; }
+  .loader {
+    padding: 16px !important;
+    background-size: 520px auto !important;
+  }
+
+  .loader .loader-orbit {
+    width: clamp(176px, 48vw, 206px) !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .loader {
+    background-size: 490px auto !important;
+  }
+
+  .loader .loader-orbit {
+    width: clamp(166px, 46vw, 192px) !important;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .loader,
-  .loader::before,
-  .loader .loader-orbit,
-  .loader > span { animation: none !important; }
+  .loader .loader-orbit {
+    animation: none !important;
+  }
 }
