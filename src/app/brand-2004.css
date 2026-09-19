@@ -22,17 +22,13 @@
   padding: 16px !important;
   display: grid !important;
   place-items: center !important;
-  background-color: #b88636 !important;
-  background-image:
-    linear-gradient(180deg, rgba(255,236,178,.10), rgba(101,58,10,.16)),
-    url('/assets/chayhana-pattern-reference.webp') !important;
-  background-repeat: no-repeat, repeat !important;
-  background-position: center, center center !important;
-  background-size: auto, 720px auto !important;
-  background-blend-mode: soft-light, luminosity !important;
-  box-shadow:
-    inset 0 1px rgba(255,244,205,.20),
-    inset 0 -1px rgba(91,54,12,.16) !important;
+  background-color: #21488d !important;
+  background-image: url('/assets/chayhana-pattern-reference.webp') !important;
+  background-repeat: repeat !important;
+  background-position: center center !important;
+  background-size: 720px auto !important;
+  background-blend-mode: normal !important;
+  box-shadow: none !important;
 }
 
 .menu-hero::before,
@@ -51,8 +47,10 @@
   height: auto !important;
   aspect-ratio: 463 / 401 !important;
   margin: 0 !important;
-  background: url('/assets/chayhana-logo.svg') center / contain no-repeat !important;
-  filter: none !important;
+  background: #d7aa4f !important;
+  -webkit-mask: url('/assets/chayhana-logo.svg') center / contain no-repeat !important;
+  mask: url('/assets/chayhana-logo.svg') center / contain no-repeat !important;
+  filter: drop-shadow(0 8px 16px rgba(74,45,7,.18)) !important;
   transform: none !important;
 }
 
@@ -175,8 +173,8 @@
   .menu-hero {
     min-height: 168px !important;
     padding: 12px !important;
-    background-position: center, center center !important;
-    background-size: auto, 520px auto !important;
+    background-position: center center !important;
+    background-size: 520px auto !important;
   }
 
   .menu-hero-logo {
@@ -238,7 +236,7 @@
 @media (max-width: 390px) {
   .menu-hero {
     min-height: 160px !important;
-    background-size: auto, 490px auto !important;
+    background-size: 490px auto !important;
   }
   .menu-hero-logo { width: 146px !important; }
 }
