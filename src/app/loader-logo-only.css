@@ -11,9 +11,9 @@
   padding: 20px !important;
   background-color: #21488d !important;
   background-image: url('/assets/chayhana-pattern-reference.webp') !important;
-  background-repeat: repeat !important;
+  background-repeat: no-repeat !important;
   background-position: center center !important;
-  background-size: 720px auto !important;
+  background-size: cover !important;
   animation: referenceLoaderIn .28s ease-out both;
 }
 
@@ -96,7 +96,7 @@
 @media (max-width: 640px) {
   .loader {
     padding: 16px !important;
-    background-size: 520px auto !important;
+    background-size: cover !important;
   }
 
   .loader .loader-orbit {
@@ -106,7 +106,7 @@
 
 @media (max-width: 390px) {
   .loader {
-    background-size: 490px auto !important;
+    background-size: cover !important;
   }
 
   .loader .loader-orbit {

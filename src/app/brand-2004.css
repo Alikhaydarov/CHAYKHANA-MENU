@@ -18,7 +18,7 @@
 .menu-hero {
   position: relative !important;
   overflow: hidden !important;
-  min-height: 206px !important;
+  min-height: 191px !important;
   padding: 16px !important;
   display: grid !important;
   place-items: center !important;
@@ -168,7 +168,7 @@
   }
 
   .menu-hero {
-    min-height: 168px !important;
+    min-height: 153px !important;
     padding: 12px !important;
     background-position: center center !important;
     background-size: 520px auto !important;
@@ -233,7 +233,7 @@
 
 @media (max-width: 390px) {
   .menu-hero {
-    min-height: 160px !important;
+    min-height: 145px !important;
     background-size: 490px auto !important;
   }
   .menu-hero-logo { width: 146px !important; }
