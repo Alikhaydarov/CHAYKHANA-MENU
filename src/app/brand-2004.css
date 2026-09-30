@@ -235,8 +235,8 @@
   }
 
   .dish-image {
-    height: clamp(172px, 46vw, 205px) !important;
-    min-height: 172px !important;
+    height: clamp(210px, 58vw, 255px) !important;
+    min-height: 210px !important;
     margin: 5px !important;
     border-radius: 17px !important;
   }

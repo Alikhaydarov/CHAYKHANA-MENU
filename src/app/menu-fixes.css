@@ -13,7 +13,7 @@
 .dish-card-open {
   position: absolute;
   inset: 0;
-  z-index: 1;
+  z-index: 4;
   border: 0;
   border-radius: inherit;
   background: transparent;
@@ -29,7 +29,7 @@
 .dish-card .stepper,
 .dish-card .stepper button {
   position: relative;
-  z-index: 2;
+  z-index: 5;
 }
 
 .dish-detail-sheet {
