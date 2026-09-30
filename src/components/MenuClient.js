@@ -19,7 +19,7 @@ const LANGUAGE_LOADER_MS = 620;
 
 const categoryIcons = [
   { match: ["soup", "sho", "shur", "supa", "borsh", "lagmon"], Icon: BowlSteam },
-  { match: ["main", "meal", "asosiy", "taom", "plov", "osh", "manti"], Icon: ForkKnife },
+  { match: ["main", "meal", "asosiy", "taom", "plov", "osh", "manti", "kebab", "kabob", "shash"], Icon: ForkKnife },
   { match: ["salad", "salat", "olivie", "fresh"], Icon: Leaf },
   { match: ["garnish", "garnir", "fries", "kartoshka"], Icon: BowlFood },
   { match: ["bread", "non"], Icon: Bread },
@@ -36,13 +36,8 @@ function CategoryIcon({ item }) {
   return <Icon aria-hidden="true" weight="duotone" />;
 }
 
-function isDirectMenuAsset(src) {
-  return typeof src === "string" && src.startsWith("/assets/");
-}
-
 function DishPhoto({ dish, alt, priority = false }) {
   const [loaded, setLoaded] = useState(false);
-  const direct = isDirectMenuAsset(dish.image);
 
   return <div className={`dish-image-media${loaded ? " is-loaded" : ""}`}>
     <span className="dish-image-shimmer" aria-hidden="true" />
@@ -54,7 +49,6 @@ function DishPhoto({ dish, alt, priority = false }) {
       priority={priority}
       fetchPriority={priority ? "high" : "auto"}
       loading={priority ? "eager" : "lazy"}
-      unoptimized={direct}
       decoding="async"
       onLoad={() => setLoaded(true)}
     />
@@ -277,7 +271,6 @@ export default function MenuClient() {
             sizes="(max-width: 759px) 96vw, 720px"
             priority
             fetchPriority="high"
-            unoptimized={isDirectMenuAsset(detailDish.image)}
             decoding="async"
           />
         </div>

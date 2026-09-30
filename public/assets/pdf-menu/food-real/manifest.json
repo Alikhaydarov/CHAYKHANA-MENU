@@ -1,0 +1,352 @@
+[
+  {
+    "slug": "jiz-biz-fries",
+    "page": 1,
+    "image": "/assets/pdf-menu/food-real/jiz-biz-fries.webp",
+    "width": 1050,
+    "height": 1400
+  },
+  {
+    "slug": "lamb-soup",
+    "page": 1,
+    "image": "/assets/pdf-menu/food-real/lamb-soup.webp",
+    "width": 1050,
+    "height": 1400
+  },
+  {
+    "slug": "borsh",
+    "page": 1,
+    "image": "/assets/pdf-menu/food-real/borsh.webp",
+    "width": 1050,
+    "height": 1400
+  },
+  {
+    "slug": "mastava",
+    "page": 1,
+    "image": "/assets/pdf-menu/food-real/mastava.webp",
+    "width": 1050,
+    "height": 1400
+  },
+  {
+    "slug": "lagmon-soup",
+    "page": 1,
+    "image": "/assets/pdf-menu/food-real/lagmon-soup.webp",
+    "width": 1050,
+    "height": 1400
+  },
+  {
+    "slug": "dumplings-soup",
+    "page": 1,
+    "image": "/assets/pdf-menu/food-real/dumplings-soup.webp",
+    "width": 1050,
+    "height": 1400
+  },
+  {
+    "slug": "kuza-shurpa",
+    "page": 1,
+    "image": "/assets/pdf-menu/food-real/kuza-shurpa.webp",
+    "width": 1050,
+    "height": 1400
+  },
+  {
+    "slug": "golubtsi",
+    "page": 1,
+    "image": "/assets/pdf-menu/food-real/golubtsi.webp",
+    "width": 908,
+    "height": 1210
+  },
+  {
+    "slug": "tandoor-lamb",
+    "page": 1,
+    "image": "/assets/pdf-menu/food-real/tandoor-lamb.webp",
+    "width": 1400,
+    "height": 1050
+  },
+  {
+    "slug": "kazan-kebab",
+    "page": 1,
+    "image": "/assets/pdf-menu/food-real/kazan-kebab.webp",
+    "width": 908,
+    "height": 1210
+  },
+  {
+    "slug": "assorti-manti",
+    "page": 1,
+    "image": "/assets/pdf-menu/food-real/assorti-manti.webp",
+    "width": 1050,
+    "height": 1400
+  },
+  {
+    "slug": "gardan-kabob",
+    "page": 1,
+    "image": "/assets/pdf-menu/food-real/gardan-kabob.webp",
+    "width": 1050,
+    "height": 1400
+  },
+  {
+    "slug": "achiq-gusht",
+    "page": 1,
+    "image": "/assets/pdf-menu/food-real/achiq-gusht.webp",
+    "width": 1050,
+    "height": 1400
+  },
+  {
+    "slug": "beef-cutlet",
+    "page": 1,
+    "image": "/assets/pdf-menu/food-real/beef-cutlet.webp",
+    "width": 1050,
+    "height": 1400
+  },
+  {
+    "slug": "grilled-chicken",
+    "page": 1,
+    "image": "/assets/pdf-menu/food-real/grilled-chicken.webp",
+    "width": 694,
+    "height": 679
+  },
+  {
+    "slug": "qurtob",
+    "page": 1,
+    "image": "/assets/pdf-menu/food-real/qurtob.webp",
+    "width": 1400,
+    "height": 1050
+  },
+  {
+    "slug": "jiz-biz-ribs",
+    "page": 1,
+    "image": "/assets/pdf-menu/food-real/jiz-biz-ribs.webp",
+    "width": 1050,
+    "height": 1400
+  },
+  {
+    "slug": "plov",
+    "page": 1,
+    "image": "/assets/pdf-menu/food-real/plov.webp",
+    "width": 1050,
+    "height": 1400
+  },
+  {
+    "slug": "manti",
+    "page": 1,
+    "image": "/assets/pdf-menu/food-real/manti.webp",
+    "width": 1050,
+    "height": 1400
+  },
+  {
+    "slug": "hanum",
+    "page": 1,
+    "image": "/assets/pdf-menu/food-real/hanum.webp",
+    "width": 1050,
+    "height": 1400
+  },
+  {
+    "slug": "norin",
+    "page": 1,
+    "image": "/assets/pdf-menu/food-real/norin.webp",
+    "width": 1050,
+    "height": 1400
+  },
+  {
+    "slug": "shox-kabob",
+    "page": 1,
+    "image": "/assets/pdf-menu/food-real/shox-kabob.webp",
+    "width": 1400,
+    "height": 1050
+  },
+  {
+    "slug": "fried-lagman",
+    "page": 1,
+    "image": "/assets/pdf-menu/food-real/fried-lagman.webp",
+    "width": 1050,
+    "height": 1400
+  },
+  {
+    "slug": "gulyash",
+    "page": 1,
+    "image": "/assets/pdf-menu/food-real/gulyash.webp",
+    "width": 1050,
+    "height": 1400
+  },
+  {
+    "slug": "minced-beef-shashlik",
+    "page": 2,
+    "image": "/assets/pdf-menu/food-real/minced-beef-shashlik.webp",
+    "width": 1050,
+    "height": 1400
+  },
+  {
+    "slug": "lamb-shashlik",
+    "page": 2,
+    "image": "/assets/pdf-menu/food-real/lamb-shashlik.webp",
+    "width": 1050,
+    "height": 1400
+  },
+  {
+    "slug": "roll-beef-shashlik",
+    "page": 2,
+    "image": "/assets/pdf-menu/food-real/roll-beef-shashlik.webp",
+    "width": 1050,
+    "height": 1400
+  },
+  {
+    "slug": "chicken-chest-shashlik",
+    "page": 2,
+    "image": "/assets/pdf-menu/food-real/chicken-chest-shashlik.webp",
+    "width": 1050,
+    "height": 1400
+  },
+  {
+    "slug": "chicken-wings-shashlik",
+    "page": 2,
+    "image": "/assets/pdf-menu/food-real/chicken-wings-shashlik.webp",
+    "width": 1050,
+    "height": 1400
+  },
+  {
+    "slug": "mujskoy",
+    "page": 2,
+    "image": "/assets/pdf-menu/food-real/mujskoy.webp",
+    "width": 1400,
+    "height": 1050
+  },
+  {
+    "slug": "smak",
+    "page": 2,
+    "image": "/assets/pdf-menu/food-real/smak.webp",
+    "width": 1050,
+    "height": 1400
+  },
+  {
+    "slug": "samarkand",
+    "page": 2,
+    "image": "/assets/pdf-menu/food-real/samarkand.webp",
+    "width": 1400,
+    "height": 1050
+  },
+  {
+    "slug": "suzma",
+    "page": 2,
+    "image": "/assets/pdf-menu/food-real/suzma.webp",
+    "width": 1400,
+    "height": 1050
+  },
+  {
+    "slug": "okroshka",
+    "page": 2,
+    "image": "/assets/pdf-menu/food-real/okroshka.webp",
+    "width": 1050,
+    "height": 1400
+  },
+  {
+    "slug": "fresh-salad",
+    "page": 2,
+    "image": "/assets/pdf-menu/food-real/fresh-salad.webp",
+    "width": 1050,
+    "height": 1400
+  },
+  {
+    "slug": "carrot-salad",
+    "page": 2,
+    "image": "/assets/pdf-menu/food-real/carrot-salad.webp",
+    "width": 1050,
+    "height": 1400
+  },
+  {
+    "slug": "salted-cabbage",
+    "page": 2,
+    "image": "/assets/pdf-menu/food-real/salted-cabbage.webp",
+    "width": 1050,
+    "height": 1400
+  },
+  {
+    "slug": "salted-pickles",
+    "page": 2,
+    "image": "/assets/pdf-menu/food-real/salted-pickles.webp",
+    "width": 1050,
+    "height": 1400
+  },
+  {
+    "slug": "salty-assorted",
+    "page": 2,
+    "image": "/assets/pdf-menu/food-real/salty-assorted.webp",
+    "width": 1050,
+    "height": 1400
+  },
+  {
+    "slug": "olivie",
+    "page": 2,
+    "image": "/assets/pdf-menu/food-real/olivie.webp",
+    "width": 1050,
+    "height": 1400
+  },
+  {
+    "slug": "patyr",
+    "page": 2,
+    "image": "/assets/pdf-menu/food-real/patyr.webp",
+    "width": 1050,
+    "height": 1400
+  },
+  {
+    "slug": "cheburek",
+    "page": 2,
+    "image": "/assets/pdf-menu/food-real/cheburek.webp",
+    "width": 1050,
+    "height": 1400
+  },
+  {
+    "slug": "oven-flatbread",
+    "page": 2,
+    "image": "/assets/pdf-menu/food-real/oven-flatbread.webp",
+    "width": 1400,
+    "height": 1050
+  },
+  {
+    "slug": "tandoor-flatbread",
+    "page": 2,
+    "image": "/assets/pdf-menu/food-real/tandoor-flatbread.webp",
+    "width": 1050,
+    "height": 1400
+  },
+  {
+    "slug": "tandoor-samsa",
+    "page": 2,
+    "image": "/assets/pdf-menu/food-real/tandoor-samsa.webp",
+    "width": 1050,
+    "height": 1400
+  },
+  {
+    "slug": "lavash",
+    "page": 2,
+    "image": "/assets/pdf-menu/food-real/lavash.webp",
+    "width": 1050,
+    "height": 1400
+  },
+  {
+    "slug": "cottage-pancake",
+    "page": 2,
+    "image": "/assets/pdf-menu/food-real/cottage-pancake.webp",
+    "width": 733,
+    "height": 572
+  },
+  {
+    "slug": "shavurma-beef",
+    "page": 2,
+    "image": "/assets/pdf-menu/food-real/shavurma-beef.webp",
+    "width": 900,
+    "height": 587
+  },
+  {
+    "slug": "eggs-sausage",
+    "page": 2,
+    "image": "/assets/pdf-menu/food-real/eggs-sausage.webp",
+    "width": 908,
+    "height": 1210
+  },
+  {
+    "slug": "fries",
+    "page": 2,
+    "image": "/assets/pdf-menu/food-real/fries.webp",
+    "width": 608,
+    "height": 563
+  }
+]
