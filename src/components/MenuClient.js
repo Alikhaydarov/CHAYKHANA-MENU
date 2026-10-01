@@ -251,7 +251,7 @@ export default function MenuClient() {
     </nav>
 
     {error ? <section className="menu-empty"><b>!</b><h2>{error}</h2><button onClick={load}>{t.retry}</button></section> : list.length === 0 ? <section className="menu-empty"><MagnifyingGlass/><h2>{emptyMessage}</h2></section> : <section className="dish-grid">
-      {list.map((dish, index) => <article className="dish-card" key={dish.id}>
+      {list.map((dish, index) => <article className={`dish-card${dish.category !== "drinks" ? " dish-card--ceramic" : ""}`} key={dish.id}>
         <button className="dish-card-open" aria-label={`Rasmni ochish: ${dish.names[lang] || dish.names.uz}`} onClick={() => setDetailDish(dish)} />
         <div className="dish-image"><DishPhoto dish={dish} alt={dish.names[lang] || dish.names.uz} priority={index < 3}/><span>{categoryLabel(dish.category)}</span></div>
         <div className="dish-meta"><div><h2>{dish.names[lang] || dish.names.uz}</h2><small>{dish.descriptions[lang] || dish.descriptions.uz}</small><p>₩{dish.price.toLocaleString()}</p></div>{quantityControl(dish, true)}</div>

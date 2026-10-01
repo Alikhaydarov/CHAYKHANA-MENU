@@ -1,0 +1,34 @@
+/* One shared backdrop; original food photos stay separate and uncropped. */
+.dish-card--ceramic .dish-image {
+  background: #f7f0e3 url('/assets/menu/ceramic-background-v1.webp') center / cover no-repeat !important;
+}
+
+.dish-card--ceramic .dish-image::before,
+.dish-card--ceramic .dish-image::after,
+.dish-card--ceramic .dish-image > span {
+  display: none !important;
+}
+
+.dish-card--ceramic .dish-image-media img {
+  object-fit: contain !important;
+  padding: 4px !important;
+  filter: drop-shadow(0 8px 10px rgba(48, 39, 25, .14)) !important;
+}
+
+.dish-card--ceramic .dish-meta h2,
+.dish-card--ceramic .dish-meta small {
+  letter-spacing: 0 !important;
+  overflow-wrap: anywhere;
+}
+
+.dish-card--ceramic .dish-meta small {
+  white-space: normal !important;
+  max-width: none !important;
+}
+
+@media (max-width: 759px) {
+  .dish-card--ceramic .dish-image {
+    height: clamp(232px, 64vw, 280px) !important;
+    min-height: 232px !important;
+  }
+}
