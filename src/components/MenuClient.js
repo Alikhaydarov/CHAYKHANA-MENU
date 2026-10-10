@@ -278,6 +278,7 @@ export default function MenuClient() {
           <b>{detailDish.names[lang] || detailDish.names.uz}</b>
           <span>₩{detailDish.price.toLocaleString()}</span>
         </div>
+        {(detailDish.descriptions?.[lang] || detailDish.descriptions?.uz) && <p className="image-lightbox-desc">{detailDish.descriptions[lang] || detailDish.descriptions.uz}</p>}
       </section>
     </div>}
 

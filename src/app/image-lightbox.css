@@ -151,3 +151,40 @@
   .image-lightbox-backdrop,
   .image-lightbox { animation: none !important; }
 }
+
+/* Dish description under the enlarged image */
+.image-lightbox-frame {
+  height: min(54dvh, 520px);
+}
+
+.image-lightbox-desc {
+  margin: 0;
+  padding: 12px 14px;
+  max-height: 22dvh;
+  overflow-y: auto;
+  border-radius: 16px;
+  color: #3b3226;
+  background: rgba(255, 250, 238, .96);
+  font-size: 14px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .6);
+}
+
+@media (max-width: 759px) {
+  .image-lightbox-frame {
+    height: min(50dvh, 440px);
+  }
+
+  .image-lightbox-desc {
+    font-size: 13.5px;
+    padding: 10px 12px;
+  }
+}
+
+@media (max-width: 390px) {
+  .image-lightbox-frame {
+    height: min(46dvh, 400px);
+    min-height: 220px;
+  }
+}
