@@ -1,6 +1,6 @@
 /* One shared backdrop; original food photos stay separate and uncropped. */
 .dish-card--ceramic .dish-image {
-  background: #f7f0e3 url('/assets/menu/ceramic-background-v2.webp') center / cover no-repeat !important;
+  background: #f7f0e3 url('/assets/menu/food-bg-custom.webp') center / cover no-repeat !important;
 }
 
 .dish-card--ceramic .dish-image::before,
