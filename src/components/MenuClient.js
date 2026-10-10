@@ -45,6 +45,7 @@ function DishPhoto({ dish, alt, priority = false }) {
       src={dish.image}
       alt={alt}
       fill
+      quality={95}
       sizes="(max-width: 759px) calc(100vw - 30px), 540px"
       priority={priority}
       fetchPriority={priority ? "high" : "auto"}
@@ -268,6 +269,7 @@ export default function MenuClient() {
             src={detailDish.image}
             alt={detailDish.names[lang] || detailDish.names.uz}
             fill
+            quality={95}
             sizes="(max-width: 759px) 96vw, 720px"
             priority
             fetchPriority="high"
