@@ -1,6 +1,6 @@
 /* One shared backdrop; original food photos stay separate and uncropped. */
 .dish-card--ceramic .dish-image {
-  background: #f7f0e3 url('/assets/menu/food-bg-custom.webp') center / cover no-repeat !important;
+  background: #f7f0e3 url('/assets/menu/ceramic-background-v2.webp') center / cover no-repeat !important;
 }
 
 .dish-card--ceramic .dish-image::before,
@@ -31,16 +31,4 @@
     height: clamp(232px, 64vw, 280px) !important;
     min-height: 232px !important;
   }
-}
-
-/* Visible menu-list background. Food cards, pictures and controls stay unchanged. */
-.menu-page .dish-grid {
-  background-color: #f7ecdc !important;
-  background-image: url('/assets/menu/food-bg-custom.webp') !important;
-  background-position: center top !important;
-  background-size: 100% auto !important;
-  background-repeat: repeat-y !important;
-  padding-top: 24px !important;
-  padding-bottom: 24px !important;
-  border-radius: 18px;
 }
