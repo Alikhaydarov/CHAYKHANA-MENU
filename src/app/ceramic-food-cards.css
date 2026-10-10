@@ -1,6 +1,6 @@
 /* One shared backdrop; original food photos stay separate and uncropped. */
 .dish-card--ceramic .dish-image {
-  background: #f7f0e3 url('/assets/menu/ceramic-background-v2.webp') center / cover no-repeat !important;
+  background: #f7f0e3 url('/assets/menu/ceramic-background-v1.webp') center / cover no-repeat !important;
 }
 
 .dish-card--ceramic .dish-image::before,
@@ -11,9 +11,10 @@
 
 .dish-card--ceramic .dish-image-media img {
   object-fit: contain !important;
+  -webkit-mask-image: radial-gradient(ellipse 48% 49% at center, #000 74%, transparent 100%) !important;
+  mask-image: radial-gradient(ellipse 48% 49% at center, #000 74%, transparent 100%) !important;
   padding: 4px !important;
   /* Blend the opaque beige photo backdrop into the decorative image beneath it. */
-  mix-blend-mode: normal !important;
   filter: drop-shadow(0 8px 10px rgba(48, 39, 25, .14)) !important;
 }
 
