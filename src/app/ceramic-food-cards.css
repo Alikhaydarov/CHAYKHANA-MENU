@@ -32,3 +32,15 @@
     min-height: 232px !important;
   }
 }
+
+/* Visible menu-list background. Food cards, pictures and controls stay unchanged. */
+.menu-page .dish-grid {
+  background-color: #f7ecdc !important;
+  background-image: url('/assets/menu/food-bg-custom.webp') !important;
+  background-position: center top !important;
+  background-size: 100% auto !important;
+  background-repeat: repeat-y !important;
+  padding-top: 24px !important;
+  padding-bottom: 24px !important;
+  border-radius: 18px;
+}
