@@ -12,6 +12,8 @@
 .dish-card--ceramic .dish-image-media img {
   object-fit: contain !important;
   padding: 4px !important;
+  /* Blend the opaque beige photo backdrop into the decorative image beneath it. */
+  mix-blend-mode: multiply !important;
   filter: drop-shadow(0 8px 10px rgba(48, 39, 25, .14)) !important;
 }
 
