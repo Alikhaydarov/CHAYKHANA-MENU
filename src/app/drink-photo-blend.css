@@ -1,0 +1,27 @@
+/* Drink photos: soften white studio backgrounds so they sit naturally in the warm menu. */
+.dish-card:not(.dish-card--ceramic) .dish-image {
+  overflow: hidden !important;
+  background:
+    radial-gradient(ellipse at 50% 42%, rgba(255,255,255,.38), transparent 60%),
+    linear-gradient(145deg, #e8dcc7 0%, #f3e9d8 48%, #e3d4bd 100%) !important;
+  border-color: rgba(211, 190, 160, .8) !important;
+}
+
+/* Multiply removes most pure-white photo background without editing the original image. */
+.dish-card:not(.dish-card--ceramic) .dish-image-media img {
+  object-fit: contain !important;
+  mix-blend-mode: multiply !important;
+  -webkit-mask-image: radial-gradient(ellipse 66% 62% at 50% 48%, #000 70%, rgba(0,0,0,.92) 82%, transparent 100%) !important;
+  mask-image: radial-gradient(ellipse 66% 62% at 50% 48%, #000 70%, rgba(0,0,0,.92) 82%, transparent 100%) !important;
+  filter: saturate(1.04) contrast(1.025) drop-shadow(0 7px 9px rgba(59, 39, 17, .14)) !important;
+}
+
+/* Keep the drink itself crisp; only the outer white edges blend into the warm surface. */
+.dish-card:not(.dish-card--ceramic) .dish-image-media {
+  background: transparent !important;
+}
+
+.dish-card:not(.dish-card--ceramic) .dish-image::after {
+  background: linear-gradient(180deg, rgba(9,24,43,0) 58%, rgba(9,24,43,.10) 100%) !important;
+  pointer-events: none;
+}
