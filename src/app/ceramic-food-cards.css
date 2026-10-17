@@ -38,16 +38,15 @@
 }
 
 
-/* Drinks: keep the same Uzbek tablecloth behind each product and blend away
-   the bright studio-white photo backdrop without editing the original photo. */
+/* Drinks: blend the white studio background directly with the shared tablecloth.
+   Do not isolate the image: multiply must see the tablecloth behind the photo. */
 .dish-card--drinks .dish-image-media {
   background: transparent !important;
-  isolation: isolate;
 }
 
 .dish-card--drinks .dish-image-media img {
   mix-blend-mode: multiply !important;
-  filter: saturate(1.08) contrast(1.035) drop-shadow(0 3px 3px rgba(42, 29, 15, .20)) !important;
-  -webkit-mask-image: radial-gradient(ellipse 48% 49% at center, #000 83%, transparent 100%) !important;
-  mask-image: radial-gradient(ellipse 48% 49% at center, #000 83%, transparent 100%) !important;
+  filter: saturate(1.06) contrast(1.025) drop-shadow(0 4px 5px rgba(42, 29, 15, .20)) !important;
+  -webkit-mask-image: radial-gradient(ellipse 49% 50% at center, #000 86%, transparent 100%) !important;
+  mask-image: radial-gradient(ellipse 49% 50% at center, #000 86%, transparent 100%) !important;
 }
