@@ -36,3 +36,24 @@
     min-height: 232px !important;
   }
 }
+
+
+/* Drinks keep their original photos; white photo backgrounds blend into the same Uzbek table setting. */
+.dish-card--drink .dish-image {
+  background: #f7f0e3 url('/assets/menu/food-bg-uzbek.webp') center / cover no-repeat !important;
+}
+
+.dish-card--drink .dish-image-media {
+  isolation: isolate;
+}
+
+.dish-card--drink .dish-image-media img {
+  object-fit: contain !important;
+  padding: 8px !important;
+  mix-blend-mode: multiply !important;
+  filter: drop-shadow(0 5px 5px rgba(55, 35, 15, .18)) !important;
+}
+
+.dish-card--drink .dish-image-shimmer {
+  display: none !important;
+}
